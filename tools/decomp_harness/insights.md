@@ -697,6 +697,10 @@ The two forms differ only in whether the str precedes the register copy. Retail 
 
 In render_window WaitingIcon_New(Window *window, u16 tileNum), retail spills r0 (window) first and then r1. With the frozen header's `u16 tileNum`, MWCC spilled r1 first. Declaring the defining TU's own prototype as `u32 tileNum` (pokeplatinum also uses u32 baseTile) reproduced the retail order exactly. The ABI is unchanged, so callers compiled against the u16 header are unaffected. The same lever did NOT fix sub_0200EA68 or DrawPokemonPicFromSpecies in that file, so try it once and move on if it fails.
 
+### A 'bmi L; b M; L: movs #0; M: strb' clamp is a field store written in BOTH arms with the pass-through arm first  <!-- id: clamp-bxx-b-over-store-in-both-arms -->
+
+Retail: `subs r4,r2,r4; bmi L; b M; L: movs r4,#0; M: strb r4,[r0]`. The empty fall-through arm plus a `b` over a one-instruction block means MWCC laid out an if/else whose then-arm became empty after it tail-merged the identical stores. Source: `if (y - h >= 0) { s->top = y - h; } else { s->top = 0; }`. A local temp (`v = ...; if (v < 0) v = 0; s->top = v;`), a ternary, or the reversed polarity (`if (v < 0) {s->top = 0;} else {...}`) all collapse to `bpl; movs #0; strb`. If the clamp is the last statement it shows as duplicated `strb; pop; bx lr` tails instead. Also: a `u32 i; do { *p = 0; p++; i--; } while (i != 0);` loop gives `movs r1,#16; strb; adds; subs; bne` (int i or a for loop gives cmp/bgt). Seen in ov41_02249978 / ov41_022496E8 (overlay_41_02248ED4).
+
 ## Matching Tricks
 
 ### Small source changes that move codegen  <!-- id: decl-order-tricks -->
@@ -980,6 +984,10 @@ When a `0` is materialised once before a switch and reused in several cases (e.g
 ### `adds r0,r0,r1` vs `adds r0,r1,r0` after a division call: assign the quotient to a temp first (`v = a*b/c; x = v + y;`), or use `x = q; x += y;`  <!-- id: commutative-add-operand-order-via-temp -->
 
 `p[0] = p[2]*a1/a2 + p[1]` (and the `p[1] + ...` spelling) both gave `adds r0, r1, r0` where retail had `adds r0, r0, r1`. Splitting the quotient into its own statement (`s32 v = p[2]*a1/a2; p[0] = v + p[1];` or `cur = ...; cur += start;`) flips the operand order. Seen in sub_020125D4, sub_02012884 and sub_02012ACC in unk_0201010C.
+
+### A null-check loaded into r1 (not r0) right before a call usually means that value is the callee's second argument  <!-- id: callee-arg-register-reveals-extra-param -->
+
+In ov41_022492B0 retail did `ldr r1,[r4,#0x10]; cmp r1,#0; beq; ldr r0,[r4,#4]; bl ov41_02248020` and my C loaded into r0. The callee was really `ov41_02248020(obj, node)`, and its asm `add r0,r1,#0` shows it reading r1. MWCC loads the checked value straight into its outgoing-argument register. When an unknown-prototype import is involved, read the callee's asm for its real argument count before shuffling the C.
 
 ## IPA (-ipa file) Behavior
 

@@ -994,6 +994,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "compare-verified HG+SS. Window frames, message box and scroll cursor, signposts, wait dial, Pokemon preview. Ported from pret/pokeplatinum render_window.c (the 175578f26^ draft was 29/40 asm with placeholder C and referenced renamed headers). 37 C + 3 NONMATCHING (sub_0200EA68 spill scheduling; DrawPokemonPicFromSpecies/FromMon heapID-vs-x register choice). The defining TU does not include the frozen render_window.h (it declares sub_0200F478 without its parameter) and declares its own prototypes."
+    },
+    {
+      "file": "asm/overlay_41_02248ED4.s",
+      "lines": 1556,
+      "functions": 41,
+      "attempts": 1,
+      "result": "matched",
+      "note": "41/41 C: fashion-case touch drag state machine, slide task, mon pokepic hitbox helpers, node pool"
     }
   ],
   "failed": [
@@ -1402,8 +1410,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 221,
-    "total_matched": 93,
+    "total_attempts": 222,
+    "total_matched": 94,
     "total_failed": 31
   },
   "matched": [

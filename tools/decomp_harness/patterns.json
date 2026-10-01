@@ -1847,6 +1847,30 @@
       "category": "file-patterns",
       "title": "render_window and other shared engine files: pret/pokeplatinum and pokediamond have matching C. Fetch it from raw.githubusercontent.com and port it.",
       "body": "HG render_window.s maps 1:1 onto pokeplatinum src/render_window.c: standard frame, message box, scroll cursor (HG generalises it to member/frames/srcX/srcY), transparent-tile replace, signpost, wait dial and Pokemon preview. Porting with HG API names (FillBgTilemapRect, GfGfxLoader_*, FieldSpriteManager_*, BG_LoadCharTilesData, sub_020143E0) matched 37/40 nearly as written. HG differences: FillBgTilemapRect mode 16 = keep palette; WaitingIcon/PokemonPreview use HG struct layouts; rodata templates (regions, res counts, ManagedSpriteTemplate with resIdList 89301) are file-scope static consts copied by struct assignment. github.com/.../raw is blocked by the egress proxy, but raw.githubusercontent.com works."
+    },
+    {
+      "id": "clamp-bxx-b-over-store-in-both-arms",
+      "category": "codegen",
+      "title": "A 'bmi L; b M; L: movs #0; M: strb' clamp is a field store written in BOTH arms with the pass-through arm first",
+      "body": "Retail: `subs r4,r2,r4; bmi L; b M; L: movs r4,#0; M: strb r4,[r0]`. The empty fall-through arm plus a `b` over a one-instruction block means MWCC laid out an if/else whose then-arm became empty after it tail-merged the identical stores. Source: `if (y - h >= 0) { s->top = y - h; } else { s->top = 0; }`. A local temp (`v = ...; if (v < 0) v = 0; s->top = v;`), a ternary, or the reversed polarity (`if (v < 0) {s->top = 0;} else {...}`) all collapse to `bpl; movs #0; strb`. If the clamp is the last statement it shows as duplicated `strb; pop; bx lr` tails instead. Also: a `u32 i; do { *p = 0; p++; i--; } while (i != 0);` loop gives `movs r1,#16; strb; adds; subs; bne` (int i or a for loop gives cmp/bgt). Seen in ov41_02249978 / ov41_022496E8 (overlay_41_02248ED4).",
+      "tags": [
+        "clamp",
+        "branch",
+        "if-else",
+        "tail-merge",
+        "loop"
+      ]
+    },
+    {
+      "id": "callee-arg-register-reveals-extra-param",
+      "category": "matching-tricks",
+      "title": "A null-check loaded into r1 (not r0) right before a call usually means that value is the callee's second argument",
+      "body": "In ov41_022492B0 retail did `ldr r1,[r4,#0x10]; cmp r1,#0; beq; ldr r0,[r4,#4]; bl ov41_02248020` and my C loaded into r0. The callee was really `ov41_02248020(obj, node)`, and its asm `add r0,r1,#0` shows it reading r1. MWCC loads the checked value straight into its outgoing-argument register. When an unknown-prototype import is involved, read the callee's asm for its real argument count before shuffling the C.",
+      "tags": [
+        "prototype",
+        "register",
+        "arguments"
+      ]
     }
   ]
 }

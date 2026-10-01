@@ -22,12 +22,12 @@ session can resume from whatever was last pushed.
 | unk_0200FA24 | 32 C + 1 NONMATCHING (BeginNormalPaletteFade, duplicate pool word) |
 | unk_0201010C | 127/127 C |
 | render_window | 37 C + 3 NONMATCHING (sub_0200EA68, DrawPokemonPicFromSpecies/FromMon) |
+| overlay_41_02248ED4 | 41/41 C |
 
 ## In progress / next
 
-- Next target: `asm/overlay_41_02248ED4.s` (41 fns, touch handling for the
-  fashion-case accessory board; reuses the structs in
-  `include/overlay_41_02248400.h`). Not started in C yet.
+- Next target: `asm/overlay_117.s` (9 fns, ~1200 insns), the head of the
+  triage queue. Not started.
 - After that: `triage.py` queue (`next_target.sh --info`).
 
 ## Helpers in this directory
