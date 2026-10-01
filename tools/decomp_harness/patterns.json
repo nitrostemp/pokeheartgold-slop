@@ -1817,6 +1817,24 @@
       "category": "codegen",
       "title": "`sObj.field` and `ptr->field` (ptr = &sObj, constant-propagated) give different code: symbol+offset pool entries vs `ldr =sObj; add #off` / `[base, reg]` with an offset literal",
       "body": "For a static struct, direct member access folds to a pool entry for sObj (or sObj+0x140-style split for large offsets) and immediate-offset ldr/str. If retail instead shows `ldr r0,=sObj; add r0,#0x14` for an address, or `ldr r1,=0x14E; ldr r0,=sObj; strb r2,[r0,r1]` for a byte field, the source went through a pointer local `T *p = &sObj;` that MWCC constant-propagated and rematerialised (not kept in a callee-saved reg). Address-of and store uses through p keep it propagated; a LOAD through p (p->flag in a condition) made MWCC give p a register instead. In BeginNormalPaletteFade (unk_0200FA24) the tail `sub_02010064(&fade->screens[i]); fade->busy[i] = TRUE;` needed fade, while the conditions stayed `sPaletteFade.screenEnabled[i]`."
+    },
+    {
+      "id": "rodata-template-struct-copy-from-section-base",
+      "category": "data-sections",
+      "title": "`ldr rX,=<first rodata label>; ldrh [rX,#off]` x4 then strh to sp = a struct copy of a 2-aligned 8-byte member of ONE rodata aggregate (base splits at 0x40 for larger offsets)",
+      "body": "In unk_0201010C, FadeFunc_32..35 load from `=_020F5D58` + 0x18/0x20/0x30 and FadeFunc_33 from `=_020F5D98` + 0x28, i.e. section offset 0x68. Those offsets fall INSIDE disassembler labels, and the base splits at a multiple of 0x40 because ldrh imm max is 0x3E. This is member access on a single const aggregate. Model .rodata as one struct, splitting labels at the real object boundaries, and give the copied pieces a 2-aligned type (`typedef struct { u16 v[4]; } FadeParams;`). Then `FadeParams p = _020F5D88;` (macro for sRodata.f020F5D88) emits exactly the ldrh/strh pairs. A `u16 p[4] = {..}` initializer makes MWCC emit its own anonymous template instead and breaks the layout. The same file's .data is also one object (all stores go through `=_0210F64C` + off while the address args use the field's own label)."
+    },
+    {
+      "id": "store-field-then-reload-local",
+      "category": "codegen",
+      "title": "`bl Alloc; str r0,[rD,#f]; add r4,r0,#0` (store FIRST, then copy) = `obj->f = Alloc(..); p = obj->f;`, not `p = Alloc(..); obj->f = p;`",
+      "body": "The two forms differ only in whether the str precedes the register copy. Retail unk_0201010C used `data->work = Heap_Alloc(...); work = data->work;` throughout. When the callee arg is `ldr r0,[r5,#0x14]` reloaded right before the call, pass `data->work` directly with no local at all. For `memset(data->work, 0, N)` straight after the alloc, MWCC reuses r0. Applying this file-wide fixed about 10 functions at once."
+    },
+    {
+      "id": "commutative-add-operand-order-via-temp",
+      "category": "matching-tricks",
+      "title": "`adds r0,r0,r1` vs `adds r0,r1,r0` after a division call: assign the quotient to a temp first (`v = a*b/c; x = v + y;`), or use `x = q; x += y;`",
+      "body": "`p[0] = p[2]*a1/a2 + p[1]` (and the `p[1] + ...` spelling) both gave `adds r0, r1, r0` where retail had `adds r0, r0, r1`. Splitting the quotient into its own statement (`s32 v = p[2]*a1/a2; p[0] = v + p[1];` or `cur = ...; cur += start;`) flips the operand order. Seen in sub_020125D4, sub_02012884 and sub_02012ACC in unk_0201010C."
     }
   ]
 }

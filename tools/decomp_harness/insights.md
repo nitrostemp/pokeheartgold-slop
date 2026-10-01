@@ -689,6 +689,10 @@ When the function exit is beyond Thumb conditional-branch range (~256B), MWCC re
 
 For a static struct, direct member access folds to a pool entry for sObj (or sObj+0x140-style split for large offsets) and immediate-offset ldr/str. If retail instead shows `ldr r0,=sObj; add r0,#0x14` for an address, or `ldr r1,=0x14E; ldr r0,=sObj; strb r2,[r0,r1]` for a byte field, the source went through a pointer local `T *p = &sObj;` that MWCC constant-propagated and rematerialised (not kept in a callee-saved reg). Address-of and store uses through p keep it propagated; a LOAD through p (p->flag in a condition) made MWCC give p a register instead. In BeginNormalPaletteFade (unk_0200FA24) the tail `sub_02010064(&fade->screens[i]); fade->busy[i] = TRUE;` needed fade, while the conditions stayed `sPaletteFade.screenEnabled[i]`.
 
+### `bl Alloc; str r0,[rD,#f]; add r4,r0,#0` (store FIRST, then copy) = `obj->f = Alloc(..); p = obj->f;`, not `p = Alloc(..); obj->f = p;`  <!-- id: store-field-then-reload-local -->
+
+The two forms differ only in whether the str precedes the register copy. Retail unk_0201010C used `data->work = Heap_Alloc(...); work = data->work;` throughout. When the callee arg is `ldr r0,[r5,#0x14]` reloaded right before the call, pass `data->work` directly with no local at all. For `memset(data->work, 0, N)` straight after the alloc, MWCC reuses r0. Applying this file-wide fixed about 10 functions at once.
+
 ## Matching Tricks
 
 ### Small source changes that move codegen  <!-- id: decl-order-tricks -->
@@ -969,6 +973,10 @@ When a call result is both stored to a struct field and kept in a callee-saved l
 
 When a `0` is materialised once before a switch and reused in several cases (e.g. `frameIdx = 0; tmpl.f = 0;`), objdiff may show the identical instruction stream but with the constant in r0 where retail uses r1 (and the case-local temp in r1 vs r0). Declaration order and pre-switch store order do not move it; reordering the statements inside the case body that consumes the constant does. In ov41_022485DC, case 0 `resIdx = idx; tmpl.unk1C = board->unk50[idx]; frameIdx = 0;` -> `resIdx = idx; frameIdx = 0; tmpl.unk1C = board->unk50[idx];` took it from 26 diffs to 8 (the rest was stack-slot decl order). Brute-forcing the pre-switch template store order first (120 permutations, ~3.5s each via compile_one) is what got the param registers right. Related: [[stack-slot-reverse-decl-order]], [[decl-order-regalloc]].
 
+### `adds r0,r0,r1` vs `adds r0,r1,r0` after a division call: assign the quotient to a temp first (`v = a*b/c; x = v + y;`), or use `x = q; x += y;`  <!-- id: commutative-add-operand-order-via-temp -->
+
+`p[0] = p[2]*a1/a2 + p[1]` (and the `p[1] + ...` spelling) both gave `adds r0, r1, r0` where retail had `adds r0, r0, r1`. Splitting the quotient into its own statement (`s32 v = p[2]*a1/a2; p[0] = v + p[1];` or `cur = ...; cur += start;`) flips the operand order. Seen in sub_020125D4, sub_02012884 and sub_02012ACC in unk_0201010C.
+
 ## IPA (-ipa file) Behavior
 
 ### Shared-header signatures are load-bearing across compilation units  <!-- id: ipa-shared-headers -->
@@ -1154,6 +1162,10 @@ Refines [[rodata-consolidate-one-struct-flip]] step (5)/(6) with a clean case: o
 ### A byte-wise (alignment-1) struct copy from a consolidated-rodata member splits the pool literal as sym+(off&~31) plus ldrb #imm5 -- unlike word/ldmia copies, which fold the exact address; the fix is a NONMATCHING asm body with ldr =sRodata+off  <!-- id: byte-struct-copy-splits-consolidated-rodata-literal-at-32 -->
 
 Caveat to [[consolidated-rodata-all-ref-kinds-fold-clean]]. In src/overlay_98.c a 4-byte TouchscreenHitbox (union of u8s, alignment 1) at sRodata offset 0x4C is copied to the stack in ov98_0221EF24. Retail (standalone symbol) emits `ldr r2,=ov98_0221F1E0; ldrb r3,[r2,#0]..[r2,#3]`. Every C spelling (`hitbox = sRodata.hitbox`, `= *src` via a hoisted `const TouchscreenHitbox *src = &sRodata.hitbox`) emits `ldr r2,=sRodata+0x40; ldrb r3,[r2,#12]..#15` -- MWCC's byte-copy path folds only the 32-byte-aligned part of the offset into the literal and keeps the remainder in the ldrb immediate, so the literal can only equal the member address when off%32==0. A field-wise copy (`hitbox.rect.top = src->rect.top; ...`) DOES fold the exact address but changes the copy shape (dst in r0 / temp r1, no interleaved last-two loads) -> still a DIFF. Word/ldmia copies from the same struct (E5E0 0x18/0x2C, E7E8 0x8, F174 0xB4) and variable-indexed member arrays all fold exactly. Resolution: keep the C under #ifdef NONMATCHING and transcribe the function as inline asm with `ldr r2, =sRodata + 0x4C` (one pool word, same size; ROM SHA1 OK). Check first whether the member offset is a multiple of 32 -- if so plain C works. Related: [[rodata-consolidate-one-struct-flip]], [[nonmatching-inline-asm-rodata-symbol-plus-offset]].
+
+### `ldr rX,=<first rodata label>; ldrh [rX,#off]` x4 then strh to sp = a struct copy of a 2-aligned 8-byte member of ONE rodata aggregate (base splits at 0x40 for larger offsets)  <!-- id: rodata-template-struct-copy-from-section-base -->
+
+In unk_0201010C, FadeFunc_32..35 load from `=_020F5D58` + 0x18/0x20/0x30 and FadeFunc_33 from `=_020F5D98` + 0x28, i.e. section offset 0x68. Those offsets fall INSIDE disassembler labels, and the base splits at a multiple of 0x40 because ldrh imm max is 0x3E. This is member access on a single const aggregate. Model .rodata as one struct, splitting labels at the real object boundaries, and give the copied pieces a 2-aligned type (`typedef struct { u16 v[4]; } FadeParams;`). Then `FadeParams p = _020F5D88;` (macro for sRodata.f020F5D88) emits exactly the ldrh/strh pairs. A `u16 p[4] = {..}` initializer makes MWCC emit its own anonymous template instead and breaks the layout. The same file's .data is also one object (all stores go through `=_0210F64C` + off while the address args use the field's own label).
 
 ## Recurring File/Module Patterns
 

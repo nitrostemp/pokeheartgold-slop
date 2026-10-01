@@ -1,14 +1,14 @@
 # Decomp Coverage Ledger
 
-*Generated 2026-10-01T10:20:27Z by `coverage_ledger.py` — do not hand-edit; regenerate after each decomp.*
+*Generated 2026-10-01T10:56:20Z by `coverage_ledger.py` — do not hand-edit; regenerate after each decomp.*
 
-Tracked functions (files with retained asm): **19040** — matched 2421, pending 15757, plus 20 matched-but-blocked inside failed files.
+Tracked functions (files with retained asm): **19040** — matched 2548, pending 15630, plus 20 matched-but-blocked inside failed files.
 
 | status | files | functions | insn lines | ~text bytes |
 |---|---|---|---|---|
-| matched | 120 | 2421 | 72921 | 163430 |
+| matched | 121 | 2548 | 78089 | 174576 |
 | blocked | 49 | 862 | 28331 | 62386 |
-| pending | 143 | 15757 | 790527 | 1769834 |
+| pending | 142 | 15630 | 785359 | 1758688 |
 | upstream | 414 | 0 | 0 | 0 |
 
 ## Blockers (value-ordered: fix what gates the most)
@@ -75,11 +75,12 @@ Tracked functions (files with retained asm): **19040** — matched 2421, pending
 | asm/middleware.s | 0 | 0 | yes |  Data-only: 7 NUL-terminated SDK middleware version strings in a custom .version section (single ordered section, each .b |
 | asm/overlay_12_battle_command.s | 0 | 0 | yes |   |
 
-## Matched files (asm retained) (120)
+## Matched files (asm retained) (121)
 
 | file | functions | insn lines | data-only | notes |
 |---|---|---|---|---|
 | asm/overlay_02_02248728.s | 364 | 14752 |  | retained_asm |
+| asm/unk_0201010C.s | 127 | 5168 |  | harness |
 | asm/unk_02004A44.s | 95 | 1764 |  | harness |
 | asm/unk_02030A98.s | 71 | 1383 |  | harness |
 | asm/unk_02023694.s | 68 | 1608 |  | harness |
@@ -200,7 +201,7 @@ Tracked functions (files with retained asm): **19040** — matched 2421, pending
 | asm/overlay_01_data_02208BFC.s | 0 | 0 | yes | retained_asm |
 | asm/battle_arcade_game_board_data.s | 0 | 0 | yes | harness |
 
-## Pending files (143)
+## Pending files (142)
 
 | file | functions | insn lines | data-only | notes |
 |---|---|---|---|---|
@@ -237,7 +238,6 @@ Tracked functions (files with retained asm): **19040** — matched 2421, pending
 | asm/overlay_92.s | 132 | 12807 |  |  |
 | asm/overlay_01_021F944C.s | 131 | 2582 |  |  |
 | asm/overlay_14_021F2490.s | 128 | 4353 |  |  |
-| asm/unk_0201010C.s | 127 | 5168 |  |  |
 | asm/overlay_83_0223DD60.s | 122 | 8890 |  |  |
 | asm/overlay_89.s | 120 | 7456 |  |  |
 | asm/overlay_103.s | 118 | 3747 |  |  |

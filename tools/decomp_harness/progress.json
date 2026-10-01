@@ -978,6 +978,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "compare-verified HG+SS. Palette/brightness screen-fade driver. Rewrote the 175578f26^ draft (pointer-cast soup, 20/33) as one 0x154-byte static PaletteFadeData {header, FadeScreenSettings screens[2], FadeHBlankTasks, plttWork[0xC0], active, busy[2], lastColor}; the _021D0EF4.. labels were sub-fields of it. 32 C + 1 NONMATCHING (BeginNormalPaletteFade, duplicate pool word; asm uses explicit dcd pool). Address-taken u16 params give the push {r0-r3} homing in sub_0200FC60/FCDC."
+    },
+    {
+      "file": "asm/unk_0201010C.s",
+      "lines": 6144,
+      "functions": 127,
+      "attempts": 1,
+      "result": "matched",
+      "note": "compare-verified HG+SS. Screen-fade effect library (FadeFunc_00..42 + brightness/window/scanline helpers + two HBlank callbacks), all C, no NONMATCHING. Started from the 175578f26^ draft (71/127, placeholder C behind asm for the HBlank callbacks). Key fixes: rodata/.data as one aggregate each (templates at section offsets copied by struct assignment); store-then-reload data->work; the draft had arg mappings shifted in the 8-arg setup functions; SDK G2_SetWnd*Position/InsidePlane/OutsidePlane inlines with HBLK guard for the callbacks; GXWndPlane returned by value; FX_Mul/FX_Whole/FX_Div for the _ll_mul blocks."
     }
   ],
   "failed": [
@@ -1386,8 +1394,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 219,
-    "total_matched": 91,
+    "total_attempts": 220,
+    "total_matched": 92,
     "total_failed": 31
   },
   "matched": [
