@@ -1026,6 +1026,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "54/54 C: Battle Frontier link send/recv handlers for 4 facilities"
+    },
+    {
+      "file": "asm/unk_02096910.s",
+      "lines": 558,
+      "functions": 15,
+      "attempts": 1,
+      "result": "matched",
+      "note": "15/15 C: Frontier link command table + static-module facility link handlers"
     }
   ],
   "failed": [
@@ -1434,8 +1442,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 225,
-    "total_matched": 97,
+    "total_attempts": 226,
+    "total_matched": 98,
     "total_failed": 31
   },
   "matched": [

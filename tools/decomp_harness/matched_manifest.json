@@ -1,5 +1,5 @@
 {
- "count": 540,
+ "count": 541,
  "game": "heartgold.us",
  "schema": 1,
  "tus": {
@@ -82811,6 +82811,108 @@
      "name": ".text",
      "sha1": "be2bcbc32ce895f199227b3cc0da8f9b3fcc27f8",
      "size": 96,
+     "type": 1
+    }
+   ]
+  },
+  "src/unk_02096910.c": {
+   "alloc_sha1": "7fa5e155aa586c563d6f4c7a3866185ae89372ff",
+   "object": "build/heartgold.us/src/unk_02096910.o",
+   "sections": [
+    {
+     "name": ".rodata",
+     "sha1": "13fa7f5342254b8f4c72551eacc7a4f716846350",
+     "size": 624,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "498b8b919f63b223e537ad6d7cd3e3a9c2a48d49",
+     "size": 20,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "05e174651622916c1f1dbe9a3f8e0bf3b30c7399",
+     "size": 116,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "b4496f70cd9d0c62211cec20a582d4782199d1a6",
+     "size": 44,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "37f33c3060abc32bbe82322e9c06b81d81e12e0b",
+     "size": 52,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "a8b9d9ef84bdcdf19fe3a8b3c4c90c0e958f3a2a",
+     "size": 60,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "d09178032ed6f331ead6838834e25bcad3cdbeb1",
+     "size": 72,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "f809d9685b48630b43723507a0a302636d49d2b9",
+     "size": 46,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "997a3f9213002c8e2976c77c631a637ad2f3d435",
+     "size": 30,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "e773adf907ef3757ac5f8ee65d49098017f30c1e",
+     "size": 38,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "94c72046145682ca6510ebbe23adda9babec806c",
+     "size": 194,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "b57f906602c291cecad2f59cb2348d6dbd1241cc",
+     "size": 62,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "3fe4aa6d4b553a682dca39e84b973d2a8f7101af",
+     "size": 30,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "a140748ceffa79dcc0bd5f3712704d55f97a88ca",
+     "size": 38,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "544d97828668a8e241d2f81270d2acf01cd68b1d",
+     "size": 30,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "e918831fcbbc45e1bfbeb9f6a2022db351d005ed",
+     "size": 38,
      "type": 1
     }
    ]
