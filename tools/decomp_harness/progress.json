@@ -947,6 +947,13 @@
       "functions": 17,
       "attempts": 7,
       "result": "matched"
+    },
+    {
+      "file": "asm/unk_02004A44.s",
+      "lines": 2672,
+      "functions": 95,
+      "attempts": 1,
+      "result": "matched"
     }
   ],
   "failed": [
@@ -1356,7 +1363,7 @@
   "in_progress": null,
   "stats": {
     "total_attempts": 216,
-    "total_matched": 87,
+    "total_matched": 88,
     "total_failed": 31
   },
   "matched": [

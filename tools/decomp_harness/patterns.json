@@ -1793,6 +1793,12 @@
       "category": "matching-tricks",
       "title": "A function-local array initializer copies at the declaration point; if retail copies AFTER other code, declare the local uninitialised and struct-assign a named const later",
       "body": "`s16 rects[12][4] = {...};` emits the template copy (here an ldrh/strh x48 loop for an alignment-2 96-byte table) at function entry, before any statements. When retail performs the copy after an earlier loop, wrap the table in a struct type, define it as a file-scope `static const` (e.g. `static const RectList sButtonRects = {...};`), declare the local without an initializer, and assign it at the right point (`rects = sButtonRects;`). The struct copy keeps the same copy loop. Rodata order in unk_02085604 still matched retail: const funcptr array (16B) @0, anonymous local int-grid template (60B) @0x10, then the named struct (96B) @0x4C (ascending size). Verify with `nm -n` and objdiff --rodata. Seen in sub_020860B8 (src/unk_02085604.c). Related: [[local-array-init-as-named-const-struct-copy-for-rodata-order]]."
+    },
+    {
+      "id": "recover-reverted-drafts-from-175578f26",
+      "category": "tooling",
+      "title": "Before writing a file from scratch, check git history for a draft reverted by 175578f26 (objdiff-bug revert): it may already match",
+      "body": "Commit 175578f26 reverted 12 fork decomps because objdiff.py's byte extraction was broken and had reported MATCH for everything. Some of those reverts were caused by SHARED-HEADER edits (IPA cascades into other TUs), not by the C itself. unk_02004A44 (95 fns) was recovered with `git show 175578f26^:src/unk_02004A44.c`, its deleted include/sound_02004A44_internal.h inlined as local types/prototypes, the frozen public include/sound_02004A44.h left untouched (not included) -- and it matched 95/95 + data under the fixed objdiff and passed HG+SS ROM SHA1 with zero C edits. Recipe: `git log --oneline --all -- src/<name>.c`; if a pre-175578f26 version exists, restore it, inline any deleted *_internal.h, drop includes of headers the old commit modified, flip main.lsf, compile_one. Files from that revert still in asm as of 2026-10-01: render_window (2930-line draft), unk_0200FA24 (559), unk_0201010C (3595), unk_02026DE0 (30). Their old commits also edited include/render_window.h / unk_0201010C.h / unk_02026DE0.h -- keep those headers frozen and use local prototypes."
     }
   ]
 }

@@ -1,21 +1,21 @@
 # Decomp Coverage Ledger
 
-*Generated 2026-10-01T07:58:38Z by `coverage_ledger.py` — do not hand-edit; regenerate after each decomp.*
+*Generated 2026-10-01T08:42:45Z by `coverage_ledger.py` — do not hand-edit; regenerate after each decomp.*
 
-Tracked functions (files with retained asm): **19040** — matched 2245, pending 15898, plus 20 matched-but-blocked inside failed files.
+Tracked functions (files with retained asm): **19040** — matched 2340, pending 15803, plus 20 matched-but-blocked inside failed files.
 
 | status | files | functions | insn lines | ~text bytes |
 |---|---|---|---|---|
-| matched | 116 | 2245 | 69112 | 154678 |
+| matched | 117 | 2340 | 70876 | 158982 |
 | blocked | 51 | 897 | 29123 | 64116 |
-| pending | 145 | 15898 | 793544 | 1776856 |
+| pending | 144 | 15803 | 791780 | 1772552 |
 | upstream | 414 | 0 | 0 | 0 |
 
 ## Blockers (value-ordered: fix what gates the most)
 
 | id | blocks | gates pending files | description |
 |---|---|---|---|
-| param-copyprop-cmp | 0 | 6 | MWCC copy-propagates parameter copies: 'adds r4, r0, #0; cmp r4, #N' at function entry cannot be produced from pure C (MWCC substitutes back to r0; the shape only arises for saved return values after a bl). Affected functions need the NONMATCHING inline-asm fallback — routine, not a wall (proven: unk_0200B150 re-landed 2026-07-02 via ROADMAP T0.2, full ROM SHA1 OK). Entry-idiom scan (asmscan) finds the remaining sites in pending files: overlay_102 (6), unk_02077678 (4), overlay_96 (3), overlay_48 (2), overlay_112, unk_02004A44, unk_020517A4, unk_02058034 (1 each). Gated files carry the affected function names in triage_report copyprop_funcs. |
+| param-copyprop-cmp | 0 | 5 | MWCC copy-propagates parameter copies: 'adds r4, r0, #0; cmp r4, #N' at function entry cannot be produced from pure C (MWCC substitutes back to r0; the shape only arises for saved return values after a bl). Affected functions need the NONMATCHING inline-asm fallback — routine, not a wall (proven: unk_0200B150 re-landed 2026-07-02 via ROADMAP T0.2, full ROM SHA1 OK). Entry-idiom scan (asmscan) finds the remaining sites in pending files: overlay_102 (6), unk_02077678 (4), overlay_96 (3), overlay_48 (2), overlay_112, unk_02004A44, unk_020517A4, unk_02058034 (1 each). Gated files carry the affected function names in triage_report copyprop_funcs. |
 | ext-data-section-split | 0 | 3 | Data-only files exporting multiple EXTERNAL (.public) const arrays: MWCC (all modes — with/without -ipa file, pragma or not; T0.3 experiments 2026-07-02 disproved the earlier mwldarm-reorder theory) emits file-scope external consts SIZE-ASCENDING with a deterministic equal-size scramble, so a retail layout that is not size-ascending cannot come from one TU in source order. objdiff cannot see section order — verify these files ONLY with chiri pkg -- compare. |
 | ipa-shared-headers | 0 | 0 | MWCC -ipa file: changing a signature in a shared header cascades codegen changes into every already-matched caller in other compilation units. Affects only files that must ADD or CHANGE declarations in a frozen header — call-only consumers of the exported APIs are NOT gated (proven by patterns 'ipa-blocked-files-can-call-sound-fns-without-cascade' and 'false-ipa-gate-shared-imports'). Diagnostic before blaming IPA for any mismatch: recompile the TU without '-ipa file' and objdiff (pattern ipa-file-flag-effects-and-removal-nonviability). |
 | ipa-cse-literal-pool | 1 | 0 | MWCC -ipa file caches repeated literal-pool addresses/large offsets in callee-saved registers across calls where retail reloads them (or vice versa). A codegen-shape problem, not a header problem — split from ipa-shared-headers 2026-07-01, where this file's ubiquitous exports (BeginNormalPaletteFade family, imported by ~84 pending .inc files) badly inflated the gate count. |
@@ -77,11 +77,12 @@ Tracked functions (files with retained asm): **19040** — matched 2245, pending
 | asm/middleware.s | 0 | 0 | yes |  Data-only: 7 NUL-terminated SDK middleware version strings in a custom .version section (single ordered section, each .b |
 | asm/overlay_12_battle_command.s | 0 | 0 | yes |   |
 
-## Matched files (asm retained) (116)
+## Matched files (asm retained) (117)
 
 | file | functions | insn lines | data-only | notes |
 |---|---|---|---|---|
 | asm/overlay_02_02248728.s | 364 | 14752 |  | retained_asm |
+| asm/unk_02004A44.s | 95 | 1764 |  | harness |
 | asm/unk_02030A98.s | 71 | 1383 |  | harness |
 | asm/unk_02023694.s | 68 | 1608 |  | harness |
 | asm/unk_0202B614.s | 61 | 1125 |  | retained_asm |
@@ -198,7 +199,7 @@ Tracked functions (files with retained asm): **19040** — matched 2245, pending
 | asm/overlay_01_data_02208BFC.s | 0 | 0 | yes | retained_asm |
 | asm/battle_arcade_game_board_data.s | 0 | 0 | yes | harness |
 
-## Pending files (145)
+## Pending files (144)
 
 | file | functions | insn lines | data-only | notes |
 |---|---|---|---|---|
@@ -246,7 +247,6 @@ Tracked functions (files with retained asm): **19040** — matched 2245, pending
 | asm/overlay_39_thumb.s | 97 | 3842 |  |  |
 | asm/overlay_87.s | 97 | 4577 |  |  |
 | asm/overlay_27.s | 96 | 5299 |  |  |
-| asm/unk_02004A44.s | 95 | 1764 |  |  |
 | asm/unk_020632B0.s | 93 | 2449 |  |  |
 | asm/overlay_01_021EB1E8.s | 92 | 4616 |  |  |
 | asm/unk_02035900.s | 90 | 3629 |  |  |
