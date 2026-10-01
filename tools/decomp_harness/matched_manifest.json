@@ -1,5 +1,5 @@
 {
- "count": 556,
+ "count": 557,
  "game": "heartgold.us",
  "schema": 1,
  "tus": {
@@ -45233,6 +45233,234 @@
      "name": ".text",
      "sha1": "113000686854fd2ae08529db3dd0f8a761b79c34",
      "size": 60,
+     "type": 1
+    }
+   ]
+  },
+  "src/overlay_41_02246B34.c": {
+   "alloc_sha1": "5f91f29d253ab399f8d154d9b6dc10a817a7b02d",
+   "object": "build/heartgold.us/src/overlay_41_02246B34.o",
+   "sections": [
+    {
+     "name": ".text",
+     "sha1": "44932821174af7ccff60acd2e4983364d323075b",
+     "size": 40,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "44767f01183b74c9542fa74b1eed48290acef41f",
+     "size": 12,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "4e725bd901b9733d14301ca2999476ef35d9327b",
+     "size": 130,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "f4c2c20d4df8a7a2158c55953f445b00a4474988",
+     "size": 162,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "fc629c8b5f7bd4ba22a979f6b6c93601e059e6b8",
+     "size": 30,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "0ae9a341b03afe3ecc65fc23d9751e6ee1616408",
+     "size": 16,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "3f89d24501ad2fc15b6b67453f962d9d07152877",
+     "size": 108,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "83c7f8c0dd87a4a7dead7211b6f8264a396e9b72",
+     "size": 40,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "c9f67ba24059472aa2b277a4ac531258cd60eebd",
+     "size": 82,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "e8bb3d4189d1a4a090a7340655f611bd760824eb",
+     "size": 54,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "0d1dd58046d20d2de1c701b8b865d9c883597cee",
+     "size": 296,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "02d3ec15d1c9f0035ef2cbd1777e4c1bad3333b6",
+     "size": 584,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "b32c2edfbbf24b00df275dbf8673b143207cf050",
+     "size": 240,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "dff15065ce9648da9560f196ea70e7215f265e80",
+     "size": 42,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "ab41ef382436bbec56db7a88e21e3c4e589036ad",
+     "size": 8,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "5d23a0a7f2ffba26c26dfa52ecaf406e3020935f",
+     "size": 20,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "fa057204199173e9d92aabce79bed9b1260f973a",
+     "size": 134,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "4adec2d9a1f55b1925d7fb94e1caafc10dbad431",
+     "size": 36,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "6cd6f4a39899469d8a58654fa3190224af73ec06",
+     "size": 186,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "0740ad522c50a22ff58da1af099bae2263dbcaf6",
+     "size": 36,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "a9e35892056a23cb3295178ad720e4079b942d73",
+     "size": 100,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "ab41ef382436bbec56db7a88e21e3c4e589036ad",
+     "size": 8,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "d7a7e88929b074a9977cc726314292f544c44b78",
+     "size": 68,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "02c79f6491e36a292f86dad1bd2a364216681a34",
+     "size": 16,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "3024f539148f723017fbd6ec9ede0a80965f91e6",
+     "size": 148,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "febabdc41ee56d05ace4091c1c05fbcea9380225",
+     "size": 16,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "ede4eb9044bf02c31416890d84bd5f519af8a19e",
+     "size": 16,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "ede4eb9044bf02c31416890d84bd5f519af8a19e",
+     "size": 16,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "47a10f76127ce7a871ac97f5f3dd6f72fd8e9c3a",
+     "size": 28,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "026c68f741779c31e3232fcfa8ca223e65ab1233",
+     "size": 30,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "7978ea769b4993b48583720fbce0117791c38b62",
+     "size": 30,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "474af7a4cd143bf28613993292debc548cc76cd3",
+     "size": 50,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "b52e18a73f27305d12301ac70b7ea4909547cacd",
+     "size": 50,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "1256599b058c02c1108e9940274133742d47206b",
+     "size": 76,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "07dfbf67eaa4063940b50e7b613e14b74a6114df",
+     "size": 16,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "4bfa007fc1a7b0d8e5e58f5c9d931e005bb8b863",
+     "size": 40,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "a6a49f158a5290527467f9af219163759cec6d5b",
+     "size": 326,
      "type": 1
     }
    ]

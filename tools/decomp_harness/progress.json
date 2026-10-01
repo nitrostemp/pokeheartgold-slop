@@ -1154,6 +1154,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "Battle Frontier map graphics (FrontierMap_Init/Free, BG/3D/sprite setup, map objects); port of plat overlay104 frontier_graphics.c"
+    },
+    {
+      "file": "asm/overlay_41_02246B34.s",
+      "lines": 1671,
+      "functions": 37,
+      "attempts": 1,
+      "result": "matched",
+      "note": "Fashion Case app: overlay init/main/exit, gfx tables, pokepic VRAM, board/canvas/button wiring"
     }
   ],
   "failed": [
@@ -1562,8 +1570,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 241,
-    "total_matched": 113,
+    "total_attempts": 242,
+    "total_matched": 114,
     "total_failed": 31
   },
   "matched": [
