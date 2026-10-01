@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-01T13:17:00Z",
+ "generated": "2026-10-01T13:55:38Z",
  "weights": {
   "insn_line": 1.0,
   "unknown_callee": 40.0,
@@ -10,29 +10,6 @@
   "special_section": 500.0
  },
  "queue": [
-  {
-   "file": "asm/overlay_80_0222FD08.s",
-   "score": 1694.0,
-   "special_sections": [],
-   "functions": 21,
-   "insn_lines": 1614,
-   "data_only": false,
-   "unknown_callees": [
-    "ov80_0223BDD4",
-    "ov80_0223BDE0"
-   ],
-   "jumptable_words": 0,
-   "rodata_bytes": 0,
-   "arm_functions": 0,
-   "gated_by": [],
-   "copyprop_funcs": [],
-   "cluster_partners": [
-    {
-     "file": "asm/overlay_80_0222BDF4.s",
-     "shared_symbols": 2
-    }
-   ]
-  },
   {
    "file": "asm/unk_02016EDC.s",
    "score": 1940.8,
@@ -7154,7 +7131,7 @@
   },
   {
    "file": "asm/overlay_70.s",
-   "score": 24743.4,
+   "score": 24703.4,
    "special_sections": [],
    "functions": 519,
    "insn_lines": 23556,
@@ -7163,7 +7140,6 @@
     "TradeSequence_Exit",
     "TradeSequence_Init",
     "TradeSequence_Main",
-    "_0223DD40",
     "gOverlayTemplate_PokemonSummary",
     "ov00_021E6A70",
     "ov38_0221BE84",

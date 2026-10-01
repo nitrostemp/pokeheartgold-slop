@@ -1943,6 +1943,42 @@
         "layout",
         "case-order"
       ]
+    },
+    {
+      "id": "static-global-work-ptr-explicit-local-reload-points",
+      "category": "matching-tricks",
+      "title": "A file-static work pointer that retail reloads only at specific points: copy it into locals at exactly those points (and reuse the old local where retail does)",
+      "body": "ov80_0222FD08 allocates `static BattleFactoryWork *sWork` and fills it. Writing `sWork->field` everywhere made MWCC reload the global after every store (it assumes a pointer store may alias the global): 564 vs 484 bytes. Retail loads the global into a register at a few points and keeps using it across calls and stores. Match by assigning locals at those points: `work = sWork; work->a = ...; work->b = ...; work = sWork;`. Retail even mixes two locals in one statement (`work2->x = GetStat(GetStatic(work2->save), f(work2->lvl), g(f(work->lvl)))`); reproduce that literally. A load that sits after a call in retail (`bl A24; ldr r1,=sWork; ldr r4,[r1]`) means the assignment came after the call: `type = sub_02030A24(...); work = sWork; work->type = type;`.",
+      "tags": [
+        "global",
+        "reload",
+        "alias",
+        "local-copy"
+      ]
+    },
+    {
+      "id": "swap-temps-shared-function-scope-vars",
+      "category": "codegen",
+      "title": "Two parallel branches that swap array entries share ONE set of function-scope temps; per-branch block-scoped temps shuffle the spill slots",
+      "body": "ov80_022300D4 swaps entry `index` with a random entry across four parallel arrays (u16/u8/u32/FrontierMon), with an identical if/else branch for two array groups. Block-scoped `u16 id; u8 iv; u32 pid; FrontierMon mon;` in each branch gave 12 stack-offset diffs. Declaring them once at function scope and assigning them in both branches matches: MWCC splits each variable's two live ranges into the separate slots retail uses (A temps at 0x1c..0x14, B temps at 0x8..0x0, the two FrontierMon copies at 0xa4 and 0x6c).",
+      "tags": [
+        "stack",
+        "spill",
+        "scope",
+        "swap"
+      ]
+    },
+    {
+      "id": "stack-value-buffer-struct-with-u32-array",
+      "category": "codegen",
+      "title": "`add r0,sp,#4; strb r1,[r0,#8]` plus `&sp+0xc` passed to a setter: one local struct {u16 h[4]; u8 b[4]; u32 w[4];} used as a scratch value buffer",
+      "body": "ov80_0223049C passes &value to sub_02030978(frontierData, field, index, &value) with u16, u8 and u32 values. Retail addresses the u8 as (sp+4)+8 and the frame is 0x20 with push {r3,...}. Separate locals give a 0x14 frame and plain sp offsets. `struct { u16 value16[4]; u8 value8[4]; u32 value32[4]; } buf;` (0x1C bytes) matches both the addressing and the frame size. Also: a Party_GetCount bound compared `blo` against a u16 counter means the bound is u32, not int/u16.",
+      "tags": [
+        "stack",
+        "struct",
+        "buffer",
+        "frame-size"
+      ]
     }
   ]
 }

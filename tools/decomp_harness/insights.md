@@ -713,6 +713,14 @@ In overlay_80_0222AEF8 the link handlers pack u32 personalities as two u16 runs.
 
 ov80_0222B740: an if/else-if on a byte field (== 0, else == 4) emitted `bne` with the ==0 body first. Retail tests 0 first but lays out the ==4 body first, which is `switch (x) { case 4: ...; break; case 0: ...; break; }`. MWCC tests switch cases in value order but emits the bodies in source order.
 
+### Two parallel branches that swap array entries share ONE set of function-scope temps; per-branch block-scoped temps shuffle the spill slots  <!-- id: swap-temps-shared-function-scope-vars -->
+
+ov80_022300D4 swaps entry `index` with a random entry across four parallel arrays (u16/u8/u32/FrontierMon), with an identical if/else branch for two array groups. Block-scoped `u16 id; u8 iv; u32 pid; FrontierMon mon;` in each branch gave 12 stack-offset diffs. Declaring them once at function scope and assigning them in both branches matches: MWCC splits each variable's two live ranges into the separate slots retail uses (A temps at 0x1c..0x14, B temps at 0x8..0x0, the two FrontierMon copies at 0xa4 and 0x6c).
+
+### `add r0,sp,#4; strb r1,[r0,#8]` plus `&sp+0xc` passed to a setter: one local struct {u16 h[4]; u8 b[4]; u32 w[4];} used as a scratch value buffer  <!-- id: stack-value-buffer-struct-with-u32-array -->
+
+ov80_0223049C passes &value to sub_02030978(frontierData, field, index, &value) with u16, u8 and u32 values. Retail addresses the u8 as (sp+4)+8 and the frame is 0x20 with push {r3,...}. Separate locals give a 0x14 frame and plain sp offsets. `struct { u16 value16[4]; u8 value8[4]; u32 value32[4]; } buf;` (0x1C bytes) matches both the addressing and the frame size. Also: a Party_GetCount bound compared `blo` against a u16 counter means the bound is u32, not int/u16.
+
 ## Matching Tricks
 
 ### Small source changes that move codegen  <!-- id: decl-order-tricks -->
@@ -1008,6 +1016,10 @@ ov117_0225F524 keeps `movs r7,#4` in the prologue, passes it as `adds rN,r7,#0` 
 ### Retail recomputes `base + (j+1)*32` per outer iteration and folds the struct offset into ldrh: write the row as a flat index on row 0  <!-- id: jplus1-row-index-flat-form-defeats-strength-reduction -->
 
 ov46_02258F78 blends palettes with BlendPalette(&base[j][i], &out[k][i], 1, step>>8, base[j+1][i]). Retail keeps induction pointers for base[j] and out[k], but for base[j+1] it recomputes `work + (j+1)*32` once per j-iteration (spilled) and loads with `ldrh [r6, #0xdc]` (the struct offset folded into the load). Writing `base[j + 1][i]` made MWCC strength-reduce it into a third induction pointer: +1 stack slot, push {r3,...}, 4 bytes larger. `((u16*)base)[(j+1)*16+i]` fixed the size but hoisted `&work->...base` into its own slot. `work->palAnim.base[0][(j + 1) * 16 + i]` (an out-of-row index on row 0) matches exactly; `*(base[0] + (j+1)*16 + i)` and `base[0][i + (j+1)*16]` also match.
+
+### A file-static work pointer that retail reloads only at specific points: copy it into locals at exactly those points (and reuse the old local where retail does)  <!-- id: static-global-work-ptr-explicit-local-reload-points -->
+
+ov80_0222FD08 allocates `static BattleFactoryWork *sWork` and fills it. Writing `sWork->field` everywhere made MWCC reload the global after every store (it assumes a pointer store may alias the global): 564 vs 484 bytes. Retail loads the global into a register at a few points and keeps using it across calls and stores. Match by assigning locals at those points: `work = sWork; work->a = ...; work->b = ...; work = sWork;`. Retail even mixes two locals in one statement (`work2->x = GetStat(GetStatic(work2->save), f(work2->lvl), g(f(work->lvl)))`); reproduce that literally. A load that sits after a call in retail (`bl A24; ldr r1,=sWork; ldr r4,[r1]`) means the assignment came after the call: `type = sub_02030A24(...); work = sWork; work->type = type;`.
 
 ## IPA (-ipa file) Behavior
 

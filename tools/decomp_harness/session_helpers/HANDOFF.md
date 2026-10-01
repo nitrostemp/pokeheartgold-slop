@@ -27,6 +27,7 @@ session can resume from whatever was last pushed.
 | overlay_46 | 20/20 C |
 | frontier/overlay_80_0222AEF8 | 54/54 C |
 | unk_02096910 | 15/15 C |
+| frontier/overlay_80_0222FD08 | 20 C + 1 NONMATCHING (ov80_022308C4 stack slot) |
 
 ## In progress / next
 

@@ -1,15 +1,15 @@
 # Decomp Coverage Ledger
 
-*Generated 2026-10-01T13:17:43Z by `coverage_ledger.py` — do not hand-edit; regenerate after each decomp.*
+*Generated 2026-10-01T13:56:25Z by `coverage_ledger.py` — do not hand-edit; regenerate after each decomp.*
 
-Tracked functions (files with retained asm): **18986** — matched 2673, pending 15451, plus 20 matched-but-blocked inside failed files.
+Tracked functions (files with retained asm): **18965** — matched 2673, pending 15430, plus 20 matched-but-blocked inside failed files.
 
 | status | files | functions | insn lines | ~text bytes |
 |---|---|---|---|---|
 | matched | 126 | 2673 | 85059 | 189956 |
 | blocked | 49 | 862 | 28331 | 62386 |
-| pending | 136 | 15451 | 776656 | 1739620 |
-| upstream | 415 | 0 | 0 | 0 |
+| pending | 135 | 15430 | 775042 | 1736020 |
+| upstream | 416 | 0 | 0 | 0 |
 
 ## Blockers (value-ordered: fix what gates the most)
 
@@ -206,7 +206,7 @@ Tracked functions (files with retained asm): **18986** — matched 2673, pending
 | asm/overlay_01_data_02208BFC.s | 0 | 0 | yes | retained_asm |
 | asm/battle_arcade_game_board_data.s | 0 | 0 | yes | harness |
 
-## Pending files (136)
+## Pending files (135)
 
 | file | functions | insn lines | data-only | notes |
 |---|---|---|---|---|
@@ -335,7 +335,6 @@ Tracked functions (files with retained asm): **18986** — matched 2673, pending
 | asm/overlay_80_022324C4.s | 26 | 1946 |  |  |
 | asm/unk_020755E8.s | 22 | 3237 |  |  |
 | asm/overlay_14_021F1808.s | 21 | 1375 |  |  |
-| asm/overlay_80_0222FD08.s | 21 | 1614 |  |  |
 | asm/overlay_49_02268D94.s | 17 | 940 |  |  |
 | asm/overlay_14_021EEF34.s | 15 | 1538 |  |  |
 | asm/overlay_49_02261FC0.s | 10 | 1432 |  |  |

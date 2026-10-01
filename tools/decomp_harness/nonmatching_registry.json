@@ -2,11 +2,11 @@
   "schema": 1,
   "generated": "2026-07-02",
   "generator": "tools/decomp_harness/permuter/gen_nonmatching_registry.py",
-  "total": 87,
-  "candidates": 84,
+  "total": 88,
+  "candidates": 85,
   "do_not_queue": 3,
   "by_failure_class": {
-    "regalloc-tiebreak": 49,
+    "regalloc-tiebreak": 50,
     "unknown": 17,
     "control-flow-divergence": 5,
     "instruction-schedule": 5,
@@ -136,6 +136,15 @@
       "permuter_candidate": true,
       "reason": "MWCC register-allocation / scheduling tie-break; primary permuter target (equivalent C shapes flip the allocator)",
       "source": "block_comment"
+    },
+    {
+      "file": "src/frontier/overlay_80_0222FD08.c",
+      "function": "ov80_022308C4",
+      "line": 496,
+      "failure_class": "regalloc-tiebreak",
+      "permuter_candidate": true,
+      "reason": "MWCC register-allocation / scheduling tie-break; primary permuter target (equivalent C shapes flip the allocator)",
+      "source": "attempts_log"
     },
     {
       "file": "src/frontier/overlay_80_02235900.c",
