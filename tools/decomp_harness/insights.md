@@ -1327,6 +1327,10 @@ The helper that measures a String (FontID_String_GetWidth + FX_ModS32(width,8) t
 
 HG render_window.s maps 1:1 onto pokeplatinum src/render_window.c: standard frame, message box, scroll cursor (HG generalises it to member/frames/srcX/srcY), transparent-tile replace, signpost, wait dial and Pokemon preview. Porting with HG API names (FillBgTilemapRect, GfGfxLoader_*, FieldSpriteManager_*, BG_LoadCharTilesData, sub_020143E0) matched 37/40 nearly as written. HG differences: FillBgTilemapRect mode 16 = keep palette; WaitingIcon/PokemonPreview use HG struct layouts; rodata templates (regions, res counts, ManagedSpriteTemplate with resIdList 89301) are file-scope static consts copied by struct assignment. github.com/.../raw is blocked by the egress proxy, but raw.githubusercontent.com works.
 
+### unk_02016EDC = pokeplatinum src/pokemon_anim.c (PokeAnm script interpreter): ports 1:1 with HG constants and one extra loop  <!-- id: port-pokemon-anim-from-pokeplatinum -->
+
+The 62 functions line up with pokeplatinum's pokemon_anim.c in order. Port steps: rename to HG symbols in asm order (the harness pairs functions by name, so the static helpers need sub_ names too); PokemonSprite_* -> Pokepic_GetAttr/SetAttr/AddAttr/StartPaletteFade/ResumePaletteFade; MON_SPRITE_X/Y_CENTER/ROTATION_Z/X_PIVOT/SCALE_X/SCALE_Y -> POKEPIC_X/Y/ZROT/XPIVOT/AFFINEW/AFFINEH; SysTask_Start/Done -> SysTask_CreateOnMainQueue/Destroy; the NARC is NARC_a_0_9_0. HG-only differences: PokemonAnimManager_New also loops `anims[i].completed = TRUE`; transform types are 35..39 and curve types 30..33 (Platinum uses 0-based enums); the command table order comes from the HG .rodata (WaitTransform/SetYNormalization/transforms before SetStartDelay/Fade/WaitFade). Pull the other numeric constants from `cmp` immediates in the asm. Platinum's `typedef struct X X;` followed by `typedef struct X {...} X;` is a redeclaration error under MWCC's -lang c99, so define the bodies as `struct X {...};`.
+
 ## NONMATCHING Fallback
 
 ### NONMATCHING inline asm syntax (MWCC)  <!-- id: nonmatching-inline-asm-syntax -->

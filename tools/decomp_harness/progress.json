@@ -1042,6 +1042,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "20 C + 1 NONMATCHING (ov80_022308C4 stack slot): Battle Factory work state"
+    },
+    {
+      "file": "asm/unk_02016EDC.s",
+      "lines": 2400,
+      "functions": 62,
+      "attempts": 1,
+      "result": "matched",
+      "note": "62/62 C: Pokemon sprite anim script interpreter, ported from pokeplatinum pokemon_anim.c"
     }
   ],
   "failed": [
@@ -1450,8 +1458,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 227,
-    "total_matched": 99,
+    "total_attempts": 228,
+    "total_matched": 100,
     "total_failed": 31
   },
   "matched": [

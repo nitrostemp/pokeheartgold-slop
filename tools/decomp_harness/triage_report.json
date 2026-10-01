@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-01T13:55:38Z",
+ "generated": "2026-10-01T14:03:29Z",
  "weights": {
   "insn_line": 1.0,
   "unknown_callee": 40.0,
@@ -10,21 +10,6 @@
   "special_section": 500.0
  },
  "queue": [
-  {
-   "file": "asm/unk_02016EDC.s",
-   "score": 1940.8,
-   "special_sections": [],
-   "functions": 62,
-   "insn_lines": 1931,
-   "data_only": false,
-   "unknown_callees": [],
-   "jumptable_words": 0,
-   "rodata_bytes": 196,
-   "arm_functions": 0,
-   "gated_by": [],
-   "copyprop_funcs": [],
-   "cluster_partners": []
-  },
   {
    "file": "asm/unk_020658D4.s",
    "score": 1992.8,
@@ -2159,6 +2144,34 @@
    ]
   },
   {
+   "file": "asm/unk_020755E8.s",
+   "score": 3375.8,
+   "special_sections": [],
+   "functions": 22,
+   "insn_lines": 3237,
+   "data_only": false,
+   "unknown_callees": [
+    "gOverlayTemplate_PokemonSummary",
+    "sub_0203A880",
+    "sub_02089D40"
+   ],
+   "jumptable_words": 0,
+   "rodata_bytes": 376,
+   "arm_functions": 0,
+   "gated_by": [],
+   "copyprop_funcs": [],
+   "cluster_partners": [
+    {
+     "file": "asm/unk_02088288.s",
+     "shared_symbols": 2
+    },
+    {
+     "file": "asm/unk_0203A3B0.s",
+     "shared_symbols": 1
+    }
+   ]
+  },
+  {
    "file": "asm/overlay_108_021E8850.s",
    "score": 3452.0,
    "special_sections": [],
@@ -2172,41 +2185,6 @@
    "gated_by": [],
    "copyprop_funcs": [],
    "cluster_partners": []
-  },
-  {
-   "file": "asm/unk_020755E8.s",
-   "score": 3495.8,
-   "special_sections": [],
-   "functions": 22,
-   "insn_lines": 3237,
-   "data_only": false,
-   "unknown_callees": [
-    "gOverlayTemplate_PokemonSummary",
-    "sub_02016EDC",
-    "sub_02016F2C",
-    "sub_02017068",
-    "sub_0203A880",
-    "sub_02089D40"
-   ],
-   "jumptable_words": 0,
-   "rodata_bytes": 376,
-   "arm_functions": 0,
-   "gated_by": [],
-   "copyprop_funcs": [],
-   "cluster_partners": [
-    {
-     "file": "asm/unk_02016EDC.s",
-     "shared_symbols": 3
-    },
-    {
-     "file": "asm/unk_02088288.s",
-     "shared_symbols": 2
-    },
-    {
-     "file": "asm/unk_0203A3B0.s",
-     "shared_symbols": 1
-    }
-   ]
   },
   {
    "file": "asm/overlay_01_021F1AFC.s",
@@ -2423,6 +2401,41 @@
    ]
   },
   {
+   "file": "asm/overlay_95.s",
+   "score": 3643.6,
+   "special_sections": [],
+   "functions": 62,
+   "insn_lines": 3039,
+   "data_only": false,
+   "unknown_callees": [
+    "sub_02014DA0",
+    "sub_02014DB4",
+    "sub_02014EBC",
+    "sub_02015264",
+    "sub_0201526C",
+    "sub_02015354",
+    "sub_02015394",
+    "sub_0201543C",
+    "sub_02015460",
+    "sub_02015494",
+    "sub_020154B0",
+    "sub_020154D0",
+    "sub_02015524",
+    "sub_02015528"
+   ],
+   "jumptable_words": 0,
+   "rodata_bytes": 892,
+   "arm_functions": 0,
+   "gated_by": [],
+   "copyprop_funcs": [],
+   "cluster_partners": [
+    {
+     "file": "asm/unk_02014DA0.s",
+     "shared_symbols": 14
+    }
+   ]
+  },
+  {
    "file": "asm/overlay_109.s",
    "score": 3688.4,
    "special_sections": [],
@@ -2442,48 +2455,6 @@
    "cluster_partners": [
     {
      "file": "asm/unk_020210A0.s",
-     "shared_symbols": 3
-    }
-   ]
-  },
-  {
-   "file": "asm/overlay_95.s",
-   "score": 3763.6,
-   "special_sections": [],
-   "functions": 62,
-   "insn_lines": 3039,
-   "data_only": false,
-   "unknown_callees": [
-    "sub_02014DA0",
-    "sub_02014DB4",
-    "sub_02014EBC",
-    "sub_02015264",
-    "sub_0201526C",
-    "sub_02015354",
-    "sub_02015394",
-    "sub_0201543C",
-    "sub_02015460",
-    "sub_02015494",
-    "sub_020154B0",
-    "sub_020154D0",
-    "sub_02015524",
-    "sub_02015528",
-    "sub_02016EDC",
-    "sub_02016F2C",
-    "sub_02017068"
-   ],
-   "jumptable_words": 0,
-   "rodata_bytes": 892,
-   "arm_functions": 0,
-   "gated_by": [],
-   "copyprop_funcs": [],
-   "cluster_partners": [
-    {
-     "file": "asm/unk_02014DA0.s",
-     "shared_symbols": 14
-    },
-    {
-     "file": "asm/unk_02016EDC.s",
      "shared_symbols": 3
     }
    ]
@@ -4811,7 +4782,7 @@
   },
   {
    "file": "asm/overlay_12_022378C0.s",
-   "score": 6408.8,
+   "score": 6328.8,
    "special_sections": [
     ".sinit"
    ],
@@ -4833,8 +4804,6 @@
     "ov12_02265FD4",
     "sub_02014DA0",
     "sub_02014F84",
-    "sub_02016EDC",
-    "sub_02016F2C",
     "sub_020210BC",
     "sub_02021148",
     "sub_02021238",
@@ -5276,13 +5245,12 @@
   },
   {
    "file": "asm/unk_02088288.s",
-   "score": 7345.2,
+   "score": 7305.2,
    "special_sections": [],
    "functions": 97,
    "insn_lines": 5166,
    "data_only": false,
    "unknown_callees": [
-    "sub_02016EDC",
     "sub_020210BC",
     "sub_02021148",
     "sub_02021238",
@@ -5354,10 +5322,6 @@
     {
      "file": "asm/unk_020210A0.s",
      "shared_symbols": 3
-    },
-    {
-     "file": "asm/unk_02016EDC.s",
-     "shared_symbols": 1
     },
     {
      "file": "asm/unk_0203A3B0.s",
@@ -5590,7 +5554,7 @@
   },
   {
    "file": "asm/overlay_57.s",
-   "score": 8856.0,
+   "score": 8736.0,
    "special_sections": [
     ".sinit"
    ],
@@ -5612,9 +5576,6 @@
     "sub_02014DA0",
     "sub_0201543C",
     "sub_02015460",
-    "sub_02016EDC",
-    "sub_02016F2C",
-    "sub_02017068",
     "sub_020210BC",
     "sub_02021148",
     "sub_02021238"
@@ -5631,10 +5592,6 @@
     },
     {
      "file": "asm/unk_02014DA0.s",
-     "shared_symbols": 3
-    },
-    {
-     "file": "asm/unk_02016EDC.s",
      "shared_symbols": 3
     },
     {
@@ -7043,7 +7000,7 @@
   },
   {
    "file": "asm/overlay_12_battle_controller_opponent.s",
-   "score": 19029.8,
+   "score": 18989.8,
    "special_sections": [],
    "functions": 216,
    "insn_lines": 16947,
@@ -7098,8 +7055,7 @@
     "ov12_02263360",
     "ov12_02263A00",
     "ov12_0226430C",
-    "ov12_022643C8",
-    "sub_02017068"
+    "ov12_022643C8"
    ],
    "jumptable_words": 0,
    "rodata_bytes": 856,
@@ -7121,10 +7077,6 @@
     },
     {
      "file": "asm/overlay_12_022378C0.s",
-     "shared_symbols": 1
-    },
-    {
-     "file": "asm/unk_02016EDC.s",
      "shared_symbols": 1
     }
    ]

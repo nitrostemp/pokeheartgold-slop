@@ -1979,6 +1979,18 @@
         "buffer",
         "frame-size"
       ]
+    },
+    {
+      "id": "port-pokemon-anim-from-pokeplatinum",
+      "category": "file-patterns",
+      "title": "unk_02016EDC = pokeplatinum src/pokemon_anim.c (PokeAnm script interpreter): ports 1:1 with HG constants and one extra loop",
+      "body": "The 62 functions line up with pokeplatinum's pokemon_anim.c in order. Port steps: rename to HG symbols in asm order (the harness pairs functions by name, so the static helpers need sub_ names too); PokemonSprite_* -> Pokepic_GetAttr/SetAttr/AddAttr/StartPaletteFade/ResumePaletteFade; MON_SPRITE_X/Y_CENTER/ROTATION_Z/X_PIVOT/SCALE_X/SCALE_Y -> POKEPIC_X/Y/ZROT/XPIVOT/AFFINEW/AFFINEH; SysTask_Start/Done -> SysTask_CreateOnMainQueue/Destroy; the NARC is NARC_a_0_9_0. HG-only differences: PokemonAnimManager_New also loops `anims[i].completed = TRUE`; transform types are 35..39 and curve types 30..33 (Platinum uses 0-based enums); the command table order comes from the HG .rodata (WaitTransform/SetYNormalization/transforms before SetStartDelay/Fade/WaitFade). Pull the other numeric constants from `cmp` immediates in the asm. Platinum's `typedef struct X X;` followed by `typedef struct X {...} X;` is a redeclaration error under MWCC's -lang c99, so define the bodies as `struct X {...};`.",
+      "tags": [
+        "port",
+        "pokeplatinum",
+        "pokemon_anim",
+        "pokepic"
+      ]
     }
   ]
 }
