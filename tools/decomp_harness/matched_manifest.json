@@ -1,5 +1,5 @@
 {
- "count": 532,
+ "count": 533,
  "game": "heartgold.us",
  "schema": 1,
  "tus": {
@@ -72790,6 +72790,24 @@
     {
      "name": ".text",
      "sha1": "c893822ebe20001e1c7fac795c0828c9367e8415",
+     "size": 24,
+     "type": 1
+    }
+   ]
+  },
+  "src/unk_02026DE0.c": {
+   "alloc_sha1": "5386817933e56d2b45064333157fc009968c53c6",
+   "object": "build/heartgold.us/src/unk_02026DE0.o",
+   "sections": [
+    {
+     "name": ".text",
+     "sha1": "c61fefcea29172106ef74f8918b26a69d6dfc4bd",
+     "size": 54,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "e211e588dd41ab03344dcdb3a943e5a0b75cb6aa",
      "size": 24,
      "type": 1
     }

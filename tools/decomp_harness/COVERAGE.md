@@ -1,13 +1,13 @@
 # Decomp Coverage Ledger
 
-*Generated 2026-10-01T09:53:44Z by `coverage_ledger.py` — do not hand-edit; regenerate after each decomp.*
+*Generated 2026-10-01T09:59:03Z by `coverage_ledger.py` — do not hand-edit; regenerate after each decomp.*
 
-Tracked functions (files with retained asm): **19040** — matched 2386, pending 15757, plus 20 matched-but-blocked inside failed files.
+Tracked functions (files with retained asm): **19040** — matched 2388, pending 15757, plus 20 matched-but-blocked inside failed files.
 
 | status | files | functions | insn lines | ~text bytes |
 |---|---|---|---|---|
-| matched | 118 | 2386 | 72129 | 161700 |
-| blocked | 51 | 897 | 29123 | 64116 |
+| matched | 119 | 2388 | 72168 | 161778 |
+| blocked | 50 | 895 | 29084 | 64038 |
 | pending | 143 | 15757 | 790527 | 1769834 |
 | upstream | 414 | 0 | 0 | 0 |
 
@@ -21,7 +21,7 @@ Tracked functions (files with retained asm): **19040** — matched 2386, pending
 | ipa-cse-literal-pool | 1 | 0 | MWCC -ipa file caches repeated literal-pool addresses/large offsets in callee-saved registers across calls where retail reloads them (or vice versa). A codegen-shape problem, not a header problem — split from ipa-shared-headers 2026-07-01, where this file's ubiquitous exports (BeginNormalPaletteFade family, imported by ~84 pending .inc files) badly inflated the gate count. |
 | objdiff-false-positives | 0 | 0 | RESOLVED. objdiff.py had a critical bug: the byte extraction regex did not match MWCC's ARM Thumb objdump format (packed hex like 'b418' vs expected space-separated 'b4 18'). It extracted 0 bytes for every function, so 0==0 always reported MATCH. 11 decomps accepted via objdiff were not actually byte-matching. Fixed; all 11 non-matching decomps reverted to asm. 2 decomps that truly match (unk_0202DB34, battle_arcade_game_board_data) kept. |
 
-## Blocked files (51)
+## Blocked files (50)
 
 | file | functions | insn lines | data-only | notes |
 |---|---|---|---|---|
@@ -71,13 +71,12 @@ Tracked functions (files with retained asm): **19040** — matched 2386, pending
 | asm/overlay_116.s | 5 | 368 |  |   |
 | asm/unk_02025C44.s | 4 | 276 |  | regalloc-pointer-spill G2D module; 3/4 match (GF_InitG2dRenderer, GF_SetG2dRendererSurface, sub_02025C54). sub_02025C98 (NNSG2dRndCellCullingFu |
 | asm/unk_02087FD4.s | 3 | 59 |  | large-reloc-data-file ~4032-byte relocation-heavy rodata (field-move-response trees, ~27 nested tables chained via .word pointers) + 3 trivial |
-| asm/unk_02026DE0.s | 2 | 39 |  |  sub_02026E18 matches; sub_02026DE0 not reproducible under MWCC -O4,p. asm keeps a late-materialized stack buffer (dead b |
 | asm/overlay_114.s | 2 | 538 |  |   |
 | asm/unk_02055BF0_data.s | 0 | 0 | yes | ext-data-section-split Data-only: 3 external const fn-ptr arrays (sMapEnterRoutines, sMapExitRoutines, _020FC76C) referenced only by already-ma |
 | asm/middleware.s | 0 | 0 | yes |  Data-only: 7 NUL-terminated SDK middleware version strings in a custom .version section (single ordered section, each .b |
 | asm/overlay_12_battle_command.s | 0 | 0 | yes |   |
 
-## Matched files (asm retained) (118)
+## Matched files (asm retained) (119)
 
 | file | functions | insn lines | data-only | notes |
 |---|---|---|---|---|
@@ -189,6 +188,7 @@ Tracked functions (files with retained asm): **19040** — matched 2386, pending
 | asm/unk_020961D8.s | 3 | 129 |  | harness |
 | asm/unk_02097B78.s | 3 | 43 |  | harness |
 | asm/overlay_41_0224BE34.s | 3 | 146 |  | harness |
+| asm/unk_02026DE0.s | 2 | 39 |  | harness |
 | asm/unk_02027010.s | 2 | 72 |  | harness |
 | asm/unk_020551B8.s | 2 | 59 |  | harness |
 | asm/unk_02078DD8.s | 2 | 34 |  | harness |

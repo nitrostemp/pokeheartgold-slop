@@ -962,6 +962,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "compare-verified HG+SS. Fashion-case accessory board (UnkOv41Board 0x8c, node lists, page-swap SysTask). 45 C + 1 NONMATCHING (ov41_02248B48 regalloc tie-break). 022484E8 pages are id/9 (quotient). Fixes: stack-slot reverse decl order, node declared before head for r4, count read via board->lists[type].count (no list ptr local), case-body statement order steers zero-const register."
+    },
+    {
+      "file": "asm/unk_02026DE0.s",
+      "lines": 46,
+      "functions": 2,
+      "attempts": 1,
+      "result": "matched",
+      "note": "compare-verified HG+SS. Billboard gfx-sequence lookup (frame -> texture/palette index). The 175578f26^ draft was 10 bytes short: retail returns BillboardTexPlttIndex (2-byte struct) by value through a stack temp and reloads seqCount each loop iteration. Uses the BillboardGfxSequence/BillboardTexPlttIndex types from unk_02023694.c."
     }
   ],
   "failed": [
@@ -1370,8 +1378,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 217,
-    "total_matched": 89,
+    "total_attempts": 218,
+    "total_matched": 90,
     "total_failed": 31
   },
   "matched": [
