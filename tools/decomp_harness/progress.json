@@ -954,6 +954,14 @@
       "functions": 95,
       "attempts": 1,
       "result": "matched"
+    },
+    {
+      "file": "asm/overlay_41_02248400.s",
+      "lines": 1568,
+      "functions": 46,
+      "attempts": 1,
+      "result": "matched",
+      "note": "compare-verified HG+SS. Fashion-case accessory board (UnkOv41Board 0x8c, node lists, page-swap SysTask). 45 C + 1 NONMATCHING (ov41_02248B48 regalloc tie-break). 022484E8 pages are id/9 (quotient). Fixes: stack-slot reverse decl order, node declared before head for r4, count read via board->lists[type].count (no list ptr local), case-body statement order steers zero-const register."
     }
   ],
   "failed": [
@@ -1362,8 +1370,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 216,
-    "total_matched": 88,
+    "total_attempts": 217,
+    "total_matched": 89,
     "total_failed": 31
   },
   "matched": [

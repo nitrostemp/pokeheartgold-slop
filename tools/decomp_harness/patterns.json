@@ -1799,6 +1799,12 @@
       "category": "tooling",
       "title": "Before writing a file from scratch, check git history for a draft reverted by 175578f26 (objdiff-bug revert): it may already match",
       "body": "Commit 175578f26 reverted 12 fork decomps because objdiff.py's byte extraction was broken and had reported MATCH for everything. Some of those reverts were caused by SHARED-HEADER edits (IPA cascades into other TUs), not by the C itself. unk_02004A44 (95 fns) was recovered with `git show 175578f26^:src/unk_02004A44.c`, its deleted include/sound_02004A44_internal.h inlined as local types/prototypes, the frozen public include/sound_02004A44.h left untouched (not included) -- and it matched 95/95 + data under the fixed objdiff and passed HG+SS ROM SHA1 with zero C edits. Recipe: `git log --oneline --all -- src/<name>.c`; if a pre-175578f26 version exists, restore it, inline any deleted *_internal.h, drop includes of headers the old commit modified, flip main.lsf, compile_one. Files from that revert still in asm as of 2026-10-01: render_window (2930-line draft), unk_0200FA24 (559), unk_0201010C (3595), unk_02026DE0 (30). Their old commits also edited include/render_window.h / unk_0201010C.h / unk_02026DE0.h -- keep those headers frozen and use local prototypes."
+    },
+    {
+      "id": "switch-case-stmt-order-steers-shared-zero-reg",
+      "category": "matching-tricks",
+      "title": "A zero constant CSE'd across switch cases lands in r0 vs r1 depending on statement order INSIDE the case bodies",
+      "body": "When a `0` is materialised once before a switch and reused in several cases (e.g. `frameIdx = 0; tmpl.f = 0;`), objdiff may show the identical instruction stream but with the constant in r0 where retail uses r1 (and the case-local temp in r1 vs r0). Declaration order and pre-switch store order do not move it; reordering the statements inside the case body that consumes the constant does. In ov41_022485DC, case 0 `resIdx = idx; tmpl.unk1C = board->unk50[idx]; frameIdx = 0;` -> `resIdx = idx; frameIdx = 0; tmpl.unk1C = board->unk50[idx];` took it from 26 diffs to 8 (the rest was stack-slot decl order). Brute-forcing the pre-switch template store order first (120 permutations, ~3.5s each via compile_one) is what got the param registers right. Related: [[stack-slot-reverse-decl-order]], [[decl-order-regalloc]]."
     }
   ]
 }

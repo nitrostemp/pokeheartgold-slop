@@ -961,6 +961,10 @@ When a call result is both stored to a struct field and kept in a callee-saved l
 
 `s16 rects[12][4] = {...};` emits the template copy (here an ldrh/strh x48 loop for an alignment-2 96-byte table) at function entry, before any statements. When retail performs the copy after an earlier loop, wrap the table in a struct type, define it as a file-scope `static const` (e.g. `static const RectList sButtonRects = {...};`), declare the local without an initializer, and assign it at the right point (`rects = sButtonRects;`). The struct copy keeps the same copy loop. Rodata order in unk_02085604 still matched retail: const funcptr array (16B) @0, anonymous local int-grid template (60B) @0x10, then the named struct (96B) @0x4C (ascending size). Verify with `nm -n` and objdiff --rodata. Seen in sub_020860B8 (src/unk_02085604.c). Related: [[local-array-init-as-named-const-struct-copy-for-rodata-order]].
 
+### A zero constant CSE'd across switch cases lands in r0 vs r1 depending on statement order INSIDE the case bodies  <!-- id: switch-case-stmt-order-steers-shared-zero-reg -->
+
+When a `0` is materialised once before a switch and reused in several cases (e.g. `frameIdx = 0; tmpl.f = 0;`), objdiff may show the identical instruction stream but with the constant in r0 where retail uses r1 (and the case-local temp in r1 vs r0). Declaration order and pre-switch store order do not move it; reordering the statements inside the case body that consumes the constant does. In ov41_022485DC, case 0 `resIdx = idx; tmpl.unk1C = board->unk50[idx]; frameIdx = 0;` -> `resIdx = idx; frameIdx = 0; tmpl.unk1C = board->unk50[idx];` took it from 26 diffs to 8 (the rest was stack-slot decl order). Brute-forcing the pre-switch template store order first (120 permutations, ~3.5s each via compile_one) is what got the param registers right. Related: [[stack-slot-reverse-decl-order]], [[decl-order-regalloc]].
+
 ## IPA (-ipa file) Behavior
 
 ### Shared-header signatures are load-bearing across compilation units  <!-- id: ipa-shared-headers -->
