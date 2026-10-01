@@ -35,6 +35,7 @@ session can resume from whatever was last pushed.
 | unk_02032844 | 75/75 C (port of pokeplatinum wireless_manager.c) |
 | unk_02034B0C | 56/56 C (port of pokeplatinum unk_02033200.c CommServerClient) |
 | overlay_56 | 31/31 C (mail viewer, HG version of pokeplatinum mail_viewer.c) |
+| overlay_41_02249A40 | 43/43 C (fashion case node list, bg scroll, button bar) |
 
 ## In progress / next
 

@@ -1,12 +1,12 @@
 {
  "summary": {
-  "generated": "2026-10-01T15:34:26Z",
+  "generated": "2026-10-01T15:48:16Z",
   "by_status": {
    "matched": {
-    "files": 133,
-    "functions": 3029,
-    "insn_lines": 96770,
-    "text_bytes_est": 216058
+    "files": 134,
+    "functions": 3072,
+    "insn_lines": 98073,
+    "text_bytes_est": 218920
    },
    "blocked": {
     "files": 49,
@@ -15,10 +15,10 @@
     "text_bytes_est": 62386
    },
    "pending": {
-    "files": 128,
-    "functions": 15074,
-    "insn_lines": 763331,
-    "text_bytes_est": 1709918
+    "files": 127,
+    "functions": 15031,
+    "insn_lines": 762028,
+    "text_bytes_est": 1707056
    },
    "upstream": {
     "files": 416,
@@ -29,9 +29,9 @@
   },
   "function_totals": {
    "tracked": 18965,
-   "matched": 3029,
+   "matched": 3072,
    "partial_in_blocked": 20,
-   "pending": 15074
+   "pending": 15031
   },
   "blockers": [
    {
@@ -84873,8 +84873,8 @@
   },
   {
    "file": "asm/overlay_41_02249A40.s",
-   "lsf_kind": "asm",
-   "status": "pending",
+   "lsf_kind": "src",
+   "status": "matched",
    "lines": 1568,
    "function_count": 43,
    "text_bytes_est": 2862,
@@ -84992,303 +84992,304 @@
      "mode": "thumb",
      "insns": 7,
      "size_est": 14,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249A50",
      "mode": "thumb",
      "insns": 7,
      "size_est": 14,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249A60",
      "mode": "thumb",
      "insns": 7,
      "size_est": 14,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249A70",
      "mode": "thumb",
      "insns": 14,
      "size_est": 32,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249A90",
      "mode": "thumb",
      "insns": 9,
      "size_est": 22,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249AA8",
      "mode": "thumb",
      "insns": 33,
      "size_est": 74,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249AF4",
      "mode": "thumb",
      "insns": 36,
      "size_est": 78,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249B44",
      "mode": "thumb",
      "insns": 37,
      "size_est": 80,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249B94",
      "mode": "thumb",
      "insns": 9,
      "size_est": 22,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249BAC",
      "mode": "thumb",
      "insns": 28,
      "size_est": 60,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249BE8",
      "mode": "thumb",
      "insns": 25,
      "size_est": 54,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249C20",
      "mode": "thumb",
      "insns": 43,
      "size_est": 92,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249C7C",
      "mode": "thumb",
      "insns": 35,
      "size_est": 70,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249CC4",
      "mode": "thumb",
      "insns": 12,
      "size_est": 28,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249CE0",
      "mode": "thumb",
      "insns": 12,
      "size_est": 24,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249CF8",
      "mode": "thumb",
      "insns": 49,
      "size_est": 104,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249D60",
      "mode": "thumb",
      "insns": 38,
      "size_est": 82,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249DB4",
      "mode": "thumb",
      "insns": 62,
      "size_est": 138,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249E40",
      "mode": "thumb",
      "insns": 16,
      "size_est": 32,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249E60",
      "mode": "thumb",
      "insns": 80,
      "size_est": 170,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249F0C",
      "mode": "thumb",
      "insns": 50,
      "size_est": 112,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249F7C",
      "mode": "thumb",
      "insns": 60,
      "size_est": 128,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_02249FFC",
      "mode": "thumb",
      "insns": 36,
      "size_est": 78,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A04C",
      "mode": "thumb",
      "insns": 32,
      "size_est": 70,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A094",
      "mode": "thumb",
      "insns": 24,
      "size_est": 58,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A0D0",
      "mode": "thumb",
      "insns": 30,
      "size_est": 72,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A118",
      "mode": "thumb",
      "insns": 29,
      "size_est": 66,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A15C",
      "mode": "thumb",
      "insns": 36,
      "size_est": 76,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A1A8",
      "mode": "thumb",
      "insns": 11,
      "size_est": 24,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A1C0",
      "mode": "thumb",
      "insns": 10,
      "size_est": 26,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A1DC",
      "mode": "thumb",
      "insns": 8,
      "size_est": 18,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A1EC",
      "mode": "thumb",
      "insns": 32,
      "size_est": 74,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A238",
      "mode": "thumb",
      "insns": 12,
      "size_est": 26,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A254",
      "mode": "thumb",
      "insns": 1,
      "size_est": 2,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A258",
      "mode": "thumb",
      "insns": 5,
      "size_est": 10,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A264",
      "mode": "thumb",
      "insns": 5,
      "size_est": 10,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A270",
      "mode": "thumb",
      "insns": 5,
      "size_est": 10,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A27C",
      "mode": "thumb",
      "insns": 160,
      "size_est": 358,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A3E4",
      "mode": "thumb",
      "insns": 40,
      "size_est": 100,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A448",
      "mode": "thumb",
      "insns": 77,
      "size_est": 160,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A4EC",
      "mode": "thumb",
      "insns": 45,
      "size_est": 94,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A54C",
      "mode": "thumb",
      "insns": 22,
      "size_est": 52,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov41_0224A580",
      "mode": "thumb",
      "insns": 14,
      "size_est": 34,
-     "status": "pending"
+     "status": "matched"
     }
-   ]
+   ],
+   "source": "harness"
   },
   {
    "file": "asm/overlay_41_0224A5A4.s",

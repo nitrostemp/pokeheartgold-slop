@@ -1,5 +1,5 @@
 {
- "count": 549,
+ "count": 550,
  "game": "heartgold.us",
  "schema": 1,
  "tus": {
@@ -45221,6 +45221,276 @@
      "name": ".text",
      "sha1": "b7429ab537281d62ee33ea75e14d93e8364e237b",
      "size": 78,
+     "type": 1
+    }
+   ]
+  },
+  "src/overlay_41_02249A40.c": {
+   "alloc_sha1": "100cc9100c964e4108a65bf673af111e63882d79",
+   "object": "build/heartgold.us/src/overlay_41_02249A40.o",
+   "sections": [
+    {
+     "name": ".rodata",
+     "sha1": "286a86af05efe7d3152964b672e3e257498144fb",
+     "size": 4,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "56fc7826319c3286067b631db34bbe676e1d04c1",
+     "size": 14,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "3b6c8508cd1b50e8517b1940590dd895dfb70ba7",
+     "size": 14,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "2f5d7320312996c817a44ec2ef59282ced531918",
+     "size": 14,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "a84428e8239e4d4daef375608e95c19c937754e3",
+     "size": 32,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "fea0b8f4b312bbf5d8f6da4bb89172c1c8fa7add",
+     "size": 22,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "7548ab26f36e24e52ffec3112bd7812ecd0aa74e",
+     "size": 74,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "4e200ec4211534e486b721c5ae3d92054de7d56f",
+     "size": 78,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "c9650d35ce4682595429fb0ec5e24b9f76dfa01c",
+     "size": 80,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "d0439607b2acfc0a35b6efe10ee737157e52be5a",
+     "size": 22,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "1d899373bc2759d70679ab074e047046a92c5a0e",
+     "size": 60,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "a758a30d85c7e24824ea5b7d6d7a04c444a5ea94",
+     "size": 54,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "5ff5508ee2aa2aeb99a3ef639f59f792666fa7e5",
+     "size": 92,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "2e53fae8a884eecd5be70f6a933da2b2ee53491c",
+     "size": 72,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "74c1c9b09c8bc513ed1c3371a03c0a7ccf3e8820",
+     "size": 28,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "d69fe45c8a1e6e984ac23a8aaea6c14744129d3c",
+     "size": 24,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "96cbc3eedc7b321729b2470b0491792a0ea92e2a",
+     "size": 104,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "17838ee422cd3f0dfe6d76f32b2eb004e8bc36be",
+     "size": 82,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "f0e7956e342ce25030c26152c4ba6f4bce2d875f",
+     "size": 140,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "041fa1a1f13242d9467e9eee903e3f599a978977",
+     "size": 32,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "7b80608d3d195331f098d578848e36efdbca6ec2",
+     "size": 170,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "de234cbb558468d9335adc9385f5d73f5806e475",
+     "size": 112,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "56f6b95231755b758376182668aa81130e44180a",
+     "size": 128,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "888b05b01bb6e95b258af4d9c89895a5a8e48c34",
+     "size": 80,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "77e1051fd50bfaeb072b3ba1d6721efefd2ada1c",
+     "size": 72,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "ab0388c87c44390a82bfd8160b2cd91d8df71989",
+     "size": 58,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "919bb9e4810a432de783f5ec62e6971e6a92e13b",
+     "size": 72,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "fb8773704087a5ae0586caf43a5d929864096de1",
+     "size": 68,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "5ef1abd507c48dc6ec45fa83b000fa70e7b3d31f",
+     "size": 76,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "de8d709d2b19de3db090fb73e6980ea3e8fb3a35",
+     "size": 24,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "97b1dc5e61880573470a446d4421f29ad7cf5f38",
+     "size": 26,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "b93a5cf5d26b0a3fe3dd30694d5c45e1388861f8",
+     "size": 16,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "fa3485d4fddd746a8fb9219676e19379839cb286",
+     "size": 76,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "623278c12931066755483e60ba76dad8428834b5",
+     "size": 26,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "e828468976b68d8bc817d32516aaa05d29b26085",
+     "size": 2,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "ddddc300d9a4dcf896160633fc2dbf86f0c59f26",
+     "size": 12,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "51508789545506770712ec1700955a3e69eb2116",
+     "size": 12,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "4eea4d9ca9a479b3b6348ba7d10b47f4fced0817",
+     "size": 12,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "e577715770e85ea83c1fdb6a7c9c330de5859b01",
+     "size": 360,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "7403993951da630c517ac422c14c04342e7b61c1",
+     "size": 100,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "fab4f0776a7559d835dc10af82362c1e0ca9cf91",
+     "size": 164,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "a332b89ecc9d0bc0eae7723834fe361a688a2894",
+     "size": 96,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "a5bf181108c5aec2d65507c98c7b2477571f3c3c",
+     "size": 52,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "02f52361c026145cef3bd399fa6a5ea8f737ded8",
+     "size": 34,
      "type": 1
     }
    ]

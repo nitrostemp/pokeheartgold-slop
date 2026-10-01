@@ -2101,6 +2101,18 @@
         "mail",
         "touch"
       ]
+    },
+    {
+      "id": "memset-small-inlined-byte-loop",
+      "category": "compiler",
+      "title": "An inline `mov rN,#size; strb; add; subs; bne` zero loop (size <= 0x18 or so) is just memset(p, 0, size); MWCC inlines small constant memsets",
+      "body": "In overlay_41_02249A40 the 0x10/0x14/0x18-byte clears are byte loops (`movs r1,#20; movs r0,#0; strb r0,[r2]; adds r2,#1; subs r1,#1; bne`), while 0x20/0x2C clears in the same file are real memset calls. Hand-written loops (`u32 n; for (n = size; n; n--) *p++ = 0;`) matched in simple functions but kept failing where a later call takes a constant-0 argument: the loop's zero got coalesced into that argument register, and declaration order, loop form, inline helpers and casts all failed. `memset(p, 0, sizeof(T))` matches everywhere, because the intrinsic expansion keeps its own constant. The existing hand-written loops in battle_arcade_game_board.c and overlay_01_021FB4C0.c (NONMATCHING) may be the same thing.",
+      "tags": [
+        "memset",
+        "intrinsic",
+        "byte-loop",
+        "register-allocation"
+      ]
     }
   ]
 }

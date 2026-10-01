@@ -1098,6 +1098,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "31/31 C: mail viewer (HG version of pokeplatinum mail_viewer.c, touch + YesNoPrompt)"
+    },
+    {
+      "file": "asm/overlay_41_02249A40.s",
+      "lines": 1568,
+      "functions": 43,
+      "attempts": 1,
+      "result": "matched",
+      "note": "43/43 C: fashion case node list, bg scroll/transfer tasks, button bar"
     }
   ],
   "failed": [
@@ -1506,8 +1514,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 234,
-    "total_matched": 106,
+    "total_attempts": 235,
+    "total_matched": 107,
     "total_failed": 31
   },
   "matched": [
