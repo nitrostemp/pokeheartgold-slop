@@ -20608,6 +20608,927 @@
     "tool": "asm_oracle.py"
    }
   },
+  "asm/overlay_49_0225CB50.s": {
+   "notes": "Wi-Fi Plaza 3D scene manager for overlay 49, plus a camera wrapper and a touch-button callback at the top of the file. Type families: (1) camera wrapper CB78..CC44, owned by the app struct at +0x3EC; (2) manager UnkStruct_ov49_0225CC4C (0x4A4), created by ov49_0225DF18 in overlay_49_0225D6AC.s with (9, 0x80), which holds the map models/anims, 3D object pools A (0xB4 each) and B (0xE4 each) and an NNSFndAllocator; (3) ObjA accessors CF28..D090; (4) ObjB accessors D098..D4F0; (5) helpers D4FC..D5FC. All the model/anim types come from the already-matched include/unk_02018000.h (UnkStruct_02018030 0x10, UnkStruct_020180BC 0x14, UnkStruct_020181B0 0x78); include it unchanged. Callers: A154 (CB50 callback, CB68, CBF4), 022595CC (CB78, CBDC), 0225EEAC/022655E0 (CC20/CC28/CC40/CC44), 02262DB8/02263B74 (CB70); everything else is called from overlay_49_0225D6AC.s. No DECL_CHUNK_EX or save_arrays relation. Only one rodata object (8-byte CameraAngle), so there is no rodata ordering risk. No prior knowledge.json sweep entry or attempts_log entries exist for this chunk.",
+   "oracle": {
+    "functions": {
+     "ov49_0225CB50": {
+      "widths": [
+       {
+        "base": "r2",
+        "confidence": "high",
+        "evidence": "L9: strb r1, [r2, #3]",
+        "kind": "store-width",
+        "offset": "#3",
+        "verdict": "u8"
+       },
+       {
+        "base": "r2",
+        "confidence": "high",
+        "evidence": "L10: ldrb r0, [r2, #3]",
+        "kind": "load-width",
+        "offset": "#3",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225CB68": {
+      "widths": [
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L28: strh r1, [r0]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u16"
+       }
+      ]
+     },
+     "ov49_0225CB78": {
+      "widths": [
+       {
+        "base": "r2",
+        "confidence": "high",
+        "evidence": "L53: strb r0, [r2]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225CC4C": {
+      "widths": [
+       {
+        "base": "r4",
+        "confidence": "high",
+        "evidence": "L210: strb r5, [r4, r0]",
+        "kind": "store-width",
+        "offset": "(r0)",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225CCF0": {
+      "signedness": [
+       {
+        "branch": "ble",
+        "confidence": "high",
+        "evidence": "L257: cmp r0, #0  =>  L258: ble _0225CD2C",
+        "register": "r0",
+        "verdict": "signed"
+       },
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L274: cmp r4, r0  =>  L275: blt _0225CD10",
+        "register": "r4",
+        "verdict": "signed"
+       },
+       {
+        "branch": "ble",
+        "confidence": "high",
+        "evidence": "L280: cmp r0, #0  =>  L281: ble _0225CD52",
+        "register": "r0",
+        "verdict": "signed"
+       },
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L294: cmp r6, r0  =>  L295: blt _0225CD3A",
+        "register": "r6",
+        "verdict": "signed"
+       }
+      ],
+      "widths": [
+       {
+        "base": "r5",
+        "confidence": "high",
+        "evidence": "L255: ldrb r0, [r5, r0]",
+        "kind": "load-width",
+        "offset": "(r0)",
+        "verdict": "u8"
+       },
+       {
+        "base": "r5",
+        "confidence": "high",
+        "evidence": "L291: ldrb r0, [r5, r7]",
+        "kind": "load-width",
+        "offset": "(r7)",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225CD58": {
+      "signedness": [
+       {
+        "branch": "ble",
+        "confidence": "high",
+        "evidence": "L331: cmp r0, #0  =>  L332: ble _0225CDB4",
+        "register": "r0",
+        "verdict": "signed"
+       },
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L347: cmp r4, r0  =>  L348: blt _0225CD9A",
+        "register": "r4",
+        "verdict": "signed"
+       },
+       {
+        "branch": "ble",
+        "confidence": "high",
+        "evidence": "L354: cmp r0, #0  =>  L355: ble _0225CDE2",
+        "register": "r0",
+        "verdict": "signed"
+       },
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L371: cmp r4, r0  =>  L372: blt _0225CDC6",
+        "register": "r4",
+        "verdict": "signed"
+       }
+      ],
+      "widths": [
+       {
+        "base": "r5",
+        "confidence": "high",
+        "evidence": "L330: ldrb r0, [r5, r0]",
+        "kind": "load-width",
+        "offset": "(r0)",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225CDEC": {
+      "widths": [
+       {
+        "base": "r5",
+        "confidence": "high",
+        "evidence": "L391: strb r2, [r5, r0]",
+        "kind": "store-width",
+        "offset": "(r0)",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225CF28": {
+      "nonmatching_flags": [
+       {
+        "confidence": "low",
+        "detail": "param r1 copied to r5 at entry, then r5 (the copy) compared while r1 is live and no bl precedes -- MWCC uses the copy [likely benign: GF_ASSERT idiom; value used across a later call (copy motivated) -- audit]",
+        "evidence": "L547: add r5, r1, #0 ; L551: cmp r5, #2",
+        "kind": "copyprop-cmp-entry",
+        "verdict": "NONMATCHING-suspect"
+       }
+      ],
+      "signedness": [
+       {
+        "branch": "ble",
+        "confidence": "high",
+        "evidence": "L551: cmp r5, #2  =>  L552: ble _0225CF3C",
+        "register": "r5",
+        "verdict": "signed"
+       },
+       {
+        "branch": "ble",
+        "confidence": "high",
+        "evidence": "L555: cmp r6, #3  =>  L556: ble _0225CF44",
+        "register": "r6",
+        "verdict": "signed"
+       }
+      ],
+      "widths": [
+       {
+        "base": "r4",
+        "confidence": "high",
+        "evidence": "L582: strb r6, [r4, #1]",
+        "kind": "store-width",
+        "offset": "#1",
+        "verdict": "u8"
+       },
+       {
+        "base": "r4",
+        "confidence": "high",
+        "evidence": "L584: strb r5, [r4, #2]",
+        "kind": "store-width",
+        "offset": "#2",
+        "verdict": "u8"
+       },
+       {
+        "base": "r4",
+        "confidence": "high",
+        "evidence": "L586: strb r1, [r4]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225CF94": {
+      "widths": [
+       {
+        "base": "r4",
+        "confidence": "high",
+        "evidence": "L604: strb r0, [r4]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225D098": {
+      "signedness": [
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L812: cmp r6, #3  =>  L813: blt _0225D0D8",
+        "register": "r6",
+        "verdict": "signed"
+       }
+      ],
+      "widths": [
+       {
+        "base": "r1",
+        "confidence": "high",
+        "evidence": "L821: strh r0, [r1]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u16"
+       },
+       {
+        "base": "r1",
+        "confidence": "high",
+        "evidence": "L825: strh r0, [r1, #2]",
+        "kind": "store-width",
+        "offset": "#2",
+        "verdict": "u16"
+       },
+       {
+        "base": "r1",
+        "confidence": "high",
+        "evidence": "L826: ldrh r2, [r1]",
+        "kind": "load-width",
+        "offset": "#0",
+        "verdict": "u16"
+       },
+       {
+        "base": "r3",
+        "confidence": "high",
+        "evidence": "L829: strh r2, [r3]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u16"
+       },
+       {
+        "base": "r1",
+        "confidence": "high",
+        "evidence": "L830: ldrh r1, [r1, #2]",
+        "kind": "load-width",
+        "offset": "#2",
+        "verdict": "u16"
+       },
+       {
+        "base": "r3",
+        "confidence": "high",
+        "evidence": "L831: strh r1, [r3, #2]",
+        "kind": "store-width",
+        "offset": "#2",
+        "verdict": "u16"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L837: strh r2, [r0]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u16"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L838: strh r1, [r0, #2]",
+        "kind": "store-width",
+        "offset": "#2",
+        "verdict": "u16"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L841: strb r1, [r0]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225D160": {
+      "signedness": [
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L904: cmp r7, #3  =>  L905: blt _0225D180",
+        "register": "r7",
+        "verdict": "signed"
+       }
+      ],
+      "widths": [
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L883: ldrh r1, [r0, #2]",
+        "kind": "load-width",
+        "offset": "#2",
+        "verdict": "u16"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L908: strh r1, [r0]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u16"
+       }
+      ]
+     },
+     "ov49_0225D1C0": {
+      "widths": [
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L917: ldrh r0, [r0, #2]",
+        "kind": "load-width",
+        "offset": "#2",
+        "verdict": "u16"
+       }
+      ]
+     },
+     "ov49_0225D1EC": {
+      "widths": [
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L956: ldrh r1, [r0, #2]",
+        "kind": "load-width",
+        "offset": "#2",
+        "verdict": "u16"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L957: ldrh r0, [r0]",
+        "kind": "load-width",
+        "offset": "#0",
+        "verdict": "u16"
+       }
+      ]
+     },
+     "ov49_0225D224": {
+      "exact_types": [
+       {
+        "confidence": "high",
+        "evidence": "L1081: bl _u32_div_f",
+        "helper": "_u32_div_f",
+        "verdict": "unsigned 32-bit int / or %  (both operands unsigned int)"
+       },
+       {
+        "confidence": "high",
+        "evidence": "L1093: bl _u32_div_f",
+        "helper": "_u32_div_f",
+        "verdict": "unsigned 32-bit int / or %  (both operands unsigned int)"
+       }
+      ],
+      "nonmatching_flags": [
+       {
+        "confidence": "low",
+        "detail": "param r2 copied to r5 at entry, then r5 (the copy) compared while r2 is live and no bl precedes -- MWCC uses the copy [likely benign: GF_ASSERT idiom; value used across a later call (copy motivated) -- audit]",
+        "evidence": "L980: add r5, r2, #0 ; L984: cmp r5, #3",
+        "kind": "copyprop-cmp-entry",
+        "verdict": "NONMATCHING-suspect"
+       }
+      ],
+      "signedness": [
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L984: cmp r5, #3  =>  L985: blt _0225D238",
+        "register": "r5",
+        "verdict": "signed"
+       },
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L988: cmp r7, #7  =>  L989: blt _0225D240",
+        "register": "r7",
+        "verdict": "signed"
+       },
+       {
+        "branch": "blo",
+        "confidence": "high",
+        "evidence": "L993: cmp r0, #0x12  =>  L994: blo _0225D24A",
+        "register": "r0",
+        "verdict": "unsigned"
+       },
+       {
+        "branch": "bhi",
+        "confidence": "high",
+        "evidence": "L1040: cmp r7, #6  =>  L1042: bhi _0225D310",
+        "register": "r7",
+        "verdict": "unsigned"
+       }
+      ],
+      "widths": [
+       {
+        "confidence": "high",
+        "evidence": "L1046: lsl r1, r1, #0x10 ; L1047: asr r1, r1, #0x10",
+        "kind": "truncation-pair",
+        "register": "r1",
+        "verdict": "s16"
+       },
+       {
+        "base": "r4",
+        "confidence": "high",
+        "evidence": "L992: ldrh r0, [r4, #2]",
+        "kind": "load-width",
+        "offset": "#2",
+        "verdict": "u16"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L1013: ldrb r0, [r0, r5]",
+        "kind": "load-width",
+        "offset": "(r5)",
+        "verdict": "u8"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L1026: strb r1, [r0, r5]",
+        "kind": "store-width",
+        "offset": "(r5)",
+        "verdict": "u8"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L1029: strb r7, [r0]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u8"
+       },
+       {
+        "base": "r1",
+        "confidence": "high",
+        "evidence": "L1041: strb r0, [r1, r5]",
+        "kind": "store-width",
+        "offset": "(r5)",
+        "verdict": "u8"
+       },
+       {
+        "base": "r1",
+        "confidence": "high",
+        "evidence": "L1045: ldrh r1, [r1, #6]",
+        "kind": "load-width",
+        "offset": "#6",
+        "verdict": "u16"
+       },
+       {
+        "base": "r1",
+        "confidence": "high",
+        "evidence": "L1080: ldrb r1, [r1]",
+        "kind": "load-width",
+        "offset": "#0",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225D328": {
+      "nonmatching_flags": [
+       {
+        "confidence": "low",
+        "detail": "param r2 copied to r4 at entry, then r4 (the copy) compared while r2 is live and no bl precedes -- MWCC uses the copy [likely benign: GF_ASSERT idiom; value used across a later call (copy motivated) -- audit]",
+        "evidence": "L1114: add r4, r2, #0 ; L1117: cmp r4, #3",
+        "kind": "copyprop-cmp-entry",
+        "verdict": "NONMATCHING-suspect"
+       }
+      ],
+      "signedness": [
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L1117: cmp r4, #3  =>  L1118: blt _0225D338",
+        "register": "r4",
+        "verdict": "signed"
+       },
+       {
+        "branch": "blo",
+        "confidence": "high",
+        "evidence": "L1122: cmp r0, #0x12  =>  L1123: blo _0225D342",
+        "register": "r0",
+        "verdict": "unsigned"
+       }
+      ],
+      "widths": [
+       {
+        "base": "r5",
+        "confidence": "high",
+        "evidence": "L1121: ldrh r0, [r5, #2]",
+        "kind": "load-width",
+        "offset": "#2",
+        "verdict": "u16"
+       },
+       {
+        "base": "r6",
+        "confidence": "high",
+        "evidence": "L1139: ldrb r0, [r6, r4]",
+        "kind": "load-width",
+        "offset": "(r4)",
+        "verdict": "u8"
+       },
+       {
+        "base": "r6",
+        "confidence": "high",
+        "evidence": "L1152: strb r0, [r6, r4]",
+        "kind": "store-width",
+        "offset": "(r4)",
+        "verdict": "u8"
+       },
+       {
+        "base": "r1",
+        "confidence": "high",
+        "evidence": "L1157: strb r0, [r1]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225D394": {
+      "signedness": [
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L1187: cmp r4, #3  =>  L1188: blt _0225D39C",
+        "register": "r4",
+        "verdict": "signed"
+       }
+      ]
+     },
+     "ov49_0225D3BC": {
+      "nonmatching_flags": [
+       {
+        "confidence": "low",
+        "detail": "param r2 copied to r4 at entry, then r4 (the copy) compared while r2 is live and no bl precedes -- MWCC uses the copy [likely benign: GF_ASSERT idiom; value used across a later call (copy motivated) -- audit]",
+        "evidence": "L1196: add r4, r2, #0 ; L1199: cmp r4, #3",
+        "kind": "copyprop-cmp-entry",
+        "verdict": "NONMATCHING-suspect"
+       }
+      ],
+      "signedness": [
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L1199: cmp r4, #3  =>  L1200: blt _0225D3CC",
+        "register": "r4",
+        "verdict": "signed"
+       },
+       {
+        "branch": "blo",
+        "confidence": "high",
+        "evidence": "L1204: cmp r0, #0x12  =>  L1205: blo _0225D3D6",
+        "register": "r0",
+        "verdict": "unsigned"
+       }
+      ],
+      "widths": [
+       {
+        "base": "r5",
+        "confidence": "high",
+        "evidence": "L1203: ldrh r0, [r5, #2]",
+        "kind": "load-width",
+        "offset": "#2",
+        "verdict": "u16"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L1221: ldrb r0, [r0]",
+        "kind": "load-width",
+        "offset": "#0",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225D3F8": {
+      "nonmatching_flags": [
+       {
+        "confidence": "low",
+        "detail": "param r2 copied to r4 at entry, then r4 (the copy) compared while r2 is live and no bl precedes -- MWCC uses the copy [likely benign: GF_ASSERT idiom; value used across a later call (copy motivated) -- audit]",
+        "evidence": "L1231: add r4, r2, #0 ; L1235: cmp r4, #3",
+        "kind": "copyprop-cmp-entry",
+        "verdict": "NONMATCHING-suspect"
+       }
+      ],
+      "signedness": [
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L1235: cmp r4, #3  =>  L1236: blt _0225D40A",
+        "register": "r4",
+        "verdict": "signed"
+       },
+       {
+        "branch": "blo",
+        "confidence": "high",
+        "evidence": "L1240: cmp r0, #0x12  =>  L1241: blo _0225D414",
+        "register": "r0",
+        "verdict": "unsigned"
+       }
+      ],
+      "widths": [
+       {
+        "base": "r5",
+        "confidence": "high",
+        "evidence": "L1239: ldrh r0, [r5, #2]",
+        "kind": "load-width",
+        "offset": "#2",
+        "verdict": "u16"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L1259: ldrb r0, [r0]",
+        "kind": "load-width",
+        "offset": "#0",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225D450": {
+      "nonmatching_flags": [
+       {
+        "confidence": "low",
+        "detail": "param r1 copied to r4 at entry, then r4 (the copy) compared while r1 is live and no bl precedes -- MWCC uses the copy [likely benign: GF_ASSERT idiom; value used across a later call (copy motivated) -- audit]",
+        "evidence": "L1279: add r4, r1, #0 ; L1281: cmp r4, #3",
+        "kind": "copyprop-cmp-entry",
+        "verdict": "NONMATCHING-suspect"
+       }
+      ],
+      "signedness": [
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L1281: cmp r4, #3  =>  L1282: blt _0225D45E",
+        "register": "r4",
+        "verdict": "signed"
+       },
+       {
+        "branch": "blo",
+        "confidence": "high",
+        "evidence": "L1286: cmp r0, #0x12  =>  L1287: blo _0225D468",
+        "register": "r0",
+        "verdict": "unsigned"
+       }
+      ],
+      "widths": [
+       {
+        "base": "r5",
+        "confidence": "high",
+        "evidence": "L1285: ldrh r0, [r5, #2]",
+        "kind": "load-width",
+        "offset": "#2",
+        "verdict": "u16"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L1292: ldrb r0, [r0]",
+        "kind": "load-width",
+        "offset": "#0",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225D470": {
+      "nonmatching_flags": [
+       {
+        "confidence": "low",
+        "detail": "param r1 copied to r4 at entry, then r4 (the copy) compared while r1 is live and no bl precedes -- MWCC uses the copy [likely benign: GF_ASSERT idiom; value used across a later call (copy motivated) -- audit]",
+        "evidence": "L1299: add r4, r1, #0 ; L1301: cmp r4, #3",
+        "kind": "copyprop-cmp-entry",
+        "verdict": "NONMATCHING-suspect"
+       }
+      ],
+      "signedness": [
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L1301: cmp r4, #3  =>  L1302: blt _0225D47E",
+        "register": "r4",
+        "verdict": "signed"
+       },
+       {
+        "branch": "blo",
+        "confidence": "high",
+        "evidence": "L1306: cmp r0, #0x12  =>  L1307: blo _0225D488",
+        "register": "r0",
+        "verdict": "unsigned"
+       }
+      ],
+      "widths": [
+       {
+        "base": "r5",
+        "confidence": "high",
+        "evidence": "L1305: ldrh r0, [r5, #2]",
+        "kind": "load-width",
+        "offset": "#2",
+        "verdict": "u16"
+       }
+      ]
+     },
+     "ov49_0225D4A0": {
+      "signedness": [
+       {
+        "branch": "blo",
+        "confidence": "high",
+        "evidence": "L1334: cmp r0, #0x12  =>  L1335: blo _0225D4B2",
+        "register": "r0",
+        "verdict": "unsigned"
+       }
+      ],
+      "widths": [
+       {
+        "base": "r4",
+        "confidence": "high",
+        "evidence": "L1332: ldrh r0, [r4, #2]",
+        "kind": "load-width",
+        "offset": "#2",
+        "verdict": "u16"
+       }
+      ]
+     },
+     "ov49_0225D4D0": {
+      "widths": [
+       {
+        "base": "r3",
+        "confidence": "high",
+        "evidence": "L1364: strb r4, [r3]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u8"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L1369: strb r2, [r0]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225D4E8": {
+      "widths": [
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L1378: strb r1, [r0]",
+        "kind": "store-width",
+        "offset": "#0",
+        "verdict": "u8"
+       }
+      ]
+     },
+     "ov49_0225D4FC": {
+      "signedness": [
+       {
+        "branch": "blo",
+        "confidence": "high",
+        "evidence": "L1398: cmp r4, #0x19  =>  L1399: blo _0225D50E",
+        "register": "r4",
+        "verdict": "unsigned"
+       }
+      ]
+     },
+     "ov49_0225D528": {
+      "signedness": [
+       {
+        "branch": "bls",
+        "confidence": "high",
+        "evidence": "L1434: cmp r1, #0  =>  L1435: bls _0225D550",
+        "register": "r1",
+        "verdict": "unsigned"
+       }
+      ],
+      "widths": [
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L1433: ldrb r1, [r0, #9]",
+        "kind": "load-width",
+        "offset": "#9",
+        "verdict": "u8"
+       },
+       {
+        "base": "r0",
+        "confidence": "high",
+        "evidence": "L1436: ldrh r1, [r0, #0xe]",
+        "kind": "load-width",
+        "offset": "#0xe",
+        "verdict": "u16"
+       }
+      ]
+     },
+     "ov49_0225D57C": {
+      "exact_types": [
+       {
+        "confidence": "high",
+        "evidence": "L1485: bl _s32_div_f",
+        "helper": "_s32_div_f",
+        "verdict": "signed 32-bit int / or %  (both operands signed int)"
+       }
+      ],
+      "signedness": [
+       {
+        "branch": "bge",
+        "confidence": "high",
+        "evidence": "L1480: cmp r0, r1  =>  L1481: bge _0225D596",
+        "register": "r0",
+        "verdict": "signed"
+       }
+      ]
+     },
+     "ov49_0225D5A0": {
+      "signedness": [
+       {
+        "branch": "bge",
+        "confidence": "high",
+        "evidence": "L1500: cmp r1, r0  =>  L1501: bge _0225D5BA",
+        "register": "r1",
+        "verdict": "signed"
+       }
+      ]
+     },
+     "ov49_0225D5E4": {
+      "signedness": [
+       {
+        "branch": "ble",
+        "confidence": "high",
+        "evidence": "L1537: cmp r1, #0  =>  L1538: ble _0225D5F2",
+        "register": "r1",
+        "verdict": "signed"
+       }
+      ]
+     },
+     "ov49_0225D5FC": {
+      "signedness": [
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L1576: cmp r6, #2  =>  L1577: blt _0225D616",
+        "register": "r6",
+        "verdict": "signed"
+       },
+       {
+        "branch": "blt",
+        "confidence": "high",
+        "evidence": "L1637: cmp r7, #5  =>  L1638: blt _0225D644",
+        "register": "r7",
+        "verdict": "signed"
+       }
+      ]
+     }
+    },
+    "generated": "2026-10-01T08:13:21Z",
+    "summary": {
+     "copyprop_cmp": 7,
+     "dead_store": 0,
+     "exact_types": 3,
+     "functions": 29,
+     "signed": 25,
+     "unsigned": 10,
+     "widths": 52
+    },
+    "tool": "asm_oracle.py"
+   },
+   "risks": [
+    "This would be the first C file in overlay_49 (src/overlay_49* does not exist). MWCC -W pedantic needs local prototypes for all 55 exported functions in the .c (pattern first-chunk-decomp-needs-local-prototypes). No existing include/ header declares any of these symbols and every caller is still asm, so there is no IPA conflict. Do NOT create or modify shared headers.",
+    "Statics: ov49_0225D4FC, ov49_0225D520, ov49_0225D5FC and rodata ov49_02269A6C are absent from the .inc. The other 55 functions must stay non-static.",
+    "Jump table in ov49_0225D224: dense cases 0-6, bodies in order 0-2 / 3-4 / 5 / 6 (cases 5 and 6 are duplicate, unmerged bodies), no default.",
+    "ov49_0225D1C4 has push {r0-r3} arg-homing, which needs a by-value 4-byte struct param with &param taken. ov49_0225D1EC returns that struct by value (r0 packed). ov49_0225D098 passes it by value through the sp-4 scratch copy.",
+    "ov49_0225CB78: the inlined 0x14-byte strb clear loop must be written as memset(), not a hand loop (pattern inlined-memset-not-hand-loop).",
+    "ov49_0225D528 contains the inline NNS_G3dGetMdlByIdx expansion (two NULL checks). Use the inline from res_struct_accessor_inline.h.",
+    "NNS_G3dMdlSetMdlLightEnableFlagAll has no header, so a local extern is needed (as in src/field/model_attributes.c). NarcIds 0xCA/0xCB need NARC_a_2_0_0/NARC_a_2_0_1 or explicit casts (-W noimplicitconv).",
+    "ov49_0225CC4C has an unused 4th param (the caller deliberately loads r3). ov49_0225D5E4 has an unused 2nd param. Keep both or the callers' bytes will not match once those callers are decompiled.",
+    "CF28 asserts are signed <= (cmp #2/#3; ble), while D224/D328 use signed < and the u16 modelIdx uses unsigned blo. Choose int vs u16 accordingly.",
+    "ov49_0225D160 calls sub_020180E8 (re-init) where a free would be expected. Reproduce it as-is.",
+    "Field re-reads after stores (CB50 u8 field, D3F8 animFrame) mean the code must use the field expression, not the param.",
+    "Many functions are 2-mod-4 with .balign pads (CB68, CBDC, CBF4, CC28, CC44, CCC0, CDE8, D088, D090, D1C4, D1EC, D328, D394, D470, D4A0, D4C8, D4F0, D528, D57C, D5A0, D5E4). The last function D5FC is 4-aligned (0xB0), so the trailing-pad hazard is unlikely, but run full compare.",
+    "ov49_0225D098 keeps obj spilled at sp+0xC with modelIdx<<4 and &subB cached at sp+0x10/0x14. Register pressure and local declaration order will matter."
+   ],
+   "sweep_output": "sweep/out/overlay_49_0225CB50.json"
+  },
   "asm/overlay_80_0222AEF8.s": {
    "notes": "Pure .text file: 56 thumb functions, no .rodata/.data/.bss, and no DECL_CHUNK_EX involvement. Follow the recipe of the sub_0203410C command-table family (template src/unk_02091564.c): senders are BOOL f(work[, u8|u16 val]) and call sub_02037030(cmd, buf, size) or sub_02036FD8 for 0x200 mon blobs. Recv handlers are void f(int netId, int size, void *data, Ctx *ctx). Record getters are void *f(int netId, Ctx *ctx, int size) with GF_ASSERT(size <= 0x200). The file has four facility blocks in order. Tower, cmds 0x22-0x26, AEF8-B0E8, counter 0xd90. Factory, cmds 0x16-0x1c, B108-B52C, counter 0x702. Castle(?), cmds 0x2a-0x30, B5C8-BA5C, counter 0xa1a. Arcade, cmds 0x41-0x46, BA7C-BDD4, counter 0xa7c. Define local structs per facility, or use raw (u8*) offsets. Only the Arcade has an existing typed struct (ArcadeContext). A new header include/frontier/overlay_80_0222AEF8.h needs to expose just the sender functions, because the dispatchers are still asm. HEAP_ID 0xb = HEAP_ID_FIELD2. GetMonData attr 0x47 = MON_DATA_ATK_IV, attr 0 = MON_DATA_PERSONALITY.",
    "oracle": {
@@ -35254,7 +36175,7 @@
    "sweep_output": "sweep/out/unk_02097B78.json"
   }
  },
- "generated": "2026-09-29T20:37:21Z",
+ "generated": "2026-10-01T08:13:21Z",
  "signature_conflicts": [
   "DestroySysTaskAndEnvironment",
   "GridInputHandler_GetNextInput",
@@ -44643,6 +45564,495 @@
     "asm/overlay_35.s"
    ]
   },
+  "UnkStruct_ov49_0225CB78": {
+   "fields": {
+    "0x0": [
+     {
+      "meaning": "Camera *camera",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0x4": [
+     {
+      "meaning": "void *followObj (player obj, NULL = static)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0x8": [
+     {
+      "meaning": "VecFx32 target",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 12
+     }
+    ]
+   },
+   "size_guesses": {
+    "asm/overlay_49_0225CB50.s": "0x14 (Heap_Alloc size)"
+   },
+   "sources": [
+    "asm/overlay_49_0225CB50.s"
+   ]
+  },
+  "UnkStruct_ov49_0225CC4C": {
+   "fields": {
+    "0x0": [
+     {
+      "meaning": "BOOL mapVisible",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0x108": [
+     {
+      "meaning": "fx32 mapAnimFrame[5]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 20
+     }
+    ],
+    "0x11C": [
+     {
+      "meaning": "UnkStruct_ov49_0225CF28 *objsA",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0x120": [
+     {
+      "meaning": "UnkStruct_ov49_0225D098 *objsB",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0x124": [
+     {
+      "meaning": "u8 numObjsA",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0x125": [
+     {
+      "meaning": "u8 numObjsB",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0x126": [
+     {
+      "meaning": "u8 unk126 (CDEC a1)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0x127": [
+     {
+      "meaning": "u8 unk127 (CDEC a2)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0x128": [
+     {
+      "meaning": "BOOL loaded",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0x12C": [
+     {
+      "meaning": "UnkStruct_ov49_0225D5FC map",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 152
+     }
+    ],
+    "0x1C4": [
+     {
+      "meaning": "UnkStruct_ov49_0225D854 subA",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 216
+     }
+    ],
+    "0x29C": [
+     {
+      "meaning": "UnkStruct_ov49_0225DC2C subB",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 504
+     }
+    ],
+    "0x4": [
+     {
+      "meaning": "UnkStruct_020181B0 mapRender[2] (0x78 each)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 240
+     }
+    ],
+    "0x494": [
+     {
+      "meaning": "NNSFndAllocator allocator",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 16
+     }
+    ],
+    "0xF4": [
+     {
+      "meaning": "BOOL mapAnimAttached[5]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 20
+     }
+    ]
+   },
+   "size_guesses": {
+    "asm/overlay_49_0225CB50.s": "0x4A4 (Heap_Alloc/memset size)"
+   },
+   "sources": [
+    "asm/overlay_49_0225CB50.s"
+   ]
+  },
+  "UnkStruct_ov49_0225CF28": {
+   "fields": {
+    "0x0": [
+     {
+      "meaning": "u8 active",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0x1": [
+     {
+      "meaning": "u8 variant (texRes column, <3)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0x2": [
+     {
+      "meaning": "u8 modelIdx (<2)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0x4": [
+     {
+      "meaning": "UnkStruct_020181B0 render",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 120
+     }
+    ],
+    "0x7C": [
+     {
+      "meaning": "BOOL animActive[4]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 16
+     }
+    ],
+    "0x8C": [
+     {
+      "meaning": "fx32 animFrame[4]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 16
+     }
+    ],
+    "0x9C": [
+     {
+      "meaning": "VecFx32 pos",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 12
+     }
+    ],
+    "0xA8": [
+     {
+      "meaning": "VecFx32 offset",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 12
+     }
+    ]
+   },
+   "size_guesses": {
+    "asm/overlay_49_0225CB50.s": "0xB4 (alloc stride)"
+   },
+   "sources": [
+    "asm/overlay_49_0225CB50.s"
+   ]
+  },
+  "UnkStruct_ov49_0225D098": {
+   "fields": {
+    "0x0": [
+     {
+      "meaning": "u16 active",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 2
+     }
+    ],
+    "0x2": [
+     {
+      "meaning": "u16 modelIdx (<18, unsigned compares)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 2
+     }
+    ],
+    "0x4": [
+     {
+      "meaning": "UnkStruct_020181B0 render",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 120
+     }
+    ],
+    "0x7C": [
+     {
+      "meaning": "UnkStruct_020180BC anims[3]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 60
+     }
+    ],
+    "0xB8": [
+     {
+      "meaning": "u8 animActive[3] + 1 pad byte at 0xBB (needs an explicit pad or [4])",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0xBC": [
+     {
+      "meaning": "u8 animMode[3] (0..6)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0xC0": [
+     {
+      "meaning": "fx32 animFrame[3]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0xCC": [
+     {
+      "meaning": "u8 animRandMax (=20)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0xCD": [
+     {
+      "meaning": "u8 animWait[3]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0xD0": [
+     {
+      "meaning": "void (*animCallback[3])(mgr, obj)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0xDC": [
+     {
+      "meaning": "fx32 animSpeed",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0xE0": [
+     {
+      "meaning": "u8 alphaEnabled",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0xE1": [
+     {
+      "meaning": "u8 alpha0",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ],
+    "0xE2": [
+     {
+      "meaning": "u8 alpha1",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 1
+     }
+    ]
+   },
+   "size_guesses": {
+    "asm/overlay_49_0225CB50.s": "0xE4 (alloc stride)"
+   },
+   "sources": [
+    "asm/overlay_49_0225CB50.s"
+   ]
+  },
+  "UnkStruct_ov49_0225D1C4": {
+   "fields": {
+    "0x0": [
+     {
+      "meaning": "s16 x (grid*16)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 2
+     }
+    ],
+    "0x2": [
+     {
+      "meaning": "s16 y (maps to world z)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 2
+     }
+    ]
+   },
+   "size_guesses": {
+    "asm/overlay_49_0225CB50.s": "0x4"
+   },
+   "sources": [
+    "asm/overlay_49_0225CB50.s"
+   ]
+  },
+  "UnkStruct_ov49_0225D4FC": {
+   "fields": {
+    "0x0": [
+     {
+      "meaning": "u32 subBModelFiles[18]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0x120": [
+     {
+      "meaning": "u32 subAModelFiles[2]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0x128": [
+     {
+      "meaning": "u32 subATexFiles[2][3]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0x140": [
+     {
+      "meaning": "u32 subAAnimFiles[2][4]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0x180": [
+     {
+      "meaning": "u32 mapModelFiles[2]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0x18C": [
+     {
+      "meaning": "u32 mapAnimFiles[5] (0x188 unknown)",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ],
+    "0x48": [
+     {
+      "meaning": "u32 subBAnimFiles[18][3]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 4
+     }
+    ]
+   },
+   "size_guesses": {
+    "asm/overlay_49_0225CB50.s": ">=0x1A0 (NARC a/2/0/0 file idx+1)"
+   },
+   "sources": [
+    "asm/overlay_49_0225CB50.s"
+   ]
+  },
+  "UnkStruct_ov49_0225D5FC": {
+   "fields": {
+    "0x0": [
+     {
+      "meaning": "UnkStruct_02018030 models[2]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 32
+     }
+    ],
+    "0x20": [
+     {
+      "meaning": "UnkStruct_020180BC anims[5]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 100
+     }
+    ],
+    "0x84": [
+     {
+      "meaning": "BOOL animValid[5]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 20
+     }
+    ]
+   },
+   "size_guesses": {
+    "asm/overlay_49_0225CB50.s": "0x98"
+   },
+   "sources": [
+    "asm/overlay_49_0225CB50.s"
+   ]
+  },
+  "UnkStruct_ov49_0225D854": {
+   "fields": {
+    "0x0": [
+     {
+      "meaning": "UnkStruct_02018030 models[2]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 32
+     }
+    ],
+    "0x20": [
+     {
+      "meaning": "NNSG3dResFileHeader *texRes[2][3]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 24
+     }
+    ],
+    "0x38": [
+     {
+      "meaning": "UnkStruct_020180BC anims[2][4]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 160
+     }
+    ]
+   },
+   "size_guesses": {
+    "asm/overlay_49_0225CB50.s": "0xD8"
+   },
+   "sources": [
+    "asm/overlay_49_0225CB50.s"
+   ]
+  },
+  "UnkStruct_ov49_0225DC2C": {
+   "fields": {
+    "0x0": [
+     {
+      "meaning": "UnkStruct_02018030 models[18]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 288
+     }
+    ],
+    "0x120": [
+     {
+      "meaning": "void *anmRes[18][3]",
+      "source": "asm/overlay_49_0225CB50.s",
+      "width": 216
+     }
+    ]
+   },
+   "size_guesses": {
+    "asm/overlay_49_0225CB50.s": "0x1F8"
+   },
+   "sources": [
+    "asm/overlay_49_0225CB50.s"
+   ]
+  },
   "UnkStruct_ov80_022384D8 (outer wrapper)": {
    "fields": {
     "0x0": [
@@ -46477,6 +47887,14 @@
    "known_prototype": "void CallApplicationAsTask(TaskManager *taskManager, const OverlayManagerTemplate *template, void *work)",
    "signature_sources": {}
   },
+  "Camera_Delete": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/camera.h",
+   "known_prototype": "void Camera_Delete(Camera *camera)",
+   "signature_sources": {}
+  },
   "Camera_GetCurrentTarget": {
    "callers": [
     "asm/unk_02056680.s"
@@ -46501,12 +47919,36 @@
    "known_prototype": "VecFx32 Camera_GetLookAtCamTarget(const Camera *camera)",
    "signature_sources": {}
   },
+  "Camera_Init_FromTargetDistanceAndAngle": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/camera.h",
+   "known_prototype": "void Camera_Init_FromTargetDistanceAndAngle(VecFx32 *target, fx32 distance, const CameraAngle *angle, u16 perspectiveAngle, u8 perspectiveType, BOOL setReference, Camera *camera)",
+   "signature_sources": {}
+  },
+  "Camera_New": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/camera.h",
+   "known_prototype": "Camera *Camera_New(enum HeapID heapID)",
+   "signature_sources": {}
+  },
   "Camera_OffsetLookAtPosAndTarget": {
    "callers": [
     "asm/unk_02056680.s"
    ],
    "header": "include/camera.h",
    "known_prototype": "void Camera_OffsetLookAtPosAndTarget(const VecFx32 *delta, Camera *camera)",
+   "signature_sources": {}
+  },
+  "Camera_PushLookAtToNNSGlb": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/camera.h",
+   "known_prototype": "void Camera_PushLookAtToNNSGlb(void)",
    "signature_sources": {}
   },
   "Camera_SetDistance": {
@@ -46531,6 +47973,30 @@
    ],
    "header": "include/camera.h",
    "known_prototype": "void Camera_SetLookAtTargetAndRecalcPos(const VecFx32 *target, Camera *camera)",
+   "signature_sources": {}
+  },
+  "Camera_SetPerspectiveClippingPlane": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/camera.h",
+   "known_prototype": "void Camera_SetPerspectiveClippingPlane(fx32 near, fx32 far, Camera *camera)",
+   "signature_sources": {}
+  },
+  "Camera_SetStaticPtr": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/camera.h",
+   "known_prototype": "void Camera_SetStaticPtr(Camera *camera)",
+   "signature_sources": {}
+  },
+  "Camera_UnsetStaticPtr": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/camera.h",
+   "known_prototype": "void Camera_UnsetStaticPtr(void)",
    "signature_sources": {}
   },
   "ClearFrameAndWindow2": {
@@ -47286,6 +48752,14 @@
    "known_prototype": "BOOL GF3dRender_AllocAndLoadTexResources(NNSG3dResTex *tex)",
    "signature_sources": {}
   },
+  "GF3dRender_BindModelSet": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/gf_3d_render.h",
+   "known_prototype": "BOOL GF3dRender_BindModelSet(NNSG3dResFileHeader *obj, const NNSG3dResTex *tex)",
+   "signature_sources": {}
+  },
   "GF3dRender_DrawModel": {
    "callers": [
     "asm/unk_02023694.s"
@@ -47304,6 +48778,7 @@
     "asm/overlay_01_022031C0.s",
     "asm/overlay_18_021F7ED4.s",
     "asm/overlay_41_02248400.s",
+    "asm/overlay_49_0225CB50.s",
     "asm/overlay_80_0222AEF8.s",
     "asm/overlay_80_0222FD08.s",
     "asm/overlay_80_02239AF8.s",
@@ -48405,6 +49880,14 @@
     "asm/overlay_32.s": "u32 GfGfxLoader_LoadCharDataFromOpenNarc(NARC *narc, u32 memberId, BgConfig *bg, u8 layer, ...)"
    }
   },
+  "GfGfxLoader_LoadFromNarc": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/gf_gfx_loader.h",
+   "known_prototype": "void *GfGfxLoader_LoadFromNarc(NarcId narcId, s32 fileId, BOOL isCompressed, enum HeapID heapID, BOOL atEnd)",
+   "signature_sources": {}
+  },
   "GfGfxLoader_LoadFromNarc_GetSizeOut": {
    "callers": [
     "asm/overlay_18_021F7ED4.s"
@@ -48693,6 +50176,7 @@
   "HeapExp_FndInitAllocator": {
    "callers": [
     "asm/overlay_01_022031C0.s",
+    "asm/overlay_49_0225CB50.s",
     "asm/unk_02023694.s"
    ],
    "header": "include/heap.h",
@@ -48714,6 +50198,7 @@
     "asm/overlay_14_021F6628.s",
     "asm/overlay_18_021F7ED4.s",
     "asm/overlay_41_02248400.s",
+    "asm/overlay_49_0225CB50.s",
     "asm/overlay_80_0222FD08.s",
     "asm/overlay_80_022384D8.s",
     "asm/overlay_80_0223A00C.s",
@@ -48804,6 +50289,7 @@
     "asm/overlay_18_021F7ED4.s",
     "asm/overlay_32.s",
     "asm/overlay_41_02248400.s",
+    "asm/overlay_49_0225CB50.s",
     "asm/overlay_80_0222AEF8.s",
     "asm/overlay_80_0222FD08.s",
     "asm/overlay_80_022384D8.s",
@@ -49225,7 +50711,8 @@
   },
   "MTRandom": {
    "callers": [
-    "asm/overlay_41_02248400.s"
+    "asm/overlay_41_02248400.s",
+    "asm/overlay_49_0225CB50.s"
    ],
    "header": "include/math_util.h",
    "known_prototype": "u32 MTRandom(void)",
@@ -50014,6 +51501,7 @@
     "asm/overlay_18_021F7ED4.s",
     "asm/overlay_29.s",
     "asm/overlay_32.s",
+    "asm/overlay_49_0225CB50.s",
     "asm/overlay_80_0223A00C.s",
     "asm/overlay_83_02243D7C.s",
     "asm/overlay_83_02246E08.s",
@@ -50043,6 +51531,7 @@
     "asm/overlay_18_021F7ED4.s",
     "asm/overlay_29.s",
     "asm/overlay_32.s",
+    "asm/overlay_49_0225CB50.s",
     "asm/overlay_80_0223A00C.s",
     "asm/overlay_83_02243D7C.s",
     "asm/overlay_83_02246E08.s",
@@ -50130,6 +51619,7 @@
   },
   "NNS_G3dGetMdlSet": {
    "callers": [
+    "asm/overlay_49_0225CB50.s",
     "asm/unk_02023694.s",
     "asm/unk_02069660.s"
    ],
@@ -50139,6 +51629,7 @@
   },
   "NNS_G3dGetTex": {
    "callers": [
+    "asm/overlay_49_0225CB50.s",
     "asm/unk_02023694.s",
     "asm/unk_02069660.s"
    ],
@@ -50174,6 +51665,14 @@
    ],
    "header": "lib/include/nnsys/g3d/glbstate.h",
    "known_prototype": "void NNS_G3dGlbSetBaseTrans(const VecFx32 *pTrans)",
+   "signature_sources": {}
+  },
+  "NNS_G3dMdlSetMdlLightEnableFlagAll": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "NONE: declared as a local extern in src/field/model_attributes.c:24; copy that",
+   "known_prototype": "extern void NNS_G3dMdlSetMdlLightEnableFlagAll(struct NNSG3dResMdl *model, u32 val)",
    "signature_sources": {}
   },
   "NNS_G3dPlttGetRequiredSize": {
@@ -53206,6 +54705,7 @@
     "asm/overlay_14_021F6628.s",
     "asm/overlay_18_021EE35C.s",
     "asm/overlay_41_02248400.s",
+    "asm/overlay_49_0225CB50.s",
     "asm/overlay_80_0222FD08.s",
     "asm/overlay_98.s",
     "asm/unk_02004A44.s",
@@ -53236,12 +54736,13 @@
     "asm/overlay_18_021F7ED4.s",
     "asm/overlay_29.s",
     "asm/overlay_41_02248400.s",
+    "asm/overlay_49_0225CB50.s",
     "asm/overlay_98.s",
     "asm/unk_020863F4.s"
    ],
    "confidence": "low",
-   "header": "none",
-   "known_prototype": "compiler runtime; emitted by unsigned 32-bit /",
+   "header": "implicit",
+   "known_prototype": "compiler runtime (u32 %)",
    "signature_guess": "unsigned __u32_div_f(unsigned num, unsigned den) /* MWCC runtime, quotient r0 remainder r1 */",
    "signature_sources": {
     "asm/overlay_29.s": "unsigned __u32_div_f(unsigned num, unsigned den) /* MWCC runtime, quotient r0 remainder r1 */",
@@ -53282,6 +54783,7 @@
     "asm/overlay_117.s",
     "asm/overlay_18_021F7ED4.s",
     "asm/overlay_41_02248400.s",
+    "asm/overlay_49_0225CB50.s",
     "asm/overlay_80_0223A00C.s",
     "asm/overlay_83_0223DD60.s",
     "asm/overlay_83_02242FE8.s",
@@ -72526,6 +74028,1558 @@
     "asm/overlay_41_02248400.s": "void ov41_02249DB4(UnkOv41ScrollBg *bg, UnkOv41ScrollBgTemplate *tmpl, int dx, int dy, int frames, int *doneFlag)"
    }
   },
+  "ov45_0222D740": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov45_0222D740(NNSG3dResFileHeader *resFile)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov45_0222D740(NNSG3dResFileHeader *resFile)"
+   }
+  },
+  "ov49_02258800": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_02258800(const UnkStruct_ov49_0225D1C4 *pos, VecFx32 *out)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_02258800(const UnkStruct_ov49_0225D1C4 *pos, VecFx32 *out)"
+   }
+  },
+  "ov49_02258814": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_02258814(const VecFx32 *in, UnkStruct_ov49_0225D1C4 *out)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_02258814(const VecFx32 *in, UnkStruct_ov49_0225D1C4 *out)"
+   }
+  },
+  "ov49_02258830": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_02258830(NNSG3dResFileHeader **dest, NARC *narc, s32 fileId, enum HeapID heapId)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_02258830(NNSG3dResFileHeader **dest, NARC *narc, s32 fileId, enum HeapID heapId)"
+   }
+  },
+  "ov49_02259154": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_02259154(void *followObj, VecFx32 *out)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_02259154(void *followObj, VecFx32 *out)"
+   }
+  },
+  "ov49_0225CB50": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] index is unused. After the strb the asm re-reads the u8 with ldrb, so the tests must be on the field and not on event: btn->unk3 = event; if (btn->unk3 == 0) btn->unk3 = 2; else if (btn->unk3 == 3) btn->unk3 = 1;"
+   ],
+   "signature_guess": "void ov49_0225CB50(u32 index, u32 event, UnkStruct_ov49_0225CB50 *btn)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CB50(u32 index, u32 event, UnkStruct_ov49_0225CB50 *btn)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "u8 touch state: set to event, then remapped 0->2, 3->1",
+     "offset": "0x3",
+     "param": 2,
+     "width": 1
+    }
+   ]
+  },
+  "ov49_0225CB68": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Callers in A154: trampoline ov49_0225A54C passes app+0x298, and a direct call passes r4+0x114."
+   ],
+   "signature_guess": "void ov49_0225CB68(UnkStruct_ov49_0225CB50 *btn)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CB68(UnkStruct_ov49_0225CB50 *btn)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "s16 counter cleared to 0 (read ldrsh in ov49_0225C8D4)",
+     "offset": "0x0",
+     "param": 0,
+     "width": 2
+    }
+   ]
+  },
+  "ov49_0225CB70": {
+   "callers": [],
+   "confidence": "medium",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Callers in 02262DB8/02263B74 multiply the result by String_GetLength. The app struct is the main ov49 work struct (the one ov49_0225A008 reads camera @0x3EC from). In C use a raw-offset struct or pad array."
+   ],
+   "signature_guess": "u32 ov49_0225CB70(UnkStruct_ov49_App *app)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "u32 ov49_0225CB70(UnkStruct_ov49_App *app)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "text frame delay = app msgbox (+0x2F8) field +0x14, stored from Options_GetTextFrameDelay in ov49_0225AAC8",
+     "offset": "0x30C",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225CB78": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Allocates 0x14 bytes, then clears them with an inlined 0x14-byte strb loop. Write memset(cam, 0, sizeof *cam), not a hand loop. Then Camera_Init_FromTargetDistanceAndAngle(&cam->target, 0x29AEC1, &ov49_02269A6C, 0x5C1, 0, TRUE, cam->camera); Camera_SetStaticPtr(cam->camera); Camera_SetPerspectiveClippingPlane(FX32_CONST(150) /*0x96000*/, FX32_CONST(900) /*0x384000*/, cam->camera); return cam. The caller (022595CC) passes heap 0x77."
+   ],
+   "signature_guess": "UnkStruct_ov49_0225CB78 *ov49_0225CB78(enum HeapID heapId)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "UnkStruct_ov49_0225CB78 *ov49_0225CB78(enum HeapID heapId)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "Camera* from Camera_New (re-read from memory for each use)",
+     "offset": "0x0",
+     "param": -1,
+     "width": 4
+    },
+    {
+     "meaning": "VecFx32 camera target (&cam->target passed to Camera_Init)",
+     "offset": "0x8",
+     "param": -1,
+     "width": 12
+    }
+   ]
+  },
+  "ov49_0225CBDC": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Camera_UnsetStaticPtr(); Camera_Delete(cam->camera); Heap_Free(cam);"
+   ],
+   "signature_guess": "void ov49_0225CBDC(UnkStruct_ov49_0225CB78 *cam)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CBDC(UnkStruct_ov49_0225CB78 *cam)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "Camera*",
+     "offset": "0x0",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225CBF4": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] if (cam->follow != NULL) { ov49_02259154(cam->follow, &cam->target); cam->target.x += FX32_CONST(8); cam->target.z -= FX32_CONST(32); } Camera_PushLookAtToNNSGlb();"
+   ],
+   "signature_guess": "void ov49_0225CBF4(UnkStruct_ov49_0225CB78 *cam)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CBF4(UnkStruct_ov49_0225CB78 *cam)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "follow-target object ptr (NULL = no follow)",
+     "offset": "0x4",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "target.x += 0x8000",
+     "offset": "0x8",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "target.z -= 0x20000",
+     "offset": "0x10",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225CC20": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Callers in 0225EEAC pass the three words of a stack VecFx32."
+   ],
+   "signature_guess": "void ov49_0225CC20(UnkStruct_ov49_0225CB78 *cam, fx32 x, fx32 y, fx32 z)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CC20(UnkStruct_ov49_0225CB78 *cam, fx32 x, fx32 y, fx32 z)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "target.x",
+     "offset": "0x8",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "target.y",
+     "offset": "0xc",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "target.z",
+     "offset": "0x10",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225CC28": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Store order is x, y, z. Uses push {r3,r4} for a scratch register."
+   ],
+   "signature_guess": "void ov49_0225CC28(UnkStruct_ov49_0225CB78 *cam, fx32 x, fx32 y, fx32 z)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CC28(UnkStruct_ov49_0225CB78 *cam, fx32 x, fx32 y, fx32 z)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "target = {x+0x8000, y, z-0x20000}",
+     "offset": "0x8",
+     "param": 0,
+     "width": 12
+    }
+   ]
+  },
+  "ov49_0225CC40": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "signature_guess": "void ov49_0225CC40(UnkStruct_ov49_0225CB78 *cam, void *followObj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CC40(UnkStruct_ov49_0225CB78 *cam, void *followObj)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "follow object (result of ov49_02258C5C)",
+     "offset": "0x4",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225CC44": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "signature_guess": "void ov49_0225CC44(UnkStruct_ov49_0225CB78 *cam)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CC44(UnkStruct_ov49_0225CB78 *cam)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "follow = NULL",
+     "offset": "0x4",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225CC4C": {
+   "callers": [],
+   "confidence": "medium",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] The only caller (ov49_0225DF18) passes (9, 0x80, heap, heap2) and explicitly loads r3, so a 4th param exists but is unused here. Order: Alloc(0x4A4); memset(ret,0,0x4A4); allocate objsA (sizeA = numObjA*0xB4, spilled at sp+4); allocate objsB (sizeB = numObjB*0xE4, kept in r7); memset objsA; memset objsB; strb numA; strb numB; return. heapId is spilled at [sp]."
+   ],
+   "signature_guess": "UnkStruct_ov49_0225CC4C *ov49_0225CC4C(int numObjA, int numObjB, enum HeapID heapId, enum HeapID unusedHeapId)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "UnkStruct_ov49_0225CC4C *ov49_0225CC4C(int numObjA, int numObjB, enum HeapID heapId, enum HeapID unusedHeapId)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "ObjA array = Heap_Alloc(heapId, numObjA*0xB4)",
+     "offset": "0x11C",
+     "param": -1,
+     "width": 4
+    },
+    {
+     "meaning": "ObjB array = Heap_Alloc(heapId, numObjB*0xE4)",
+     "offset": "0x120",
+     "param": -1,
+     "width": 4
+    },
+    {
+     "meaning": "numObjA",
+     "offset": "0x124",
+     "param": -1,
+     "width": 1
+    },
+    {
+     "meaning": "numObjB",
+     "offset": "0x125",
+     "param": -1,
+     "width": 1
+    }
+   ]
+  },
+  "ov49_0225CCC0": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] if (mgr->loaded) ov49_0225CE88(mgr); Heap_Free(objsA); Heap_Free(objsB); Heap_Free(mgr);"
+   ],
+   "signature_guess": "void ov49_0225CCC0(UnkStruct_ov49_0225CC4C *mgr)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CCC0(UnkStruct_ov49_0225CC4C *mgr)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "loaded flag",
+     "offset": "0x128",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "objsA freed",
+     "offset": "0x11C",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "objsB freed",
+     "offset": "0x120",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225CCF0": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Per-frame update. ov49_0225D7B8(mgr,&mgr->map); for(i=0;i<mgr->numObjA;i++) ov49_0225DA70(&mgr->objsA[i], &mgr->subA); for(i=0;i<mgr->numObjB;i++) ov49_0225DD68(mgr, &mgr->objsB[i]); Loop compares are signed (ble/blt), so i is int and the bound is the u8 field."
+   ],
+   "signature_guess": "void ov49_0225CCF0(UnkStruct_ov49_0225CC4C *mgr)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CCF0(UnkStruct_ov49_0225CC4C *mgr)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "&mgr->map",
+     "offset": "0x12C",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "&mgr->subA",
+     "offset": "0x1C4",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "numObjA, re-read every iteration",
+     "offset": "0x124",
+     "param": 0,
+     "width": 1
+    },
+    {
+     "meaning": "numObjB, re-read every iteration",
+     "offset": "0x125",
+     "param": 0,
+     "width": 1
+    }
+   ]
+  },
+  "ov49_0225CD58": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Draw. GF_ASSERT(mgr != NULL); GF_ASSERT(mgr->objsB != NULL); GF_ASSERT(mgr->objsA != NULL); ov49_0225D804(mgr,&mgr->map); loop over objsB: ov49_0225DD0C(&mgr->subB, &objsB[i]); loop over objsA: ov49_0225DAFC(&objsA[i], &mgr->subA)."
+   ],
+   "signature_guess": "void ov49_0225CD58(UnkStruct_ov49_0225CC4C *mgr)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CD58(UnkStruct_ov49_0225CC4C *mgr)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "objsB asserted non-NULL (asserted before objsA)",
+     "offset": "0x120",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "objsA asserted non-NULL",
+     "offset": "0x11C",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "&mgr->subB passed to DD0C",
+     "offset": "0x29C",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225CDE8": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Empty body (bx lr). It is 2 bytes plus a .balign pad."
+   ],
+   "signature_guess": "void ov49_0225CDE8(UnkStruct_ov49_0225CC4C *mgr)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CDE8(UnkStruct_ov49_0225CC4C *mgr)"
+   }
+  },
+  "ov49_0225CDEC": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] data = ov49_0225D4FC(a1, a2, tempHeapId); narc = NARC_New(NARC_a_2_0_1 /*0xCB*/, tempHeapId); HeapExp_FndInitAllocator(&mgr->allocator, heapId, 4); ov49_0225D5FC(&mgr->map, narc, data, heapId, &mgr->allocator); ov49_0225DC2C(&mgr->subB, narc, &mgr->allocator, data, heapId); ov49_0225D854(&mgr->subA, narc, &mgr->allocator, data, heapId); NARC_Delete(narc); ov49_0225D520(data); ov49_0225D6F0(mgr, &mgr->map); mgr->loaded = TRUE. The 5th param is read once into r4 (push {r3-r7,lr}, sp+0x18), and the outgoing 5th arg reuses the pushed r3 slot at [sp]."
+   ],
+   "signature_guess": "void ov49_0225CDEC(UnkStruct_ov49_0225CC4C *mgr, u32 a1, u32 a2, enum HeapID tempHeapId, enum HeapID heapId)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CDEC(UnkStruct_ov49_0225CC4C *mgr, u32 a1, u32 a2, enum HeapID tempHeapId, enum HeapID heapId)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "a2, stored first",
+     "offset": "0x127",
+     "param": 0,
+     "width": 1
+    },
+    {
+     "meaning": "a1",
+     "offset": "0x126",
+     "param": 0,
+     "width": 1
+    },
+    {
+     "meaning": "NNSFndAllocator",
+     "offset": "0x494",
+     "param": 0,
+     "width": 16
+    },
+    {
+     "meaning": "loaded = TRUE",
+     "offset": "0x128",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225CE88": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] ov49_0225D76C(mgr,&mgr->map); ov49_0225D6AC(&mgr->map,&mgr->allocator); ov49_0225DCBC(&mgr->subB,&mgr->allocator); ov49_0225D9D0(&mgr->subA,&mgr->allocator); mgr->loaded = FALSE;"
+   ],
+   "signature_guess": "void ov49_0225CE88(UnkStruct_ov49_0225CC4C *mgr)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CE88(UnkStruct_ov49_0225CC4C *mgr)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "loaded = FALSE",
+     "offset": "0x128",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225CED0": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] if (mgr->map.animValid[4] == 1 && mgr->mapAnimAttached[4] == 0) { mgr->mapAnimAttached[4] = 1; sub_020181D4(&mgr->mapRender[0], &mgr->map.anims[4]); }. mgr lives in r1 (not callee-saved) because it is not needed after the call."
+   ],
+   "signature_guess": "void ov49_0225CED0(UnkStruct_ov49_0225CC4C *mgr)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CED0(UnkStruct_ov49_0225CC4C *mgr)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "map.animValid[4] == 1",
+     "offset": "0x1C0",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "mapAnimAttached[4]: checked == 0, then set to 1 BEFORE the call",
+     "offset": "0x104",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "map.anims[4]",
+     "offset": "0x19C",
+     "param": 0,
+     "width": 20
+    },
+    {
+     "meaning": "mapRender[0]",
+     "offset": "0x4",
+     "param": 0,
+     "width": 120
+    }
+   ]
+  },
+  "ov49_0225CEFC": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Mirror of CED0, using sub_020181E0 (remove anim)."
+   ],
+   "signature_guess": "void ov49_0225CEFC(UnkStruct_ov49_0225CC4C *mgr)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CEFC(UnkStruct_ov49_0225CC4C *mgr)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "map.animValid[4] == 1",
+     "offset": "0x1C0",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "mapAnimAttached[4] == 1, cleared AFTER the call",
+     "offset": "0x104",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225CF28": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Asserts are cmp #2;ble and cmp #3;ble, i.e. signed with <=, so the params are int: GF_ASSERT(modelIdx <= 2); GF_ASSERT(variant <= 3). Body: obj = ov49_0225D820(mgr); sub_020181B0(&obj->render, &mgr->subA.models[modelIdx]); sub_020182A0(&obj->render, TRUE); ov49_0225CFA8(obj, pos); then a mid-block VecFx32 zero = {0,0,0} at sp+4 (aggregate init); ov49_0225CFEC(obj, &zero); stores in the order variant, modelIdx, active, animActive[0], animActive[2]; return obj. pos is spilled at [sp]. The caller (DF18) passes ldrh values from table ov49_02269A88 plus &{0,0,0x28000}."
+   ],
+   "signature_guess": "UnkStruct_ov49_0225CF28 *ov49_0225CF28(UnkStruct_ov49_0225CC4C *mgr, int modelIdx, int variant, const VecFx32 *pos)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "UnkStruct_ov49_0225CF28 *ov49_0225CF28(UnkStruct_ov49_0225CC4C *mgr, int modelIdx, int variant, const VecFx32 *pos)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "obj->variant = variant",
+     "offset": "0x1",
+     "param": -1,
+     "width": 1
+    },
+    {
+     "meaning": "obj->modelIdx = modelIdx",
+     "offset": "0x2",
+     "param": -1,
+     "width": 1
+    },
+    {
+     "meaning": "obj->active = 1",
+     "offset": "0x0",
+     "param": -1,
+     "width": 1
+    },
+    {
+     "meaning": "animActive[0] = 1",
+     "offset": "0x7c",
+     "param": -1,
+     "width": 4
+    },
+    {
+     "meaning": "animActive[2] = 1",
+     "offset": "0x84",
+     "param": -1,
+     "width": 4
+    },
+    {
+     "meaning": "&mgr->subA.models[modelIdx] (stride 16)",
+     "offset": "0x1C4",
+     "param": 0,
+     "width": 16
+    }
+   ]
+  },
+  "ov49_0225CF94": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] sub_020182A0(&obj->render, FALSE); obj->active = 0;"
+   ],
+   "signature_guess": "void ov49_0225CF94(UnkStruct_ov49_0225CF28 *obj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CF94(UnkStruct_ov49_0225CF28 *obj)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "active = 0, written after the call",
+     "offset": "0x0",
+     "param": 0,
+     "width": 1
+    }
+   ]
+  },
+  "ov49_0225CFA8": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] obj->pos = *pos; sub_020182A8(&obj->render, obj->pos.x + obj->offset.x, obj->pos.y + obj->offset.y, obj->pos.z + obj->offset.z); The fields are re-read after the copy."
+   ],
+   "signature_guess": "void ov49_0225CFA8(UnkStruct_ov49_0225CF28 *obj, const VecFx32 *pos)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CFA8(UnkStruct_ov49_0225CF28 *obj, const VecFx32 *pos)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "VecFx32 pos (struct copy via ldmia/stmia)",
+     "offset": "0x9c",
+     "param": 0,
+     "width": 12
+    },
+    {
+     "meaning": "VecFx32 offset",
+     "offset": "0xa8",
+     "param": 0,
+     "width": 12
+    }
+   ]
+  },
+  "ov49_0225CFEC": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Same body as CFA8, but the copy goes into obj->offset."
+   ],
+   "signature_guess": "void ov49_0225CFEC(UnkStruct_ov49_0225CF28 *obj, const VecFx32 *offset)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225CFEC(UnkStruct_ov49_0225CF28 *obj, const VecFx32 *offset)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "offset = *offset (struct copy)",
+     "offset": "0xa8",
+     "param": 0,
+     "width": 12
+    }
+   ]
+  },
+  "ov49_0225D030": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] sub_020182B0(&obj->render, &out->x, &out->y, &out->z). Not a tail call because r3 holds an argument."
+   ],
+   "signature_guess": "void ov49_0225D030(UnkStruct_ov49_0225CF28 *obj, VecFx32 *out)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D030(UnkStruct_ov49_0225CF28 *obj, VecFx32 *out)"
+   }
+  },
+  "ov49_0225D040": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Tail call via ldr r3,=; bx r3."
+   ],
+   "signature_guess": "void ov49_0225D040(UnkStruct_ov49_0225CF28 *obj, int visible)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D040(UnkStruct_ov49_0225CF28 *obj, int visible)"
+   }
+  },
+  "ov49_0225D04C": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] if (obj->animActive[1] == 0) { obj->animActive[1] = 1; return TRUE; } return FALSE;"
+   ],
+   "signature_guess": "BOOL ov49_0225D04C(UnkStruct_ov49_0225CF28 *obj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "BOOL ov49_0225D04C(UnkStruct_ov49_0225CF28 *obj)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "animActive[1]",
+     "offset": "0x80",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225D064": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Same as D04C, on animActive[3]."
+   ],
+   "signature_guess": "BOOL ov49_0225D064(UnkStruct_ov49_0225CF28 *obj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "BOOL ov49_0225D064(UnkStruct_ov49_0225CF28 *obj)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "animActive[3]",
+     "offset": "0x88",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225D07C": {
+   "callers": [],
+   "confidence": "medium",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Tail call sub_020182E0(&obj->render, rot, 0). There is no narrowing even though the callee param is u16, so declare rot as u16."
+   ],
+   "signature_guess": "void ov49_0225D07C(UnkStruct_ov49_0225CF28 *obj, u16 rot)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D07C(UnkStruct_ov49_0225CF28 *obj, u16 rot)"
+   }
+  },
+  "ov49_0225D088": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "signature_guess": "BOOL ov49_0225D088(UnkStruct_ov49_0225CF28 *obj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "BOOL ov49_0225D088(UnkStruct_ov49_0225CF28 *obj)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "return animActive[1]",
+     "offset": "0x80",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225D090": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "signature_guess": "BOOL ov49_0225D090(UnkStruct_ov49_0225CF28 *obj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "BOOL ov49_0225D090(UnkStruct_ov49_0225CF28 *obj)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "return animActive[3]",
+     "offset": "0x88",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225D098": {
+   "callers": [],
+   "confidence": "medium",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] obj = ov49_0225DBF8(mgr); sub_020181B0(&obj->render, &mgr->subB.models[modelIdx]); for (i=0;i<3;i++) if (mgr->subB.anmRes[modelIdx][i] != NULL) sub_020180E8(&obj->anims[i], &mgr->subB.models[modelIdx], mgr->subB.anmRes[modelIdx][i], &mgr->allocator); sub_020182A0(&obj->render, TRUE); pos.x = x<<4; pos.y = y<<4 (local Pos16 at sp+0x18); ov49_0225D1C4(obj, pos) passes the struct by value (MWCC copies it through sp-4 and does ldr r1); then the tail stores in the order listed. obj is spilled at sp+0xC and reloaded before each store. Params are not narrowed, so int, although the callers pass ldrh values."
+   ],
+   "signature_guess": "UnkStruct_ov49_0225D098 *ov49_0225D098(UnkStruct_ov49_0225CC4C *mgr, int modelIdx, int x, int y)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "UnkStruct_ov49_0225D098 *ov49_0225D098(UnkStruct_ov49_0225CC4C *mgr, int modelIdx, int x, int y)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "subB.anmRes[modelIdx][i] (row stride 12)",
+     "offset": "0x3BC",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "subB.models[modelIdx]",
+     "offset": "0x29C",
+     "param": 0,
+     "width": 16
+    },
+    {
+     "meaning": "&allocator, reloaded via pool each iteration",
+     "offset": "0x494",
+     "param": 0,
+     "width": 16
+    },
+    {
+     "meaning": "active = 1",
+     "offset": "0x0",
+     "param": -1,
+     "width": 2
+    },
+    {
+     "meaning": "modelIdx",
+     "offset": "0x2",
+     "param": -1,
+     "width": 2
+    },
+    {
+     "meaning": "animRandMax = 20",
+     "offset": "0xcc",
+     "param": -1,
+     "width": 1
+    },
+    {
+     "meaning": "animSpeed = FX32_ONE",
+     "offset": "0xdc",
+     "param": -1,
+     "width": 4
+    },
+    {
+     "meaning": "alphaEnabled = 0",
+     "offset": "0xe0",
+     "param": -1,
+     "width": 1
+    },
+    {
+     "meaning": "alpha0 = 31",
+     "offset": "0xe1",
+     "param": -1,
+     "width": 1
+    },
+    {
+     "meaning": "alpha1 = 31",
+     "offset": "0xe2",
+     "param": -1,
+     "width": 1
+    }
+   ]
+  },
+  "ov49_0225D160": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Release: sub_020182A0(&obj->render, FALSE); then the same anmRes loop as D098, which calls sub_020180E8 again (re-init) rather than sub_020180F8. This is probably an original bug and must be reproduced. Index with obj->modelIdx every iteration, not with a cached local."
+   ],
+   "signature_guess": "void ov49_0225D160(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D160(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "modelIdx, re-read every iteration",
+     "offset": "0x2",
+     "param": 1,
+     "width": 2
+    },
+    {
+     "meaning": "active = 0 at end",
+     "offset": "0x0",
+     "param": 1,
+     "width": 2
+    }
+   ]
+  },
+  "ov49_0225D1C0": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Callers switch on the result (cases 0-4, 0xb, 0xc, 0xf)."
+   ],
+   "signature_guess": "u16 ov49_0225D1C0(UnkStruct_ov49_0225D098 *obj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "u16 ov49_0225D1C0(UnkStruct_ov49_0225D098 *obj)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "return modelIdx",
+     "offset": "0x2",
+     "param": 0,
+     "width": 2
+    }
+   ]
+  },
+  "ov49_0225D1C4": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] The prologue push {r0-r3} plus the 'pop; pop {r3}; add sp,#0x10; bx r3' epilogue mean a by-value 4-byte struct param whose address is taken: VecFx32 v; ov49_02258800(&pos, &v); sub_020182A8(&obj->render, v.x, v.y, v.z). v is at sp+0 (sub sp,#0xc)."
+   ],
+   "signature_guess": "void ov49_0225D1C4(UnkStruct_ov49_0225D098 *obj, UnkStruct_ov49_0225D1C4 pos)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D1C4(UnkStruct_ov49_0225D098 *obj, UnkStruct_ov49_0225D1C4 pos)"
+   }
+  },
+  "ov49_0225D1EC": {
+   "callers": [],
+   "confidence": "medium",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Returns a 4-byte struct in r0 (ldrh y<<16 | ldrh x). VecFx32 v at sp+4 and Pos16 p at sp+0, so declare v first: sub_020182B0(&obj->render,&v.x,&v.y,&v.z); ov49_02258814(&v,&p); return p; The caller ov49_0225E9D0 unpacks it with strh/lsr #16."
+   ],
+   "signature_guess": "UnkStruct_ov49_0225D1C4 ov49_0225D1EC(UnkStruct_ov49_0225D098 *obj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "UnkStruct_ov49_0225D1C4 ov49_0225D1EC(UnkStruct_ov49_0225D098 *obj)"
+   }
+  },
+  "ov49_0225D214": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] ov49_0225D224(mgr, obj, slot, mode, NULL). The asm uses r4 for the 0 (push {r3,r4,lr}; sub sp,#4)."
+   ],
+   "signature_guess": "void ov49_0225D214(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj, int slot, int mode)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D214(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj, int slot, int mode)"
+   }
+  },
+  "ov49_0225D224": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] GF_ASSERT(slot < 3); GF_ASSERT(mode < 7) (signed blt); GF_ASSERT(obj->modelIdx < 18) (blo). if (mgr->subB.anmRes[obj->modelIdx][slot] != NULL) { if (obj->animActive[slot] == 0) sub_020181D4(&obj->render,&obj->anims[slot]); then active=1, mode, cb, wait=0; switch(mode){case 0: case 1: case 2: frame=0; break; case 3: case 4: frame=sub_020181A4(&obj->anims[slot]); break; case 5: frame=0; wait=MTRandom()%obj->animRandMax; break; case 6: (duplicate of 5, separate body) } sub_02018198(&obj->anims[slot], obj->animFrame[slot]); }. There is no default (bhi goes to the tail). The 7-entry jump table has bodies in order 0-2, 3-4, 5, 6."
+   ],
+   "signature_guess": "void ov49_0225D224(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj, int slot, int mode, UnkFunc_ov49_0225D224 cb)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D224(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj, int slot, int mode, UnkFunc_ov49_0225D224 cb)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "animActive[slot]",
+     "offset": "0xb8",
+     "param": 1,
+     "width": 1
+    },
+    {
+     "meaning": "animMode[slot] = mode",
+     "offset": "0xbc",
+     "param": 1,
+     "width": 1
+    },
+    {
+     "meaning": "animCallback[slot] = cb",
+     "offset": "0xd0",
+     "param": 1,
+     "width": 4
+    },
+    {
+     "meaning": "animWait[slot] = 0 / random",
+     "offset": "0xcd",
+     "param": 1,
+     "width": 1
+    },
+    {
+     "meaning": "animFrame[slot]",
+     "offset": "0xc0",
+     "param": 1,
+     "width": 4
+    },
+    {
+     "meaning": "animRandMax (modulus)",
+     "offset": "0xcc",
+     "param": 1,
+     "width": 1
+    }
+   ]
+  },
+  "ov49_0225D328": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Asserts slot<3 and modelIdx<18. if (anmRes[modelIdx][slot] != NULL && obj->animActive[slot] == 1) { sub_020181E0(&obj->render,&obj->anims[slot]); then zero in the order animActive, animFrame, animMode, animWait, animCallback }"
+   ],
+   "signature_guess": "void ov49_0225D328(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj, int slot)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D328(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj, int slot)"
+   }
+  },
+  "ov49_0225D394": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] for (i=0;i<3;i++) if (ov49_0225D450(obj,i) == 1) ov49_0225D328(mgr,obj,i);"
+   ],
+   "signature_guess": "void ov49_0225D394(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D394(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj)"
+   }
+  },
+  "ov49_0225D3BC": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Asserts as in D328. if (anmRes != NULL) return obj->animActive[slot]; return 0; This needs two separate pop epilogues."
+   ],
+   "signature_guess": "u8 ov49_0225D3BC(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj, int slot)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "u8 ov49_0225D3BC(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj, int slot)"
+   }
+  },
+  "ov49_0225D3F8": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Asserts slot<3, modelIdx<18, anmRes!=NULL. if (obj->animMode[slot] == 2) { obj->animFrame[slot] = frame; sub_02018198(&obj->anims[slot], obj->animFrame[slot]); }. The asm re-reads animFrame after the store, so pass the field and not frame."
+   ],
+   "signature_guess": "void ov49_0225D3F8(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj, int slot, fx32 frame)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D3F8(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj, int slot, fx32 frame)"
+   }
+  },
+  "ov49_0225D450": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] GF_ASSERT(slot<3); GF_ASSERT(obj->modelIdx<18); return obj->animActive[slot];"
+   ],
+   "signature_guess": "u8 ov49_0225D450(UnkStruct_ov49_0225D098 *obj, int slot)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "u8 ov49_0225D450(UnkStruct_ov49_0225D098 *obj, int slot)"
+   }
+  },
+  "ov49_0225D470": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Same asserts; return obj->animFrame[slot]. The caller compares the result with signed ble."
+   ],
+   "signature_guess": "fx32 ov49_0225D470(UnkStruct_ov49_0225D098 *obj, int slot)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "fx32 ov49_0225D470(UnkStruct_ov49_0225D098 *obj, int slot)"
+   }
+  },
+  "ov49_0225D494": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Tail call."
+   ],
+   "signature_guess": "void ov49_0225D494(UnkStruct_ov49_0225D098 *obj, int visible)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D494(UnkStruct_ov49_0225D098 *obj, int visible)"
+   }
+  },
+  "ov49_0225D4A0": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] GF_ASSERT(obj->modelIdx < 18); NNS_G3dMdlSetMdlLightEnableFlagAll(mgr->subB.models[obj->modelIdx].model, flag);"
+   ],
+   "signature_guess": "void ov49_0225D4A0(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj, int flag)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D4A0(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj, int flag)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "subB.models[modelIdx].model",
+     "offset": "0x2A4",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225D4C8": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "signature_guess": "void ov49_0225D4C8(UnkStruct_ov49_0225D098 *obj, fx32 speed)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D4C8(UnkStruct_ov49_0225D098 *obj, fx32 speed)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "animSpeed",
+     "offset": "0xdc",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225D4D0": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] The caller narrows arg1 with lsl/lsr #24, so the params are u8. Uses push {r3,r4}."
+   ],
+   "signature_guess": "void ov49_0225D4D0(UnkStruct_ov49_0225D098 *obj, u8 alpha0, u8 alpha1)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D4D0(UnkStruct_ov49_0225D098 *obj, u8 alpha0, u8 alpha1)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "alphaEnabled = 1",
+     "offset": "0xe0",
+     "param": 0,
+     "width": 1
+    },
+    {
+     "meaning": "alpha0",
+     "offset": "0xe1",
+     "param": 0,
+     "width": 1
+    },
+    {
+     "meaning": "alpha1",
+     "offset": "0xe2",
+     "param": 0,
+     "width": 1
+    }
+   ]
+  },
+  "ov49_0225D4E8": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "signature_guess": "void ov49_0225D4E8(UnkStruct_ov49_0225D098 *obj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D4E8(UnkStruct_ov49_0225D098 *obj)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "alphaEnabled = 0",
+     "offset": "0xe0",
+     "param": 0,
+     "width": 1
+    }
+   ]
+  },
+  "ov49_0225D4F0": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Sets the scale. bl rather than a tail call because r3 is in use."
+   ],
+   "signature_guess": "void ov49_0225D4F0(UnkStruct_ov49_0225D098 *obj, fx32 x, fx32 y, fx32 z)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D4F0(UnkStruct_ov49_0225D098 *obj, fx32 x, fx32 y, fx32 z)"
+   }
+  },
+  "ov49_0225D4FC": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Not in .public, so static. u32 idx = a0 + a1*5; GF_ASSERT(idx < 25) (unsigned blo); return GfGfxLoader_LoadFromNarc(NARC_a_2_0_0 /*0xCA*/, idx + 1, FALSE, heapId, TRUE);"
+   ],
+   "signature_guess": "static void *ov49_0225D4FC(u32 a0, u32 a1, enum HeapID heapId)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "static void *ov49_0225D4FC(u32 a0, u32 a1, enum HeapID heapId)"
+   }
+  },
+  "ov49_0225D520": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Static. Tail call Heap_Free(data)."
+   ],
+   "signature_guess": "static void ov49_0225D520(void *data)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "static void ov49_0225D520(void *data)"
+   }
+  },
+  "ov49_0225D528": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] ov49_02258830(&mdl->resFile, narc, fileId, heapId); mdl->mdlSet = NNS_G3dGetMdlSet(mdl->resFile); mdl->model = NNS_G3dGetMdlByIdx(mdl->mdlSet, 0); mdl->tex = NNS_G3dGetTex(mdl->resFile); GF3dRender_BindModelSet(mdl->resFile, mdl->tex); This is the same shape as sub_02018324 in src/unk_02018000.c."
+   ],
+   "signature_guess": "void ov49_0225D528(UnkStruct_02018030 *mdl, NARC *narc, s32 fileId, enum HeapID heapId)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D528(UnkStruct_02018030 *mdl, NARC *narc, s32 fileId, enum HeapID heapId)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "resFile (written by ov49_02258830)",
+     "offset": "0x0",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "mdlSet",
+     "offset": "0x4",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "model = inline NNS_G3dGetMdlByIdx(mdlSet,0)",
+     "offset": "0x8",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "tex",
+     "offset": "0xc",
+     "param": 0,
+     "width": 4
+    }
+   ]
+  },
+  "ov49_0225D574": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Tail call."
+   ],
+   "signature_guess": "void ov49_0225D574(UnkStruct_02018030 *mdl)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D574(UnkStruct_02018030 *mdl)"
+   }
+  },
+  "ov49_0225D57C": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Looping advance: max = sub_020181A4(anim); if (*frame + speed < max) *frame = *frame + speed; else *frame = (*frame + speed) % max; The sum is computed once in r0 (dividend), and each arm has its own pop."
+   ],
+   "signature_guess": "void ov49_0225D57C(fx32 *frame, UnkStruct_020180BC *anim, fx32 speed)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D57C(fx32 *frame, UnkStruct_020180BC *anim, fx32 speed)"
+   }
+  },
+  "ov49_0225D5A0": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] max = sub_020181A4(anim); if (*frame + speed < max) { *frame += speed; return FALSE; } *frame = max - 0x800; return TRUE; (0x800 is built with mov #2; lsl #10)."
+   ],
+   "signature_guess": "BOOL ov49_0225D5A0(fx32 *frame, UnkStruct_020180BC *anim, fx32 speed)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "BOOL ov49_0225D5A0(fx32 *frame, UnkStruct_020180BC *anim, fx32 speed)"
+   }
+  },
+  "ov49_0225D5C8": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Reverse looping: next = *frame - speed; if (next >= 0) *frame = next; else *frame = max + next; (subs + bmi, no cmp). The caller ignores r0."
+   ],
+   "signature_guess": "void ov49_0225D5C8(fx32 *frame, UnkStruct_020180BC *anim, fx32 speed)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D5C8(fx32 *frame, UnkStruct_020180BC *anim, fx32 speed)"
+   }
+  },
+  "ov49_0225D5E4": {
+   "callers": [],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] anim is unused (kept for the D57C/D5A0/D5C8 calling shape). if (*frame - speed > 0) { *frame -= speed; return FALSE; } *frame = 0; return TRUE; (sub; cmp #0; ble)."
+   ],
+   "signature_guess": "BOOL ov49_0225D5E4(fx32 *frame, UnkStruct_020180BC *anim, fx32 speed)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "BOOL ov49_0225D5E4(fx32 *frame, UnkStruct_020180BC *anim, fx32 speed)"
+   }
+  },
+  "ov49_0225D5FC": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "high",
+   "defined_in": "asm/overlay_49_0225CB50.s",
+   "mode": "thumb",
+   "notes": [
+    "[asm/overlay_49_0225CB50.s] Not in .public, so static. Last function, size 0xB0 (4-aligned, so no trailing pad issue). Loop 1 (i<2): ov49_0225D528(&map->models[i], narc, data->mapModelFiles[i], heapId); ov45_0222D740(map->models[i].resFile). Loop 2 (i<5): if (data->mapModelFiles[0] == data->mapAnimFiles[i]) map->animValid[i]=FALSE; else { map->animValid[i]=TRUE; if (i != 3) sub_020180BC(&map->anims[i], &map->models[0], narc, data->mapAnimFiles[i], heapId, allocator); else the same with &map->models[1]; }. The 5th param is self-spilled to its own slot (ldr [sp,#0x30]; str [sp,#0x30])."
+   ],
+   "signature_guess": "static void ov49_0225D5FC(UnkStruct_ov49_0225D5FC *map, NARC *narc, UnkStruct_ov49_0225D4FC *data, enum HeapID heapId, NNSFndAllocator *allocator)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "static void ov49_0225D5FC(UnkStruct_ov49_0225D5FC *map, NARC *narc, UnkStruct_ov49_0225D4FC *data, enum HeapID heapId, NNSFndAllocator *allocator)"
+   },
+   "struct_accesses": [
+    {
+     "meaning": "u32 mapModelFiles[2]",
+     "offset": "0x180",
+     "param": 2,
+     "width": 4
+    },
+    {
+     "meaning": "u32 mapAnimFiles[5]",
+     "offset": "0x18C",
+     "param": 2,
+     "width": 4
+    },
+    {
+     "meaning": "BOOL animValid[5]",
+     "offset": "0x84",
+     "param": 0,
+     "width": 4
+    },
+    {
+     "meaning": "UnkStruct_020180BC anims[5]",
+     "offset": "0x20",
+     "param": 0,
+     "width": 20
+    }
+   ]
+  },
+  "ov49_0225D6AC": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225D6AC(UnkStruct_ov49_0225D5FC *map, NNSFndAllocator *allocator)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D6AC(UnkStruct_ov49_0225D5FC *map, NNSFndAllocator *allocator)"
+   }
+  },
+  "ov49_0225D6F0": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225D6F0(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D5FC *map)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D6F0(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D5FC *map)"
+   }
+  },
+  "ov49_0225D76C": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225D76C(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D5FC *map)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D76C(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D5FC *map)"
+   }
+  },
+  "ov49_0225D7B8": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225D7B8(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D5FC *map)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D7B8(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D5FC *map)"
+   }
+  },
+  "ov49_0225D804": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225D804(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D5FC *map)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D804(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D5FC *map)"
+   }
+  },
+  "ov49_0225D820": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "UnkStruct_ov49_0225CF28 *ov49_0225D820(UnkStruct_ov49_0225CC4C *mgr)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "UnkStruct_ov49_0225CF28 *ov49_0225D820(UnkStruct_ov49_0225CC4C *mgr)"
+   }
+  },
+  "ov49_0225D854": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225D854(UnkStruct_ov49_0225D854 *subA, NARC *narc, NNSFndAllocator *allocator, UnkStruct_ov49_0225D4FC *data, enum HeapID heapId)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D854(UnkStruct_ov49_0225D854 *subA, NARC *narc, NNSFndAllocator *allocator, UnkStruct_ov49_0225D4FC *data, enum HeapID heapId)"
+   }
+  },
+  "ov49_0225D9D0": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225D9D0(UnkStruct_ov49_0225D854 *subA, NNSFndAllocator *allocator)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225D9D0(UnkStruct_ov49_0225D854 *subA, NNSFndAllocator *allocator)"
+   }
+  },
+  "ov49_0225DA70": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225DA70(UnkStruct_ov49_0225CF28 *obj, UnkStruct_ov49_0225D854 *subA)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225DA70(UnkStruct_ov49_0225CF28 *obj, UnkStruct_ov49_0225D854 *subA)"
+   }
+  },
+  "ov49_0225DAFC": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225DAFC(UnkStruct_ov49_0225CF28 *obj, UnkStruct_ov49_0225D854 *subA)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225DAFC(UnkStruct_ov49_0225CF28 *obj, UnkStruct_ov49_0225D854 *subA)"
+   }
+  },
+  "ov49_0225DBF8": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "UnkStruct_ov49_0225D098 *ov49_0225DBF8(UnkStruct_ov49_0225CC4C *mgr)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "UnkStruct_ov49_0225D098 *ov49_0225DBF8(UnkStruct_ov49_0225CC4C *mgr)"
+   }
+  },
+  "ov49_0225DC2C": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225DC2C(UnkStruct_ov49_0225DC2C *subB, NARC *narc, NNSFndAllocator *allocator, UnkStruct_ov49_0225D4FC *data, enum HeapID heapId)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225DC2C(UnkStruct_ov49_0225DC2C *subB, NARC *narc, NNSFndAllocator *allocator, UnkStruct_ov49_0225D4FC *data, enum HeapID heapId)"
+   }
+  },
+  "ov49_0225DCBC": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225DCBC(UnkStruct_ov49_0225DC2C *subB, NNSFndAllocator *allocator)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225DCBC(UnkStruct_ov49_0225DC2C *subB, NNSFndAllocator *allocator)"
+   }
+  },
+  "ov49_0225DD0C": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225DD0C(UnkStruct_ov49_0225DC2C *subB, UnkStruct_ov49_0225D098 *obj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225DD0C(UnkStruct_ov49_0225DC2C *subB, UnkStruct_ov49_0225D098 *obj)"
+   }
+  },
+  "ov49_0225DD68": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "confidence": "low",
+   "signature_guess": "void ov49_0225DD68(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj)",
+   "signature_sources": {
+    "asm/overlay_49_0225CB50.s": "void ov49_0225DD68(UnkStruct_ov49_0225CC4C *mgr, UnkStruct_ov49_0225D098 *obj)"
+   }
+  },
   "ov80_02229F04": {
    "callers": [
     "asm/overlay_80_0222FD08.s"
@@ -83698,6 +86752,110 @@
    "signature_sources": {
     "asm/unk_02017FAC.s": "int sub_02017FE4(MapsecType type, int offset)"
    }
+  },
+  "sub_02018068": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "void sub_02018068(UnkStruct_02018030 *a0)",
+   "signature_sources": {}
+  },
+  "sub_020180BC": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "void sub_020180BC(UnkStruct_020180BC *a0, UnkStruct_02018030 *a1, NARC *narc, s32 fileId, enum HeapID heapId, NNSFndAllocator *allocator)",
+   "signature_sources": {}
+  },
+  "sub_020180E8": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "void sub_020180E8(UnkStruct_020180BC *a0, UnkStruct_02018030 *a1, void *anmRes, NNSFndAllocator *allocator)",
+   "signature_sources": {}
+  },
+  "sub_02018198": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "void sub_02018198(UnkStruct_020180BC *a0, fx32 frame)",
+   "signature_sources": {}
+  },
+  "sub_020181A4": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "fx32 sub_020181A4(UnkStruct_020180BC *a0)",
+   "signature_sources": {}
+  },
+  "sub_020181B0": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "void sub_020181B0(UnkStruct_020181B0 *a0, UnkStruct_02018030 *a1)",
+   "signature_sources": {}
+  },
+  "sub_020181D4": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "void sub_020181D4(UnkStruct_020181B0 *a0, UnkStruct_020180BC *a1)",
+   "signature_sources": {}
+  },
+  "sub_020181E0": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "void sub_020181E0(UnkStruct_020181B0 *a0, UnkStruct_020180BC *a1)",
+   "signature_sources": {}
+  },
+  "sub_020182A0": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "void sub_020182A0(UnkStruct_020181B0 *a0, int visible)",
+   "signature_sources": {}
+  },
+  "sub_020182A8": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "void sub_020182A8(UnkStruct_020181B0 *a0, fx32 x, fx32 y, fx32 z)",
+   "signature_sources": {}
+  },
+  "sub_020182B0": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "void sub_020182B0(UnkStruct_020181B0 *a0, fx32 *x, fx32 *y, fx32 *z)",
+   "signature_sources": {}
+  },
+  "sub_020182C4": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "void sub_020182C4(UnkStruct_020181B0 *a0, fx32 x, fx32 y, fx32 z)",
+   "signature_sources": {}
+  },
+  "sub_020182E0": {
+   "callers": [
+    "asm/overlay_49_0225CB50.s"
+   ],
+   "header": "include/unk_02018000.h",
+   "known_prototype": "void sub_020182E0(UnkStruct_020181B0 *a0, u16 value, int idx)",
+   "signature_sources": {}
   },
   "sub_020195F4": {
    "callers": [
