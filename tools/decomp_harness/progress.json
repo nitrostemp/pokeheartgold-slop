@@ -1066,6 +1066,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "40/40 C: follow-mon field helpers (hop/fade/grayscale tasks, ScrCmd_808)"
+    },
+    {
+      "file": "asm/overlay_41_02247828.s",
+      "lines": 1631,
+      "functions": 42,
+      "attempts": 1,
+      "result": "matched",
+      "note": "42/42 C: fashion case fade-in task, yes/no prompts, accessory canvas"
     }
   ],
   "failed": [
@@ -1474,8 +1482,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 230,
-    "total_matched": 102,
+    "total_attempts": 231,
+    "total_matched": 103,
     "total_failed": 31
   },
   "matched": [

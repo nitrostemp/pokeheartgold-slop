@@ -729,6 +729,10 @@ In overlay_01_022053EC (ov01_0220553C, ov01_02205808), the asm compares 0xFD, 0x
 
 If the asm calls a function and only then copies a .rodata VecFx32/struct into the stack (ldmia/stmia), a `VecFx32 scale = {...};` at the top of the block emits the copy before the call. With -lang c99, put the declaration after the call statement (`ov01_02205790(fs, 0); VecFx32 scale = { FX32_ONE, FX32_ONE, FX32_ONE };`). Seen in overlay_01_022053EC ov01_02205B14 and ov01_02205DB4.
 
+### Loop that recomputes `y + mT` / `x + mL` every iteration but keeps x/mL/y/mT in regs: source had all four bound locals computed before the loop  <!-- id: loop-bounds-locals-copy-propagated -->
+
+In overlay_41_02247828 ov41_02248324, the out-params x/y/w/h/margins are written by pointer calls. The asm hoists `right = x + w - mR` and `bottom = y + h - mB` into spills, but recomputes `y + mT` and `x + mL` inside the loop from register copies. Writing the sums inline in the call keeps every load in the loop (too short); hoisting only right/bottom still leaves 7 diffs from stack layout. The matching source declares `left, top, right, bottom` and assigns all four before the loop (left, top, right, bottom order). MWCC copy-propagates the two-operand sums back into the loop. Stack-slot order also told me the declaration order of the address-taken locals: x, y, w, h, mL, mT, px, py, mR, mB, from the highest address down.
+
 ## Matching Tricks
 
 ### Small source changes that move codegen  <!-- id: decl-order-tricks -->

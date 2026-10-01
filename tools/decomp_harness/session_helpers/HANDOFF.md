@@ -31,6 +31,7 @@ session can resume from whatever was last pushed.
 | unk_02016EDC | 62/62 C (port of pokeplatinum pokemon_anim.c) |
 | unk_020658D4 | 50/50 C (follow/effect-object movement; rodata static order fix) |
 | overlay_01_022053EC | 40/40 C (follow-mon field helpers) |
+| overlay_41_02247828 | 42/42 C (fashion case canvas + yes/no prompts) |
 
 ## In progress / next
 
