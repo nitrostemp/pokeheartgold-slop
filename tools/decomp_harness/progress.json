@@ -1082,6 +1082,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "75/75 C: wireless manager (port of pokeplatinum wireless_manager.c)"
+    },
+    {
+      "file": "asm/unk_02034B0C.s",
+      "lines": 1903,
+      "functions": 56,
+      "attempts": 1,
+      "result": "matched",
+      "note": "56/56 C: comm server/client discovery (port of pokeplatinum unk_02033200.c)"
     }
   ],
   "failed": [
@@ -1490,8 +1498,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 232,
-    "total_matched": 104,
+    "total_attempts": 233,
+    "total_matched": 105,
     "total_failed": 31
   },
   "matched": [
