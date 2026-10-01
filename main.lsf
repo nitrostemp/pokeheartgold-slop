@@ -562,7 +562,7 @@ Overlay field
     Object src/field/rock_smash_item.o
     Object src/field/headbutt.o
     Object src/overlay_01_022051EC.o
-    Object asm/overlay_01_022053EC.o
+    Object src/overlay_01_022053EC.o
 }
 Overlay OVY_2
 {

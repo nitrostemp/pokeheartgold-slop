@@ -2004,6 +2004,41 @@
         "static-order",
         "sbin"
       ]
+    },
+    {
+      "id": "id-triple-compare-early-return",
+      "category": "codegen",
+      "title": "`id == 0xFD || id == 0xFA || id == 0xFB` gets folded into a range check; use `if (id != A && id != B && id != C) return` to keep three cmp/beq",
+      "body": "In overlay_01_022053EC (ov01_0220553C, ov01_02205808), the asm compares 0xFD, 0xFA and 0xFB one by one (cmp/beq, cmp/beq, cmp/bne). Writing the positive `||` condition lets MWCC merge 0xFA/0xFB into `subs r0,#250; cmp r0,#1; bhi`, which is 4 bytes short. The early-return form with `!=` and `&&` keeps the three compares, both for value-returning functions and for void ones (`return;` followed by the body).",
+      "tags": [
+        "compare",
+        "range-merge",
+        "early-return"
+      ]
+    },
+    {
+      "id": "local-initializer-after-call",
+      "category": "codegen",
+      "title": "A local initialized struct whose copy happens after a call: declare it after the call (C99 mixed declarations)",
+      "body": "If the asm calls a function and only then copies a .rodata VecFx32/struct into the stack (ldmia/stmia), a `VecFx32 scale = {...};` at the top of the block emits the copy before the call. With -lang c99, put the declaration after the call statement (`ov01_02205790(fs, 0); VecFx32 scale = { FX32_ONE, FX32_ONE, FX32_ONE };`). Seen in overlay_01_022053EC ov01_02205B14 and ov01_02205DB4.",
+      "tags": [
+        "initializer",
+        "c99",
+        "struct-copy",
+        "ordering"
+      ]
+    },
+    {
+      "id": "relocdiff-tool",
+      "category": "tooling",
+      "title": "Run session_helpers/relocdiff.py after objdiff to catch wrong-but-identical literal-pool and table targets before the full build",
+      "body": "`python3 tools/decomp_harness/session_helpers/relocdiff.py build/heartgold.us/asm/<f>.o build/heartgold.us/compile_one/<f>.o` resolves every R_ARM_ABS32 word (literal pools, .rodata/.data tables) to a function name or section+offset and compares them per owning function. objdiff masks relocated bytes, so swapped identical statics (two equal VecFx32s, or reordered function-pointer tables) pass objdiff and fail main.sbin. relocdiff flags those, and it passes once they are reordered. Validated on unk_020658D4.",
+      "tags": [
+        "relocation",
+        "objdiff",
+        "tool",
+        "sbin"
+      ]
     }
   ]
 }

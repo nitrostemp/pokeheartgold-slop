@@ -721,6 +721,14 @@ ov80_022300D4 swaps entry `index` with a random entry across four parallel array
 
 ov80_0223049C passes &value to sub_02030978(frontierData, field, index, &value) with u16, u8 and u32 values. Retail addresses the u8 as (sp+4)+8 and the frame is 0x20 with push {r3,...}. Separate locals give a 0x14 frame and plain sp offsets. `struct { u16 value16[4]; u8 value8[4]; u32 value32[4]; } buf;` (0x1C bytes) matches both the addressing and the frame size. Also: a Party_GetCount bound compared `blo` against a u16 counter means the bound is u32, not int/u16.
 
+### `id == 0xFD || id == 0xFA || id == 0xFB` gets folded into a range check; use `if (id != A && id != B && id != C) return` to keep three cmp/beq  <!-- id: id-triple-compare-early-return -->
+
+In overlay_01_022053EC (ov01_0220553C, ov01_02205808), the asm compares 0xFD, 0xFA and 0xFB one by one (cmp/beq, cmp/beq, cmp/bne). Writing the positive `||` condition lets MWCC merge 0xFA/0xFB into `subs r0,#250; cmp r0,#1; bhi`, which is 4 bytes short. The early-return form with `!=` and `&&` keeps the three compares, both for value-returning functions and for void ones (`return;` followed by the body).
+
+### A local initialized struct whose copy happens after a call: declare it after the call (C99 mixed declarations)  <!-- id: local-initializer-after-call -->
+
+If the asm calls a function and only then copies a .rodata VecFx32/struct into the stack (ldmia/stmia), a `VecFx32 scale = {...};` at the top of the block emits the copy before the call. With -lang c99, put the declaration after the call statement (`ov01_02205790(fs, 0); VecFx32 scale = { FX32_ONE, FX32_ONE, FX32_ONE };`). Seen in overlay_01_022053EC ov01_02205B14 and ov01_02205DB4.
+
 ## Matching Tricks
 
 ### Small source changes that move codegen  <!-- id: decl-order-tricks -->
@@ -1569,3 +1577,7 @@ HGSS and Platinum share most engine code and the same MWCC build, so a decompile
 ### Before writing a file from scratch, check git history for a draft reverted by 175578f26 (objdiff-bug revert): it may already match  <!-- id: recover-reverted-drafts-from-175578f26 -->
 
 Commit 175578f26 reverted 12 fork decomps because objdiff.py's byte extraction was broken and had reported MATCH for everything. Some of those reverts were caused by SHARED-HEADER edits (IPA cascades into other TUs), not by the C itself. unk_02004A44 (95 fns) was recovered with `git show 175578f26^:src/unk_02004A44.c`, its deleted include/sound_02004A44_internal.h inlined as local types/prototypes, the frozen public include/sound_02004A44.h left untouched (not included) -- and it matched 95/95 + data under the fixed objdiff and passed HG+SS ROM SHA1 with zero C edits. Recipe: `git log --oneline --all -- src/<name>.c`; if a pre-175578f26 version exists, restore it, inline any deleted *_internal.h, drop includes of headers the old commit modified, flip main.lsf, compile_one. Files from that revert still in asm as of 2026-10-01: render_window (2930-line draft), unk_0200FA24 (559), unk_0201010C (3595), unk_02026DE0 (30). Their old commits also edited include/render_window.h / unk_0201010C.h / unk_02026DE0.h -- keep those headers frozen and use local prototypes.
+
+### Run session_helpers/relocdiff.py after objdiff to catch wrong-but-identical literal-pool and table targets before the full build  <!-- id: relocdiff-tool -->
+
+`python3 tools/decomp_harness/session_helpers/relocdiff.py build/heartgold.us/asm/<f>.o build/heartgold.us/compile_one/<f>.o` resolves every R_ARM_ABS32 word (literal pools, .rodata/.data tables) to a function name or section+offset and compares them per owning function. objdiff masks relocated bytes, so swapped identical statics (two equal VecFx32s, or reordered function-pointer tables) pass objdiff and fail main.sbin. relocdiff flags those, and it passes once they are reordered. Validated on unk_020658D4.

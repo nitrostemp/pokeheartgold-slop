@@ -1058,6 +1058,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "50/50 C: follow-mon/follow-object/effect-object movement types"
+    },
+    {
+      "file": "asm/overlay_01_022053EC.s",
+      "lines": 1991,
+      "functions": 40,
+      "attempts": 1,
+      "result": "matched",
+      "note": "40/40 C: follow-mon field helpers (hop/fade/grayscale tasks, ScrCmd_808)"
     }
   ],
   "failed": [
@@ -1466,8 +1474,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 229,
-    "total_matched": 101,
+    "total_attempts": 230,
+    "total_matched": 102,
     "total_failed": 31
   },
   "matched": [

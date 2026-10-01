@@ -30,6 +30,7 @@ session can resume from whatever was last pushed.
 | frontier/overlay_80_0222FD08 | 20 C + 1 NONMATCHING (ov80_022308C4 stack slot) |
 | unk_02016EDC | 62/62 C (port of pokeplatinum pokemon_anim.c) |
 | unk_020658D4 | 50/50 C (follow/effect-object movement; rodata static order fix) |
+| overlay_01_022053EC | 40/40 C (follow-mon field helpers) |
 
 ## In progress / next
 
@@ -63,3 +64,5 @@ Run from the repo root.
   files; fetch via raw.githubusercontent.com.
 - Toolchain downloads: github.com/.../raw is 403 behind the cloud proxy;
   raw.githubusercontent.com/pret/pokeheartgold/workflows/assets/ works.
+
+After compile_one reports MATCH, also run `session_helpers/relocdiff.py <asm.o> <compile_one.o>`. objdiff masks relocation targets, so this is the only fast check for swapped identical statics.
