@@ -1896,6 +1896,29 @@
         "order",
         "static const"
       ]
+    },
+    {
+      "id": "jplus1-row-index-flat-form-defeats-strength-reduction",
+      "category": "matching-tricks",
+      "title": "Retail recomputes `base + (j+1)*32` per outer iteration and folds the struct offset into ldrh: write the row as a flat index on row 0",
+      "body": "ov46_02258F78 blends palettes with BlendPalette(&base[j][i], &out[k][i], 1, step>>8, base[j+1][i]). Retail keeps induction pointers for base[j] and out[k], but for base[j+1] it recomputes `work + (j+1)*32` once per j-iteration (spilled) and loads with `ldrh [r6, #0xdc]` (the struct offset folded into the load). Writing `base[j + 1][i]` made MWCC strength-reduce it into a third induction pointer: +1 stack slot, push {r3,...}, 4 bytes larger. `((u16*)base)[(j+1)*16+i]` fixed the size but hoisted `&work->...base` into its own slot. `work->palAnim.base[0][(j + 1) * 16 + i]` (an out-of-row index on row 0) matches exactly; `*(base[0] + (j+1)*16 + i)` and `base[0][i + (j+1)*16]` also match.",
+      "tags": [
+        "strength-reduction",
+        "induction",
+        "array",
+        "stack-frame"
+      ]
+    },
+    {
+      "id": "yesno-handleinput-if-elseif-not-switch",
+      "category": "codegen",
+      "title": "YesNoPrompt_HandleInput result checks are an if/else-if on a local, not a switch",
+      "body": "Retail: `bl YesNoPrompt_HandleInput; cmp r0,#1; bne L; ...; b end; L: cmp r0,#2; beq M; b end; M: ...`. A `switch (YesNoPrompt_HandleInput(...)) { case YES: ... case NO: ... }` emits `beq` dispatch with the arms in a different order. Write `input = YesNoPrompt_HandleInput(p); if (input == YESNORESPONSE_YES) {...} else if (input == YESNORESPONSE_NO) {...}`. Seen in overlay_46 (2 sites).",
+      "tags": [
+        "switch",
+        "if-else",
+        "yesno"
+      ]
     }
   ]
 }

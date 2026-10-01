@@ -865,7 +865,7 @@ Overlay OVY_45
 Overlay OVY_46
 {
     After OVY_45
-    Object asm/overlay_46.o
+    Object src/overlay_46.o
 }
 Overlay OVY_47
 {

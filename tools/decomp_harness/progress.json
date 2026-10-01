@@ -1010,6 +1010,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "9/9 C: encounter-effect tasks (6-sprite fly-in, trainer-name banner slide x5 templates)"
+    },
+    {
+      "file": "asm/overlay_46.s",
+      "lines": 1701,
+      "functions": 20,
+      "attempts": 1,
+      "result": "matched",
+      "note": "20/20 C: Wi-Fi Plaza connect/disconnect apps (msg windows, yes/no, palette-cycle VBlank task)"
     }
   ],
   "failed": [
@@ -1418,8 +1426,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 223,
-    "total_matched": 95,
+    "total_attempts": 224,
+    "total_matched": 96,
     "total_failed": 31
   },
   "matched": [

@@ -701,6 +701,10 @@ In render_window WaitingIcon_New(Window *window, u16 tileNum), retail spills r0 
 
 Retail: `subs r4,r2,r4; bmi L; b M; L: movs r4,#0; M: strb r4,[r0]`. The empty fall-through arm plus a `b` over a one-instruction block means MWCC laid out an if/else whose then-arm became empty after it tail-merged the identical stores. Source: `if (y - h >= 0) { s->top = y - h; } else { s->top = 0; }`. A local temp (`v = ...; if (v < 0) v = 0; s->top = v;`), a ternary, or the reversed polarity (`if (v < 0) {s->top = 0;} else {...}`) all collapse to `bpl; movs #0; strb`. If the clamp is the last statement it shows as duplicated `strb; pop; bx lr` tails instead. Also: a `u32 i; do { *p = 0; p++; i--; } while (i != 0);` loop gives `movs r1,#16; strb; adds; subs; bne` (int i or a for loop gives cmp/bgt). Seen in ov41_02249978 / ov41_022496E8 (overlay_41_02248ED4).
 
+### YesNoPrompt_HandleInput result checks are an if/else-if on a local, not a switch  <!-- id: yesno-handleinput-if-elseif-not-switch -->
+
+Retail: `bl YesNoPrompt_HandleInput; cmp r0,#1; bne L; ...; b end; L: cmp r0,#2; beq M; b end; M: ...`. A `switch (YesNoPrompt_HandleInput(...)) { case YES: ... case NO: ... }` emits `beq` dispatch with the arms in a different order. Write `input = YesNoPrompt_HandleInput(p); if (input == YESNORESPONSE_YES) {...} else if (input == YESNORESPONSE_NO) {...}`. Seen in overlay_46 (2 sites).
+
 ## Matching Tricks
 
 ### Small source changes that move codegen  <!-- id: decl-order-tricks -->
@@ -992,6 +996,10 @@ In ov41_022492B0 retail did `ldr r1,[r4,#0x10]; cmp r1,#0; beq; ldr r0,[r4,#4]; 
 ### Retail 'mov r7,#4' constant held in a callee-saved reg (heap ID): enum-var uses get constant-propagated; only int-typed uses keep the register  <!-- id: hoisted-constant-register-needs-int-typed-var-use -->
 
 ov117_0225F524 keeps `movs r7,#4` in the prologue, passes it as `adds rN,r7,#0` / `str r7,[sp,#4]`, and derives other constants from it (`lsls r3,r7,#17` = 0x80000, `lsls r2,r7,#24` = 0x04000000). A local `enum HeapID heapID = HEAP_ID_FIELD1;` alone does nothing: MWCC constant-propagates every use where it flows into an enum HeapID parameter. The register only survives when the variable is converted at a use, i.e. passed to an int/u32 parameter. Each such use stores r7 directly (`str r7,[sp,#n]`), while plain literal 4s become `adds rN,r7,#0` copies. Retail had exactly one direct `str r7` use, the heap argument of GfGfxLoader_GXLoadPalFromOpenNarc. Matching it took a local re-declaration of that function with `u32 heapID` (drop the gf_gfx_loader.h include, declare the needed GfGfxLoader_* prototypes locally), while every other site keeps literal HEAP_ID_FIELD1 / 4. Brute-force which call sites take the variable vs a literal with variants.py: enum-param sites do not affect codegen, int-param sites do.
+
+### Retail recomputes `base + (j+1)*32` per outer iteration and folds the struct offset into ldrh: write the row as a flat index on row 0  <!-- id: jplus1-row-index-flat-form-defeats-strength-reduction -->
+
+ov46_02258F78 blends palettes with BlendPalette(&base[j][i], &out[k][i], 1, step>>8, base[j+1][i]). Retail keeps induction pointers for base[j] and out[k], but for base[j+1] it recomputes `work + (j+1)*32` once per j-iteration (spilled) and loads with `ldrh [r6, #0xdc]` (the struct offset folded into the load). Writing `base[j + 1][i]` made MWCC strength-reduce it into a third induction pointer: +1 stack slot, push {r3,...}, 4 bytes larger. `((u16*)base)[(j+1)*16+i]` fixed the size but hoisted `&work->...base` into its own slot. `work->palAnim.base[0][(j + 1) * 16 + i]` (an out-of-row index on row 0) matches exactly; `*(base[0] + (j+1)*16 + i)` and `base[0][i + (j+1)*16]` also match.
 
 ## IPA (-ipa file) Behavior
 

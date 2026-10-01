@@ -24,6 +24,7 @@ session can resume from whatever was last pushed.
 | render_window | 37 C + 3 NONMATCHING (sub_0200EA68, DrawPokemonPicFromSpecies/FromMon) |
 | overlay_41_02248ED4 | 41/41 C |
 | overlay_117 | 9/9 C |
+| overlay_46 | 20/20 C |
 
 ## In progress / next
 

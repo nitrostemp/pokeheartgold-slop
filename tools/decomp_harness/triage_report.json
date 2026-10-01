@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-01T12:42:10Z",
+ "generated": "2026-10-01T12:53:21Z",
  "weights": {
   "insn_line": 1.0,
   "unknown_callee": 40.0,
@@ -10,41 +10,6 @@
   "special_section": 500.0
  },
  "queue": [
-  {
-   "file": "asm/overlay_46.s",
-   "score": 1883.6,
-   "special_sections": [],
-   "functions": 20,
-   "insn_lines": 1476,
-   "data_only": false,
-   "unknown_callees": [
-    "ov45_0222A5C0",
-    "ov45_0222B244",
-    "ov45_0222B270",
-    "ov45_0222D7CC",
-    "ov45_0222D7FC",
-    "ov45_0222E7CC",
-    "ov45_0222E7FC",
-    "ov45_0222ED7C",
-    "ov45_0222EDA8",
-    "sub_0203A880"
-   ],
-   "jumptable_words": 0,
-   "rodata_bytes": 152,
-   "arm_functions": 0,
-   "gated_by": [],
-   "copyprop_funcs": [],
-   "cluster_partners": [
-    {
-     "file": "asm/overlay_45_thumb.s",
-     "shared_symbols": 9
-    },
-    {
-     "file": "asm/unk_0203A3B0.s",
-     "shared_symbols": 1
-    }
-   ]
-  },
   {
    "file": "asm/overlay_80_0222AEF8.s",
    "score": 1933.0,
@@ -6774,6 +6739,74 @@
    ]
   },
   {
+   "file": "asm/overlay_45_thumb.s",
+   "score": 13907.6,
+   "special_sections": [],
+   "functions": 544,
+   "insn_lines": 12631,
+   "data_only": false,
+   "unknown_callees": [
+    "ov00_021E5CA0",
+    "ov00_021E5CD0",
+    "ov00_021E5CEC",
+    "ov00_021E6A70",
+    "ov00_021E7144",
+    "ov47_02258800",
+    "ov47_02258898",
+    "ov47_022589A8",
+    "ov48_02258800",
+    "ov48_02258920",
+    "ov48_022589FC",
+    "ov49_02258800",
+    "ov49_02258830",
+    "ov49_02259AA4",
+    "ov49_02259C90",
+    "ov49_02259EF8",
+    "ov88_02258800",
+    "ov88_022588C4",
+    "ov88_022589FC",
+    "ov89_02258800",
+    "ov89_02258B04",
+    "ov89_02258F00",
+    "ov91_0225C540",
+    "ov91_0225C58C",
+    "ov91_0225C9EC",
+    "ov92_0225CAB4",
+    "ov92_0225CDF4",
+    "ov92_0225D36C",
+    "ov93_0225C540",
+    "ov93_0225C574",
+    "ov93_0225C6C0"
+   ],
+   "jumptable_words": 0,
+   "rodata_bytes": 732,
+   "arm_functions": 0,
+   "gated_by": [],
+   "copyprop_funcs": [],
+   "cluster_partners": [
+    {
+     "file": "asm/overlay_00_thumb.s",
+     "shared_symbols": 5
+    },
+    {
+     "file": "asm/overlay_47.s",
+     "shared_symbols": 3
+    },
+    {
+     "file": "asm/overlay_48.s",
+     "shared_symbols": 3
+    },
+    {
+     "file": "asm/overlay_49_022595CC.s",
+     "shared_symbols": 3
+    },
+    {
+     "file": "asm/overlay_88.s",
+     "shared_symbols": 3
+    }
+   ]
+  },
+  {
    "file": "asm/overlay_92.s",
    "score": 14146.8,
    "special_sections": [],
@@ -6838,80 +6871,6 @@
     {
      "file": "asm/unk_02034354.s",
      "shared_symbols": 2
-    }
-   ]
-  },
-  {
-   "file": "asm/overlay_45_thumb.s",
-   "score": 14147.6,
-   "special_sections": [],
-   "functions": 544,
-   "insn_lines": 12631,
-   "data_only": false,
-   "unknown_callees": [
-    "ov00_021E5CA0",
-    "ov00_021E5CD0",
-    "ov00_021E5CEC",
-    "ov00_021E6A70",
-    "ov00_021E7144",
-    "ov46_02258800",
-    "ov46_0225892C",
-    "ov46_02258C38",
-    "ov46_02258CB4",
-    "ov46_02258DA8",
-    "ov46_02258EFC",
-    "ov47_02258800",
-    "ov47_02258898",
-    "ov47_022589A8",
-    "ov48_02258800",
-    "ov48_02258920",
-    "ov48_022589FC",
-    "ov49_02258800",
-    "ov49_02258830",
-    "ov49_02259AA4",
-    "ov49_02259C90",
-    "ov49_02259EF8",
-    "ov88_02258800",
-    "ov88_022588C4",
-    "ov88_022589FC",
-    "ov89_02258800",
-    "ov89_02258B04",
-    "ov89_02258F00",
-    "ov91_0225C540",
-    "ov91_0225C58C",
-    "ov91_0225C9EC",
-    "ov92_0225CAB4",
-    "ov92_0225CDF4",
-    "ov92_0225D36C",
-    "ov93_0225C540",
-    "ov93_0225C574",
-    "ov93_0225C6C0"
-   ],
-   "jumptable_words": 0,
-   "rodata_bytes": 732,
-   "arm_functions": 0,
-   "gated_by": [],
-   "copyprop_funcs": [],
-   "cluster_partners": [
-    {
-     "file": "asm/overlay_46.s",
-     "shared_symbols": 6
-    },
-    {
-     "file": "asm/overlay_00_thumb.s",
-     "shared_symbols": 5
-    },
-    {
-     "file": "asm/overlay_47.s",
-     "shared_symbols": 3
-    },
-    {
-     "file": "asm/overlay_48.s",
-     "shared_symbols": 3
-    },
-    {
-     "file": "asm/overlay_49_022595CC.s",
-     "shared_symbols": 3
     }
    ]
   },
