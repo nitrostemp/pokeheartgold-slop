@@ -1307,7 +1307,7 @@ Overlay OVY_110
 Overlay OVY_111
 {
     After main
-    Object asm/overlay_111.o
+    Object src/overlay_111.o
 }
 Overlay OVY_112
 {

@@ -2137,6 +2137,18 @@
       "category": "codegen",
       "title": "An explicit lsl #16/lsr #16 right after a call to a u16-returning function means the original TU saw a WIDER return type for that callee",
       "body": "ov34_0225E5EC does `u16 anim = Sprite_GetAnimationNumber(sprite)` and the asm truncates the result (lsls r0,#16; lsrs r1,#16). With the current sprite.h prototype (u16 return) MWCC trusts the zero-extension and emits no truncation, so the function was 6 bytes short. The original TU must have seen a wider (int/u32) return type. Fix used: before any include, `#define Sprite_GetAnimationNumber Sprite_GetAnimationNumber_`, `#undef` it after the includes, and re-declare `int Sprite_GetAnimationNumber(Sprite *sprite);` locally (with a comment). Same mechanism as the IPA/prototype lessons: the callee's declared return width decides whether the caller re-truncates."
+    },
+    {
+      "id": "u8-array-own-rodata-section-false-mismatch",
+      "category": "data-sections",
+      "title": "A 1-byte-aligned const u8 array gets its OWN .rodata section, so compile_one reports 'rodata size mismatch' and relocdiff shows every .rodata offset shifted by the padding; the linked ROM still matches",
+      "body": "overlay_111 has `static const u8 _021E6B74[5]` at the start of .rodata, followed by 4-aligned tables. MWCC emits the u8 array into a separate 1-aligned .rodata section (5 bytes) and the rest into a second .rodata (align 4). The asm object has one 0x1BC-byte section, so objdiff says `.rodata: size mismatch (asm=444, c=441)` and relocdiff shows all .rodata targets off by 8. The linker concatenates the two sections (5 bytes + 3 padding + rest), so the ROM layout is identical. Check by building and comparing the overlay .sbin. The real bug in that file was hidden behind this noise: OamCharTransferParam char modes were GX_OBJVRAMMODE_CHAR_1D_64K (0x100010), not 1D_32K. Pull the .sbin bytes at the rodata offset and diff them against `objcopy -O binary -j .rodata asm.o` to find real data diffs."
+    },
+    {
+      "id": "abs-load-order-neg-plus",
+      "category": "codegen",
+      "title": "abs(a - b) where the asm loads a BEFORE b and does `subs r0, ra, rb; bpl; negs`: write the inline ternary on (-b + a)",
+      "body": "ov111_021E65D4 computes |panel->y - panel->targetY| as ldrsh y; ldrsh target; subs r0, y, target; bpl; negs; then an s16 truncation. MWCC loads the SECOND operand of `a - b` first, so `(y - t) < 0 ? -(y - t) : (y - t)` loaded t first, and swapping to `(t - y)` fixed the loads but reversed the subtraction. `abs()` is a real library call. What matched: `diff = (-panel->targetY + panel->y) < 0 ? -(-panel->targetY + panel->y) : (-panel->targetY + panel->y);` (load y first, compute y - t). Related lessons from the same file: (1) a C99 local initializer declared after a call (`SpriteResourceCountsListUnion counts = {...}` after SpriteSystem_Init) puts its stack copy after that call; (2) `msgId = 2; data->state = 5;` versus the reverse order changes which constant load is scheduled between the mov and the str; (3) `for (i = 0, fullTile = baseTile + 8; ...)` interleaves the i=0 load into the fullTile computation."
     }
   ]
 }

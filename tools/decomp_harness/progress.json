@@ -1130,6 +1130,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "Union Room touchscreen message log (overlay 34): log list, scroll bar, touch/L/R scrolling"
+    },
+    {
+      "file": "asm/overlay_111.s",
+      "lines": 2456,
+      "functions": 50,
+      "attempts": 1,
+      "result": "matched",
+      "note": "Bug-Catching Contest swap-Pokemon screen (BugContestSwapMon_Init/Main/Exit)"
     }
   ],
   "failed": [
@@ -1538,8 +1546,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 238,
-    "total_matched": 110,
+    "total_attempts": 239,
+    "total_matched": 111,
     "total_failed": 31
   },
   "matched": [
