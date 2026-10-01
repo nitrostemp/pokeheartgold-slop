@@ -1074,6 +1074,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "42/42 C: fashion case fade-in task, yes/no prompts, accessory canvas"
+    },
+    {
+      "file": "asm/unk_02032844.s",
+      "lines": 2526,
+      "functions": 75,
+      "attempts": 1,
+      "result": "matched",
+      "note": "75/75 C: wireless manager (port of pokeplatinum wireless_manager.c)"
     }
   ],
   "failed": [
@@ -1482,8 +1490,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 231,
-    "total_matched": 103,
+    "total_attempts": 232,
+    "total_matched": 104,
     "total_failed": 31
   },
   "matched": [

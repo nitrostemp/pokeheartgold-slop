@@ -2051,6 +2051,19 @@
         "stack-order",
         "locals"
       ]
+    },
+    {
+      "id": "port-wireless-manager-from-pokeplatinum",
+      "category": "file-patterns",
+      "title": "unk_02032844 = pokeplatinum src/wireless_manager.c (NitroSDK WM wrapper): same struct offsets; the statics live in one 8-byte struct",
+      "body": "75 functions in order, with the same WirelessManager layout (state 0x1310, connectedBitmap 0x132E, sentBeaconCount 0x1345, sizeof 0x1360). HG differences: CommManager_GetCommType -> sub_0203993C, CommManager_CheckError -> sub_02039918, CommManager_SetCommError -> sub_02039AD8, sub_0203276C(commType) -> sub_020340C4(sub_0203993C()); there is an extra IsFatalError (state == 10); there is no SetDisconnectCallback, SetPauseClientConnection or include_unk_021C07A8; Reset (sub_02033830) is static. The repo has no NitroSDK WM headers, so the callback/param structs are defined locally with only the used offsets. The bss is 8 bytes and the code loads `[base,#4]`. Two separate statics fail: the unused printf pointer is dead-stripped and the manager pointer lands at +0. Use one static struct { debugPrint; manager; }. ATTRIBUTE_ALIGN does not exist here; use ALIGN(32) from cw/function_target.h. Function-pointer `!= NULL` tests emit `movs r0,#0; cmp`, so the HG code uses plain truthiness (`if (cb)`). The 'DP' literal is 3 bytes in .data against the asm's 4 (padding); objdiff flags it, but the ROM still matches.",
+      "tags": [
+        "port",
+        "pokeplatinum",
+        "wireless",
+        "wm",
+        "bss-struct"
+      ]
     }
   ]
 }

@@ -32,6 +32,7 @@ session can resume from whatever was last pushed.
 | unk_020658D4 | 50/50 C (follow/effect-object movement; rodata static order fix) |
 | overlay_01_022053EC | 40/40 C (follow-mon field helpers) |
 | overlay_41_02247828 | 42/42 C (fashion case canvas + yes/no prompts) |
+| unk_02032844 | 75/75 C (port of pokeplatinum wireless_manager.c) |
 
 ## In progress / next
 
