@@ -1,6 +1,7 @@
 import subprocess, sys, re, itertools
 name, fn = sys.argv[1], sys.argv[2]
-A=f'build/heartgold.us/asm/{name}.o'; C=f'build/heartgold.us/compile_one/{name}.o'
+# name may include a subdirectory (frontier/overlay_80_x); the asm object is flat
+A=f'build/heartgold.us/asm/{name.split("/")[-1]}.o'; C=f'build/heartgold.us/compile_one/{name}.o'
 out=subprocess.run(['python3','tools/decomp_harness/objdiff.py',A,C,'--disasm',fn],capture_output=True,text=True,cwd=__import__('os').path.abspath(__import__('os').path.join(__import__('os').path.dirname(__file__), '../../..'))).stdout
 parts=out.split('=== C:')
 def norm(block):

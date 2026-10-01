@@ -25,6 +25,7 @@ session can resume from whatever was last pushed.
 | overlay_41_02248ED4 | 41/41 C |
 | overlay_117 | 9/9 C |
 | overlay_46 | 20/20 C |
+| frontier/overlay_80_0222AEF8 | 54/54 C |
 
 ## In progress / next
 
@@ -37,7 +38,7 @@ session can resume from whatever was last pushed.
 Run from the repo root.
 
 - `show.py src/<tu>.c asm/<tu>.s <fn> [--asm|--c]` — print one function's asm and/or C.
-- `sbs.py <tu-basename> <fn>` — side-by-side asm vs compiled C after
+- `sbs.py <tu-basename> <fn>` (basename may include a src subdir, e.g. `frontier/overlay_80_x`) — side-by-side asm vs compiled C after
   `compile_one.sh` (branch targets normalised, `!!` marks differences).
 - `apply2.py src/<tu>.c patch.c` — replace function definitions with blocks from
   a patch file (`//@@ fn` headers); replaces a whole `#ifdef NONMATCHING` block

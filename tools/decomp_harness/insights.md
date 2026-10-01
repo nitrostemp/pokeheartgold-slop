@@ -705,6 +705,14 @@ Retail: `subs r4,r2,r4; bmi L; b M; L: movs r4,#0; M: strb r4,[r0]`. The empty f
 
 Retail: `bl YesNoPrompt_HandleInput; cmp r0,#1; bne L; ...; b end; L: cmp r0,#2; beq M; b end; M: ...`. A `switch (YesNoPrompt_HandleInput(...)) { case YES: ... case NO: ... }` emits `beq` dispatch with the arms in a different order. Write `input = YesNoPrompt_HandleInput(p); if (input == YESNORESPONSE_YES) {...} else if (input == YESNORESPONSE_NO) {...}`. Seen in overlay_46 (2 sites).
 
+### Loops that split u32s into lo/hi u16 halves at a fixed offset: retail pre-adds the offset to a walker, so write `for (i = 0, src += 12; ...) {src[0]; src[6]; src++;}` or a second counter `j = 8`  <!-- id: fixed-offset-split-u32-loop-needs-walker-or-second-counter -->
+
+In overlay_80_0222AEF8 the link handlers pack u32 personalities as two u16 runs. Retail recv: `adds r5,#24` (src += 12) AFTER `movs r1,#0`, then `ldrh [r5]` / `ldrh [r5,#12]` / `adds r5,#2`. Writing `src[12 + i]`, `src[18 + i]`, `(src + 12)[i]`, an offset variable, or `src += 12` before the loop all fold the 24 back into the ldrh immediates. What matches is a walker advanced in the for-init after the counter, `for (i = 0, src += 12; i < 6; i++) { lo = src[0]; hi = src[6]; src++; }`; for a local buffer use `for (i = 0, p = buf + 12; ...)`. Struct-field sends (`work->sendBuf[...]` with a register offset 0x3C0 and a walker starting at work+0x10) need a second counter: `for (i = 0, j = 8; i < 4; i++, j++) { work->sendBuf[j] = x[i]; work->sendBuf[j + 4] = x[i] >> 16; }`. With a variable count (offset += count), retail's hi index is `src[count + offset + i]`, not `src[offset + count + i]`: association order decides whether hi is (src + count) + offset*2 or lo + count*2.
+
+### `cmp #0; beq L0; cmp #4; bne end; [case-4 body]; L0: [case-0 body]` is a switch with case 4 written first  <!-- id: switch-case-order-from-body-layout -->
+
+ov80_0222B740: an if/else-if on a byte field (== 0, else == 4) emitted `bne` with the ==0 body first. Retail tests 0 first but lays out the ==4 body first, which is `switch (x) { case 4: ...; break; case 0: ...; break; }`. MWCC tests switch cases in value order but emits the bodies in source order.
+
 ## Matching Tricks
 
 ### Small source changes that move codegen  <!-- id: decl-order-tricks -->
