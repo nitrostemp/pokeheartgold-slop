@@ -737,6 +737,10 @@ If the asm calls a function and only then copies a .rodata VecFx32/struct into t
 
 In overlay_41_02247828 ov41_02248324, the out-params x/y/w/h/margins are written by pointer calls. The asm hoists `right = x + w - mR` and `bottom = y + h - mB` into spills, but recomputes `y + mT` and `x + mL` inside the loop from register copies. Writing the sums inline in the call keeps every load in the loop (too short); hoisting only right/bottom still leaves 7 diffs from stack layout. The matching source declares `left, top, right, bottom` and assigns all four before the loop (left, top, right, bottom order). MWCC copy-propagates the two-operand sums back into the loop. Stack-slot order also told me the declaration order of the address-taken locals: x, y, w, h, mL, mT, px, py, mR, mB, from the highest address down.
 
+### When asm reuses ONE register for a small constant AND a shifted derivative of it (movs r2,#2; lsls r0,r2,#20; str r2,[ws]), the source used a VARIABLE, not two literals  <!-- id: shared-const-reg-means-source-variable -->
+
+ov41_0224B118 built a SimpleSpriteTemplate with whichScreen=2 and position.y += 0x200000. The asm did movs r2,#2 / lsls r0,r2,#20 / str r2,[sp,#whichScreen], so the 2 and the 2<<20 shared a register. Two literals (whichScreen = NNS_G2D_VRAM_TYPE_2DSUB; y += 512<<FX32_SHIFT) are folded by the front end into unrelated constants, and no order of the 7 assignments matched (all 240 permutations brute-forced). Fix: declare a local `NNS_G2D_VRAM_TYPE screen;`, assign `screen = NNS_G2D_VRAM_TYPE_2DSUB;` AFTER the preceding call (initializing it at the declaration made MWCC also CSE the plttCount=2 call argument into a callee-saved reg), then `tmpl.whichScreen = screen; ... tmpl.position.y += screen << 20;`. Related in the same file: `tmpl.position.x = j*0x12 + 0x26; tmpl.position.x <<= FX32_SHIFT;` (raw store then shift-in-place) emits the str x / lsl / str pair, and computing positions from the loop index (instead of separate x/y induction vars) fixed the increment order of the synthesized IVs.
+
 ## Matching Tricks
 
 ### Small source changes that move codegen  <!-- id: decl-order-tricks -->

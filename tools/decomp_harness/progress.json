@@ -1106,6 +1106,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "43/43 C: fashion case node list, bg scroll/transfer tasks, button bar"
+    },
+    {
+      "file": "asm/overlay_41_0224A5A4.s",
+      "lines": 1647,
+      "functions": 38,
+      "attempts": 1,
+      "result": "matched",
+      "note": "ov41 button bar move/press handlers + info panel (scroll bg, windows, 2x10 sprite grid, sub sprites)"
     }
   ],
   "failed": [
@@ -1514,8 +1522,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 235,
-    "total_matched": 107,
+    "total_attempts": 236,
+    "total_matched": 108,
     "total_failed": 31
   },
   "matched": [

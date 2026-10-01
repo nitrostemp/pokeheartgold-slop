@@ -2113,6 +2113,12 @@
         "byte-loop",
         "register-allocation"
       ]
+    },
+    {
+      "id": "shared-const-reg-means-source-variable",
+      "category": "codegen",
+      "title": "When asm reuses ONE register for a small constant AND a shifted derivative of it (movs r2,#2; lsls r0,r2,#20; str r2,[ws]), the source used a VARIABLE, not two literals",
+      "body": "ov41_0224B118 built a SimpleSpriteTemplate with whichScreen=2 and position.y += 0x200000. The asm did movs r2,#2 / lsls r0,r2,#20 / str r2,[sp,#whichScreen], so the 2 and the 2<<20 shared a register. Two literals (whichScreen = NNS_G2D_VRAM_TYPE_2DSUB; y += 512<<FX32_SHIFT) are folded by the front end into unrelated constants, and no order of the 7 assignments matched (all 240 permutations brute-forced). Fix: declare a local `NNS_G2D_VRAM_TYPE screen;`, assign `screen = NNS_G2D_VRAM_TYPE_2DSUB;` AFTER the preceding call (initializing it at the declaration made MWCC also CSE the plttCount=2 call argument into a callee-saved reg), then `tmpl.whichScreen = screen; ... tmpl.position.y += screen << 20;`. Related in the same file: `tmpl.position.x = j*0x12 + 0x26; tmpl.position.x <<= FX32_SHIFT;` (raw store then shift-in-place) emits the str x / lsl / str pair, and computing positions from the loop index (instead of separate x/y induction vars) fixed the increment order of the synthesized IVs."
     }
   ]
 }
