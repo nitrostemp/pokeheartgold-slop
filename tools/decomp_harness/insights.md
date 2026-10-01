@@ -749,6 +749,10 @@ ov34_0225E5EC does `u16 anim = Sprite_GetAnimationNumber(sprite)` and the asm tr
 
 ov111_021E65D4 computes |panel->y - panel->targetY| as ldrsh y; ldrsh target; subs r0, y, target; bpl; negs; then an s16 truncation. MWCC loads the SECOND operand of `a - b` first, so `(y - t) < 0 ? -(y - t) : (y - t)` loaded t first, and swapping to `(t - y)` fixed the loads but reversed the subtraction. `abs()` is a real library call. What matched: `diff = (-panel->targetY + panel->y) < 0 ? -(-panel->targetY + panel->y) : (-panel->targetY + panel->y);` (load y first, compute y - t). Related lessons from the same file: (1) a C99 local initializer declared after a call (`SpriteResourceCountsListUnion counts = {...}` after SpriteSystem_Init) puts its stack copy after that call; (2) `msgId = 2; data->state = 5;` versus the reverse order changes which constant load is scheduled between the mov and the str; (3) `for (i = 0, fullTile = baseTile + 8; ...)` interleaves the i=0 load into the fullTile computation.
 
+### NNS_G3dGetMdlByIdx() is a static inline that already null-checks mdlSet and the dict; don't add your own `mdlSet != NULL ?` guard  <!-- id: nns-getmdlbyidx-inline-has-null-checks -->
+
+ov49_0225D528 loads a model set and the asm shows mdlSet==NULL -> 0, dict==NULL -> 0, numEntry==0 -> 0 checks before computing the model pointer. All of them come from the NitroSystem inlines in lib/include/nnsys/g3d/binres/res_struct_accessor_inline.h (NNS_G3dGetMdlByIdx -> NNS_G3dGetResDataByIdx). Writing `res->model = res->mdlSet != NULL ? NNS_G3dGetMdlByIdx(res->mdlSet, 0) : NULL;` (or an if/else) adds a second, redundant null check and the function is 4-6 bytes too big. Plain `res->model = NNS_G3dGetMdlByIdx(res->mdlSet, 0);` matched. Also in that file: a struct whose u8[3] arrays are followed by an aligned field may have a pad byte between two u8[3] arrays (animActive at 0xB8, animMode at 0xBC), and `VecFx32 offset = { 0, 0, 0 };` declared after a call (C99) emits the add-r1-sp/str-via-pointer zeroing right after that call.
+
 ## Matching Tricks
 
 ### Small source changes that move codegen  <!-- id: decl-order-tricks -->

@@ -1138,6 +1138,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "Bug-Catching Contest swap-Pokemon screen (BugContestSwapMon_Init/Main/Exit)"
+    },
+    {
+      "file": "asm/overlay_49_0225CB50.s",
+      "lines": 1649,
+      "functions": 58,
+      "attempts": 1,
+      "result": "matched",
+      "note": "WiFi Plaza 3D scene: camera wrapper, object manager, map/model/anim resources"
     }
   ],
   "failed": [
@@ -1546,8 +1554,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 239,
-    "total_matched": 111,
+    "total_attempts": 240,
+    "total_matched": 112,
     "total_failed": 31
   },
   "matched": [
