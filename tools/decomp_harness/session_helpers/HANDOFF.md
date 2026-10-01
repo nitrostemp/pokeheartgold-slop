@@ -38,6 +38,7 @@ session can resume from whatever was last pushed.
 | overlay_41_02249A40 | 43/43 C (fashion case node list, bg scroll, button bar) |
 | overlay_41_0224A5A4 | 38/38 C (button bar move/press, info panel: windows, msg text, 2x10 sprite grid) |
 | unk_02061284 | 84/84 C (NPC movement types, port of plat unk_0206450C.c; rodata via plat def order) |
+| overlay_34 | 36/36 C (Union Room touchscreen message log; rodata solved with session_helpers/rodata_order.py) |
 
 ## In progress / next
 
@@ -73,3 +74,5 @@ Run from the repo root.
   raw.githubusercontent.com/pret/pokeheartgold/workflows/assets/ works.
 
 After compile_one reports MATCH, also run `session_helpers/relocdiff.py <asm.o> <compile_one.o>`. objdiff masks relocation targets, so this is the only fast check for swapped identical statics.
+
+If `.rodata` objects come out in the wrong order (functions all OK, "DATA SECTIONS MISMATCH"), use `session_helpers/rodata_order.py`. MWCC heapsorts .rodata by size over the objects in reverse creation order; `rodata_order.py solve` finds a definition order that reproduces the retail layout (see pattern rodata-heapsort-reverse-creation-order-model).
