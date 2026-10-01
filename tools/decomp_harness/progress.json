@@ -970,6 +970,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "compare-verified HG+SS. Billboard gfx-sequence lookup (frame -> texture/palette index). The 175578f26^ draft was 10 bytes short: retail returns BillboardTexPlttIndex (2-byte struct) by value through a stack temp and reloads seqCount each loop iteration. Uses the BillboardGfxSequence/BillboardTexPlttIndex types from unk_02023694.c."
+    },
+    {
+      "file": "asm/unk_0200FA24.s",
+      "lines": 1042,
+      "functions": 33,
+      "attempts": 1,
+      "result": "matched",
+      "note": "compare-verified HG+SS. Palette/brightness screen-fade driver. Rewrote the 175578f26^ draft (pointer-cast soup, 20/33) as one 0x154-byte static PaletteFadeData {header, FadeScreenSettings screens[2], FadeHBlankTasks, plttWork[0xC0], active, busy[2], lastColor}; the _021D0EF4.. labels were sub-fields of it. 32 C + 1 NONMATCHING (BeginNormalPaletteFade, duplicate pool word; asm uses explicit dcd pool). Address-taken u16 params give the push {r0-r3} homing in sub_0200FC60/FCDC."
     }
   ],
   "failed": [
@@ -1378,8 +1386,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 218,
-    "total_matched": 90,
+    "total_attempts": 219,
+    "total_matched": 91,
     "total_failed": 31
   },
   "matched": [

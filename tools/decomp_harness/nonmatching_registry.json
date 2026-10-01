@@ -2,11 +2,11 @@
   "schema": 1,
   "generated": "2026-07-02",
   "generator": "tools/decomp_harness/permuter/gen_nonmatching_registry.py",
-  "total": 83,
-  "candidates": 80,
+  "total": 84,
+  "candidates": 81,
   "do_not_queue": 3,
   "by_failure_class": {
-    "regalloc-tiebreak": 46,
+    "regalloc-tiebreak": 47,
     "unknown": 17,
     "control-flow-divergence": 5,
     "instruction-schedule": 5,
@@ -379,6 +379,15 @@
       "permuter_candidate": false,
       "reason": "provably unreachable per blocker param-copyprop-cmp: MWCC copy-props param copies back to r0; the 'adds rN,r0,#0; cmp' entry idiom cannot arise from pure C",
       "source": "blocker:param-copyprop-cmp"
+    },
+    {
+      "file": "src/unk_0200FA24.c",
+      "function": "BeginNormalPaletteFade",
+      "line": 190,
+      "failure_class": "regalloc-tiebreak",
+      "permuter_candidate": true,
+      "reason": "MWCC register-allocation / scheduling tie-break; primary permuter target (equivalent C shapes flip the allocator)",
+      "source": "attempts_log"
     },
     {
       "file": "src/unk_02013534.c",

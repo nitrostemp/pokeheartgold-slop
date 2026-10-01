@@ -1,13 +1,13 @@
 # Decomp Coverage Ledger
 
-*Generated 2026-10-01T09:59:03Z by `coverage_ledger.py` — do not hand-edit; regenerate after each decomp.*
+*Generated 2026-10-01T10:20:27Z by `coverage_ledger.py` — do not hand-edit; regenerate after each decomp.*
 
-Tracked functions (files with retained asm): **19040** — matched 2388, pending 15757, plus 20 matched-but-blocked inside failed files.
+Tracked functions (files with retained asm): **19040** — matched 2421, pending 15757, plus 20 matched-but-blocked inside failed files.
 
 | status | files | functions | insn lines | ~text bytes |
 |---|---|---|---|---|
-| matched | 119 | 2388 | 72168 | 161778 |
-| blocked | 50 | 895 | 29084 | 64038 |
+| matched | 120 | 2421 | 72921 | 163430 |
+| blocked | 49 | 862 | 28331 | 62386 |
 | pending | 143 | 15757 | 790527 | 1769834 |
 | upstream | 414 | 0 | 0 | 0 |
 
@@ -21,7 +21,7 @@ Tracked functions (files with retained asm): **19040** — matched 2388, pending
 | ipa-cse-literal-pool | 1 | 0 | MWCC -ipa file caches repeated literal-pool addresses/large offsets in callee-saved registers across calls where retail reloads them (or vice versa). A codegen-shape problem, not a header problem — split from ipa-shared-headers 2026-07-01, where this file's ubiquitous exports (BeginNormalPaletteFade family, imported by ~84 pending .inc files) badly inflated the gate count. |
 | objdiff-false-positives | 0 | 0 | RESOLVED. objdiff.py had a critical bug: the byte extraction regex did not match MWCC's ARM Thumb objdump format (packed hex like 'b418' vs expected space-separated 'b4 18'). It extracted 0 bytes for every function, so 0==0 always reported MATCH. 11 decomps accepted via objdiff were not actually byte-matching. Fixed; all 11 non-matching decomps reverted to asm. 2 decomps that truly match (unk_0202DB34, battle_arcade_game_board_data) kept. |
 
-## Blocked files (50)
+## Blocked files (49)
 
 | file | functions | insn lines | data-only | notes |
 |---|---|---|---|---|
@@ -31,7 +31,6 @@ Tracked functions (files with retained asm): **19040** — matched 2388, pending
 | asm/unk_02015DD8.s | 40 | 679 |  |  Tractable but large (40 fns NNS G2D sprite manager + GE-register renderer). Fully decoded in attempts_log (struct layout |
 | asm/unk_02031B0C.s | 39 | 1300 |  |  ApricornBox save module (39 funcs); 16/39 matched WIP. KEY: solved the non-self-contained-header include-order issue (cl |
 | asm/overlay_01_021FB878.s | 34 | 877 |  |   |
-| asm/unk_0200FA24.s | 33 | 753 |  | ipa-cse-literal-pool IPA-blocked: header signature conflicts, IPA CSE caching, loop codegen. C file exists at src/unk_0200FA24.c but cannot b |
 | asm/overlay_80_0223AC24.s | 32 | 1161 |  |   |
 | asm/unk_02034354.s | 30 | 891 |  |  link-battle comm PlayerProfile manager (30 funcs); 21/30 matched WIP; remaining 9 incl sub_02034638 NONMATCHING (int-ret |
 | asm/unk_0205A44C.s | 28 | 863 |  |   |
@@ -76,7 +75,7 @@ Tracked functions (files with retained asm): **19040** — matched 2388, pending
 | asm/middleware.s | 0 | 0 | yes |  Data-only: 7 NUL-terminated SDK middleware version strings in a custom .version section (single ordered section, each .b |
 | asm/overlay_12_battle_command.s | 0 | 0 | yes |   |
 
-## Matched files (asm retained) (119)
+## Matched files (asm retained) (120)
 
 | file | functions | insn lines | data-only | notes |
 |---|---|---|---|---|
@@ -98,6 +97,7 @@ Tracked functions (files with retained asm): **19040** — matched 2388, pending
 | asm/overlay_18_021F8AB8.s | 38 | 1357 |  | harness |
 | asm/overlay_32.s | 36 | 1354 |  | harness |
 | asm/overlay_29.s | 34 | 1335 |  | harness |
+| asm/unk_0200FA24.s | 33 | 753 |  | harness |
 | asm/unk_02096C88.s | 31 | 400 |  | retained_asm |
 | asm/overlay_01_021F6830.s | 31 | 524 |  | harness |
 | asm/overlay_14_021F58B8.s | 30 | 1558 |  | harness |

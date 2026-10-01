@@ -1805,6 +1805,18 @@
       "category": "matching-tricks",
       "title": "A zero constant CSE'd across switch cases lands in r0 vs r1 depending on statement order INSIDE the case bodies",
       "body": "When a `0` is materialised once before a switch and reused in several cases (e.g. `frameIdx = 0; tmpl.f = 0;`), objdiff may show the identical instruction stream but with the constant in r0 where retail uses r1 (and the case-local temp in r1 vs r0). Declaration order and pre-switch store order do not move it; reordering the statements inside the case body that consumes the constant does. In ov41_022485DC, case 0 `resIdx = idx; tmpl.unk1C = board->unk50[idx]; frameIdx = 0;` -> `resIdx = idx; frameIdx = 0; tmpl.unk1C = board->unk50[idx];` took it from 26 diffs to 8 (the rest was stack-slot decl order). Brute-forcing the pre-switch template store order first (120 permutations, ~3.5s each via compile_one) is what got the param registers right. Related: [[stack-slot-reverse-decl-order]], [[decl-order-regalloc]]."
+    },
+    {
+      "id": "inline-asm-dcd-explicit-literal-pool",
+      "category": "nonmatching",
+      "title": "MWCC inline asm dedupes `ldr rN, =X` literals by value; reproduce a retail DUPLICATE pool word with explicit `ldr rN, [pc, #off]` + `dcd X` lines",
+      "body": "Retail MWCC can emit two literal-pool words with the same value (e.g. `&sObj` once as an address constant and once as the base of a small-offset member access). An `asm` function using `ldr r0, =sObj` twice (even spelled `=sObj+0`, `=sObj+0x10-0x10`) gets one shared pool word, so the function comes out 4 bytes short. Fix: transcribe with explicit pc-relative loads and lay the pool out by hand: `ldr r0, [pc, #0xb8]` ... `nop` (align) ... `dcd sObj+0x140` / `dcd sObj` / `dcd 0x14E`. `dcd sym+off` emits an R_ARM_ABS32 reloc with the addend. `.word`/`.long` are rejected (unknown mnemonic). Compute each offset as target - ((insn_addr + 4) & ~3). Used for BeginNormalPaletteFade in unk_0200FA24.c."
+    },
+    {
+      "id": "global-member-vs-propagated-pointer-pool-forms",
+      "category": "codegen",
+      "title": "`sObj.field` and `ptr->field` (ptr = &sObj, constant-propagated) give different code: symbol+offset pool entries vs `ldr =sObj; add #off` / `[base, reg]` with an offset literal",
+      "body": "For a static struct, direct member access folds to a pool entry for sObj (or sObj+0x140-style split for large offsets) and immediate-offset ldr/str. If retail instead shows `ldr r0,=sObj; add r0,#0x14` for an address, or `ldr r1,=0x14E; ldr r0,=sObj; strb r2,[r0,r1]` for a byte field, the source went through a pointer local `T *p = &sObj;` that MWCC constant-propagated and rematerialised (not kept in a callee-saved reg). Address-of and store uses through p keep it propagated; a LOAD through p (p->flag in a condition) made MWCC give p a register instead. In BeginNormalPaletteFade (unk_0200FA24) the tail `sub_02010064(&fade->screens[i]); fade->busy[i] = TRUE;` needed fade, while the conditions stayed `sPaletteFade.screenEnabled[i]`."
     }
   ]
 }

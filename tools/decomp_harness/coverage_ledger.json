@@ -1,18 +1,18 @@
 {
  "summary": {
-  "generated": "2026-10-01T09:59:03Z",
+  "generated": "2026-10-01T10:20:27Z",
   "by_status": {
    "matched": {
-    "files": 119,
-    "functions": 2388,
-    "insn_lines": 72168,
-    "text_bytes_est": 161778
+    "files": 120,
+    "functions": 2421,
+    "insn_lines": 72921,
+    "text_bytes_est": 163430
    },
    "blocked": {
-    "files": 50,
-    "functions": 895,
-    "insn_lines": 29084,
-    "text_bytes_est": 64038
+    "files": 49,
+    "functions": 862,
+    "insn_lines": 28331,
+    "text_bytes_est": 62386
    },
    "pending": {
     "files": 143,
@@ -29,7 +29,7 @@
   },
   "function_totals": {
    "tracked": 19040,
-   "matched": 2388,
+   "matched": 2421,
    "partial_in_blocked": 20,
    "pending": 15757
   },
@@ -2015,8 +2015,8 @@
   },
   {
    "file": "asm/unk_0200FA24.s",
-   "lsf_kind": "asm",
-   "status": "blocked",
+   "lsf_kind": "src",
+   "status": "matched",
    "lines": 1042,
    "function_count": 33,
    "text_bytes_est": 1652,
@@ -2111,237 +2111,234 @@
      "mode": "thumb",
      "insns": 108,
      "size_est": 242,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "HandleFadeUpdateFrame",
      "mode": "thumb",
      "insns": 20,
      "size_est": 44,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "IsPaletteFadeFinished",
      "mode": "thumb",
      "insns": 9,
      "size_est": 18,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FB70",
      "mode": "thumb",
      "insns": 41,
      "size_est": 92,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "ResetVisibleHardwareWindows",
      "mode": "thumb",
      "insns": 5,
      "size_est": 10,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "SetMasterBrightnessNeutral",
      "mode": "thumb",
      "insns": 5,
      "size_est": 10,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FBF4",
      "mode": "thumb",
      "insns": 18,
      "size_est": 36,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FC20",
      "mode": "thumb",
      "insns": 27,
      "size_est": 58,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FC60",
      "mode": "thumb",
      "insns": 53,
      "size_est": 118,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FCDC",
      "mode": "thumb",
      "insns": 14,
      "size_est": 32,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "SetMasterBrightness",
      "mode": "thumb",
      "insns": 12,
      "size_est": 28,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "HandleEndFade",
      "mode": "thumb",
      "insns": 39,
      "size_est": 86,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "DoFadeUpdateFrame",
      "mode": "thumb",
      "insns": 49,
      "size_est": 110,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "FadeWork_UpdateFrame",
      "mode": "thumb",
      "insns": 12,
      "size_est": 26,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "CallFadeFunc",
      "mode": "thumb",
      "insns": 9,
      "size_est": 20,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FE14",
      "mode": "thumb",
      "insns": 39,
      "size_est": 88,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FE78",
      "mode": "thumb",
      "insns": 6,
      "size_est": 12,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FE84",
      "mode": "thumb",
      "insns": 21,
      "size_est": 42,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FEB0",
      "mode": "thumb",
      "insns": 13,
      "size_est": 26,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FECC",
      "mode": "thumb",
      "insns": 11,
      "size_est": 24,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FEE4",
      "mode": "thumb",
      "insns": 54,
      "size_est": 116,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FF5C",
      "mode": "thumb",
      "insns": 20,
      "size_est": 42,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FF88",
      "mode": "thumb",
      "insns": 19,
      "size_est": 42,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FFB4",
      "mode": "thumb",
      "insns": 15,
      "size_est": 34,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FFD8",
      "mode": "thumb",
      "insns": 13,
      "size_est": 32,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0200FFF8",
      "mode": "thumb",
      "insns": 11,
      "size_est": 28,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_02010014",
      "mode": "thumb",
      "insns": 1,
      "size_est": 2,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_02010018",
      "mode": "thumb",
      "insns": 9,
      "size_est": 18,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_0201002C",
      "mode": "thumb",
      "insns": 17,
      "size_est": 34,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_02010050",
      "mode": "thumb",
      "insns": 8,
      "size_est": 20,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_02010064",
      "mode": "thumb",
      "insns": 21,
      "size_est": 44,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_02010094",
      "mode": "thumb",
      "insns": 21,
      "size_est": 46,
-     "status": "blocked"
+     "status": "matched"
     },
     {
      "name": "sub_020100C4",
      "mode": "thumb",
      "insns": 33,
      "size_est": 72,
-     "status": "blocked"
+     "status": "matched"
     }
    ],
-   "blocked_reason": "IPA-blocked: header signature conflicts, IPA CSE caching, loop codegen. C file exists at src/unk_0200FA24.c but cannot byte-match due to MWCC -ipa file cross-function optimization.",
-   "attempts": 50,
-   "blocker_id": "ipa-cse-literal-pool",
-   "kept_c": false
+   "source": "harness"
   },
   {
    "file": "asm/unk_0201010C.s",
