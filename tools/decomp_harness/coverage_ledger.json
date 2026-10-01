@@ -1,12 +1,12 @@
 {
  "summary": {
-  "generated": "2026-10-01T12:12:24Z",
+  "generated": "2026-10-01T12:43:05Z",
   "by_status": {
    "matched": {
-    "files": 123,
-    "functions": 2629,
-    "insn_lines": 81991,
-    "text_bytes_est": 183112
+    "files": 124,
+    "functions": 2638,
+    "insn_lines": 83183,
+    "text_bytes_est": 185736
    },
    "blocked": {
     "files": 49,
@@ -15,10 +15,10 @@
     "text_bytes_est": 62386
    },
    "pending": {
-    "files": 140,
-    "functions": 15549,
-    "insn_lines": 781457,
-    "text_bytes_est": 1750152
+    "files": 139,
+    "functions": 15540,
+    "insn_lines": 780265,
+    "text_bytes_est": 1747528
    },
    "upstream": {
     "files": 414,
@@ -29,9 +29,9 @@
   },
   "function_totals": {
    "tracked": 19040,
-   "matched": 2629,
+   "matched": 2638,
    "partial_in_blocked": 20,
-   "pending": 15549
+   "pending": 15540
   },
   "blockers": [
    {
@@ -170122,8 +170122,8 @@
   },
   {
    "file": "asm/overlay_117.s",
-   "lsf_kind": "asm",
-   "status": "pending",
+   "lsf_kind": "src",
+   "status": "matched",
    "lines": 1364,
    "function_count": 9,
    "text_bytes_est": 2624,
@@ -170214,65 +170214,66 @@
      "mode": "thumb",
      "insns": 456,
      "size_est": 986,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov117_0225F420",
      "mode": "thumb",
      "insns": 36,
      "size_est": 80,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov117_0225F470",
      "mode": "thumb",
      "insns": 40,
      "size_est": 100,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov117_0225F4D4",
      "mode": "thumb",
      "insns": 6,
      "size_est": 12,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov117_0225F4E4",
      "mode": "thumb",
      "insns": 6,
      "size_est": 12,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov117_0225F4F4",
      "mode": "thumb",
      "insns": 6,
      "size_est": 12,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov117_0225F504",
      "mode": "thumb",
      "insns": 6,
      "size_est": 12,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov117_0225F514",
      "mode": "thumb",
      "insns": 6,
      "size_est": 12,
-     "status": "pending"
+     "status": "matched"
     },
     {
      "name": "ov117_0225F524",
      "mode": "thumb",
      "insns": 630,
      "size_est": 1398,
-     "status": "pending"
+     "status": "matched"
     }
-   ]
+   ],
+   "source": "harness"
   },
   {
    "file": "asm/overlay_118.s",

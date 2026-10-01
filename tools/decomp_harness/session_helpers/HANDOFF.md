@@ -23,11 +23,12 @@ session can resume from whatever was last pushed.
 | unk_0201010C | 127/127 C |
 | render_window | 37 C + 3 NONMATCHING (sub_0200EA68, DrawPokemonPicFromSpecies/FromMon) |
 | overlay_41_02248ED4 | 41/41 C |
+| overlay_117 | 9/9 C |
 
 ## In progress / next
 
-- Next target: `asm/overlay_117.s` (9 fns, ~1200 insns), the head of the
-  triage queue. Not started.
+- Next target: whatever `tools/decomp_harness/next_target.sh --info` prints
+  (the queue is rebuilt after every file).
 - After that: `triage.py` queue (`next_target.sh --info`).
 
 ## Helpers in this directory

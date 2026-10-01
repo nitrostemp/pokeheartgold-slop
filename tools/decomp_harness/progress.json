@@ -1002,6 +1002,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "41/41 C: fashion-case touch drag state machine, slide task, mon pokepic hitbox helpers, node pool"
+    },
+    {
+      "file": "asm/overlay_117.s",
+      "lines": 1364,
+      "functions": 9,
+      "attempts": 1,
+      "result": "matched",
+      "note": "9/9 C: encounter-effect tasks (6-sprite fly-in, trainer-name banner slide x5 templates)"
     }
   ],
   "failed": [
@@ -1410,8 +1418,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 222,
-    "total_matched": 94,
+    "total_attempts": 223,
+    "total_matched": 95,
     "total_failed": 31
   },
   "matched": [

@@ -989,6 +989,10 @@ When a `0` is materialised once before a switch and reused in several cases (e.g
 
 In ov41_022492B0 retail did `ldr r1,[r4,#0x10]; cmp r1,#0; beq; ldr r0,[r4,#4]; bl ov41_02248020` and my C loaded into r0. The callee was really `ov41_02248020(obj, node)`, and its asm `add r0,r1,#0` shows it reading r1. MWCC loads the checked value straight into its outgoing-argument register. When an unknown-prototype import is involved, read the callee's asm for its real argument count before shuffling the C.
 
+### Retail 'mov r7,#4' constant held in a callee-saved reg (heap ID): enum-var uses get constant-propagated; only int-typed uses keep the register  <!-- id: hoisted-constant-register-needs-int-typed-var-use -->
+
+ov117_0225F524 keeps `movs r7,#4` in the prologue, passes it as `adds rN,r7,#0` / `str r7,[sp,#4]`, and derives other constants from it (`lsls r3,r7,#17` = 0x80000, `lsls r2,r7,#24` = 0x04000000). A local `enum HeapID heapID = HEAP_ID_FIELD1;` alone does nothing: MWCC constant-propagates every use where it flows into an enum HeapID parameter. The register only survives when the variable is converted at a use, i.e. passed to an int/u32 parameter. Each such use stores r7 directly (`str r7,[sp,#n]`), while plain literal 4s become `adds rN,r7,#0` copies. Retail had exactly one direct `str r7` use, the heap argument of GfGfxLoader_GXLoadPalFromOpenNarc. Matching it took a local re-declaration of that function with `u32 heapID` (drop the gf_gfx_loader.h include, declare the needed GfGfxLoader_* prototypes locally), while every other site keeps literal HEAP_ID_FIELD1 / 4. Brute-force which call sites take the variable vs a literal with variants.py: enum-param sites do not affect codegen, int-param sites do.
+
 ## IPA (-ipa file) Behavior
 
 ### Shared-header signatures are load-bearing across compilation units  <!-- id: ipa-shared-headers -->
@@ -1178,6 +1182,10 @@ Caveat to [[consolidated-rodata-all-ref-kinds-fold-clean]]. In src/overlay_98.c 
 ### `ldr rX,=<first rodata label>; ldrh [rX,#off]` x4 then strh to sp = a struct copy of a 2-aligned 8-byte member of ONE rodata aggregate (base splits at 0x40 for larger offsets)  <!-- id: rodata-template-struct-copy-from-section-base -->
 
 In unk_0201010C, FadeFunc_32..35 load from `=_020F5D58` + 0x18/0x20/0x30 and FadeFunc_33 from `=_020F5D98` + 0x28, i.e. section offset 0x68. Those offsets fall INSIDE disassembler labels, and the base splits at a multiple of 0x40 because ldrh imm max is 0x3E. This is member access on a single const aggregate. Model .rodata as one struct, splitting labels at the real object boundaries, and give the copied pieces a 2-aligned type (`typedef struct { u16 v[4]; } FadeParams;`). Then `FadeParams p = _020F5D88;` (macro for sRodata.f020F5D88) emits exactly the ldrh/strh pairs. A `u16 p[4] = {..}` initializer makes MWCC emit its own anonymous template instead and breaks the layout. The same file's .data is also one object (all stores go through `=_0210F64C` + off while the address args use the field's own label).
+
+### Separate file-scope static const objects of the same type are emitted to .rodata in reverse definition order  <!-- id: separate-static-consts-emit-in-reverse-order -->
+
+overlay_117 had five 8-byte trainer-banner templates (_0225FACC.._0225FAEC) followed by a 6-entry table. Defining the templates in address order put them in .rodata reversed (FAEC first); the table, defined after them, stayed in place. Define separate same-type static consts in reverse address order (or merge them into one aggregate). Check with `objcopy -O binary -j .rodata` on the asm and C objects and `cmp -l`.
 
 ## Recurring File/Module Patterns
 

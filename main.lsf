@@ -1337,7 +1337,7 @@ Overlay OVY_116
 Overlay OVY_117
 {
     After OVY_31
-    Object asm/overlay_117.o
+    Object src/overlay_117.o
 }
 Overlay OVY_118
 {

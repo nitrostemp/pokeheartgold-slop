@@ -1,5 +1,5 @@
 {
- "count": 537,
+ "count": 538,
  "game": "heartgold.us",
  "schema": 1,
  "tus": {
@@ -41747,6 +41747,72 @@
      "name": ".text",
      "sha1": "2a4724e38a61d5417f10627fb9ccc33f9f72d859",
      "size": 28,
+     "type": 1
+    }
+   ]
+  },
+  "src/overlay_117.c": {
+   "alloc_sha1": "fe8531ca6684d7bd3b3b93561a3e53a20f394218",
+   "object": "build/heartgold.us/src/overlay_117.o",
+   "sections": [
+    {
+     "name": ".rodata",
+     "sha1": "155b4a1df2c7b580621133e4ce2a27b2b0030cdb",
+     "size": 232,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "29d34460ccce21f8f034067b35566ff1193dccd4",
+     "size": 1022,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "52f5ebdb4817b0878608ee67f41a93a63d4ffee9",
+     "size": 80,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "569472af9a4be99607b882bb286f6a6680a65063",
+     "size": 100,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "c0e5e1f10aefa92d38cd4af0a74da932d148f235",
+     "size": 16,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "c0e5e1f10aefa92d38cd4af0a74da932d148f235",
+     "size": 16,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "c0e5e1f10aefa92d38cd4af0a74da932d148f235",
+     "size": 16,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "c0e5e1f10aefa92d38cd4af0a74da932d148f235",
+     "size": 16,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "c0e5e1f10aefa92d38cd4af0a74da932d148f235",
+     "size": 16,
+     "type": 1
+    },
+    {
+     "name": ".text",
+     "sha1": "7d09ca295fe9ad4298cd3bc331162ae94733db49",
+     "size": 1448,
      "type": 1
     }
    ]
