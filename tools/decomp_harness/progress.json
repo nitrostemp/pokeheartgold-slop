@@ -1146,6 +1146,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "WiFi Plaza 3D scene: camera wrapper, object manager, map/model/anim resources"
+    },
+    {
+      "file": "asm/frontier_map.s",
+      "lines": 2421,
+      "functions": 40,
+      "attempts": 1,
+      "result": "matched",
+      "note": "Battle Frontier map graphics (FrontierMap_Init/Free, BG/3D/sprite setup, map objects); port of plat overlay104 frontier_graphics.c"
     }
   ],
   "failed": [
@@ -1554,8 +1562,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 240,
-    "total_matched": 112,
+    "total_attempts": 241,
+    "total_matched": 113,
     "total_failed": 31
   },
   "matched": [

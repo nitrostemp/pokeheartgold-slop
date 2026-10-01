@@ -41,6 +41,7 @@ session can resume from whatever was last pushed.
 | overlay_34 | 36/36 C (Union Room touchscreen message log; rodata solved with session_helpers/rodata_order.py) |
 | overlay_111 | 50/50 C (Bug Contest swap-mon screen; u8 table in separate .rodata is a false objdiff mismatch) |
 | overlay_49_0225CB50 | 58/58 C (WiFi Plaza 3D scene: camera, object manager, model/anim resources) |
+| frontier_map | 40/40 C (Battle Frontier map graphics, port of plat frontier_graphics.c) |
 
 ## In progress / next
 
