@@ -681,6 +681,10 @@ MWCC folds the u16 narrowing of a left shift into one lsl/lsr pair: `u16 pal = w
 
 When a function caches 5+ ctx fields in locals and the retail register/stack-slot assignment and the retail load order imply DIFFERENT orderings, no ordering of `T *x = ctx->x;` init-declarations matches (they tie both to one order). Declare the locals WITHOUT initializers in the order that reproduces the register/spill-slot assignment (regs follow declaration order), then assign them in a separate block in the order that reproduces the load schedule and the base-offset register choice (the first-assigned field decides which offset is materialized as the base, e.g. 0x2F0 vs 0x2F4). Recipe: sweep all 120 init-declaration orders first to find the register order (look for SIZE fixed / fewest diffs), then sweep assignment orders with those declarations fixed. Seen in unk_020863F4 sub_02086490 (decl sys,narc,bg,pltt,mgr; assign sys,mgr,pltt,bg,narc).
 
+### Out-of-range exit: an early `return` reuses a nearby `b.n exit` trampoline, a nested `if` gets its own `beq.n +2; b.n exit` pair  <!-- id: early-return-reuses-trampoline-nested-if-gets-own-long-branch -->
+
+When the function exit is beyond Thumb conditional-branch range (~256B), MWCC relaxes the two C shapes differently. `if (!cond) return;` (a jump to the epilogue) is redirected to an EXISTING in-range unconditional `b.n <exit>` (a 2-byte `bne.n trampoline`). `if (cond) { <rest of body> }` (the if-false edge skipping a large block) is inverted into its own `beq.n +2; b.n <exit>` pair (4 bytes) even when a trampoline is in range. Symptom: objdiff SIZE off by 2 with retail showing `beq.n next; b.n exit` where you have `bne.n <a b.n exit a few insns ahead>`. Fix: nest the remainder of the function under `if (cond) { ... }` instead of the early return. Seen in sub_02086180 (src/unk_02085604.c), a TouchHitboxController callback: `if (event == 0) { ... }`. The earlier `if (ctx->state != 1) return;` in the same function DID use the trampoline in retail, so check each exit separately.
+
 ## Matching Tricks
 
 ### Small source changes that move codegen  <!-- id: decl-order-tricks -->
@@ -952,6 +956,10 @@ src/overlay_18_021F7ED4.c ov18_021F7ED4 (SIZE 660 vs 656, then 3-hunk diff). Sha
 ### `local = s->f = call()` emits str-then-mov; `local = call(); s->f = local;` emits mov-then-str  <!-- id: chained-assign-local-from-field-store-first -->
 
 When a call result is both stored to a struct field and kept in a callee-saved local, the retail order `bl f; str r0,[r4,#off]; adds r7,r0,#0` (store FIRST, then copy to the local reg) comes from the chained form `FieldEnvSubUnk18 *unk = fenv->unk18 = ov01_021E90C0();`. Writing it as two statements (`unk = ov01_021E90C0(); fenv->unk18 = unk;`) makes MWCC move into r7 first and store r7 (`adds r7,r0,#0; str r7,[r4,#off]`) -- same size, 2 swapped halfwords. Seen unk_02056680 sub_020567B4. Related: [[chained-assign-store-order-and-alias-reload]].
+
+### A function-local array initializer copies at the declaration point; if retail copies AFTER other code, declare the local uninitialised and struct-assign a named const later  <!-- id: local-array-initializer-copies-at-declaration-use-named-const-assign-later -->
+
+`s16 rects[12][4] = {...};` emits the template copy (here an ldrh/strh x48 loop for an alignment-2 96-byte table) at function entry, before any statements. When retail performs the copy after an earlier loop, wrap the table in a struct type, define it as a file-scope `static const` (e.g. `static const RectList sButtonRects = {...};`), declare the local without an initializer, and assign it at the right point (`rects = sButtonRects;`). The struct copy keeps the same copy loop. Rodata order in unk_02085604 still matched retail: const funcptr array (16B) @0, anonymous local int-grid template (60B) @0x10, then the named struct (96B) @0x4C (ascending size). Verify with `nm -n` and objdiff --rodata. Seen in sub_020860B8 (src/unk_02085604.c). Related: [[local-array-init-as-named-const-struct-copy-for-rodata-order]].
 
 ## IPA (-ipa file) Behavior
 

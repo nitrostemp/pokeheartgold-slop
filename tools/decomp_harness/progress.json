@@ -940,6 +940,13 @@
       "attempts": 8,
       "result": "matched",
       "note": "compare-verified (HG full ROM SHA1 OK; SS build not run - blocked by permission classifier). Numeric-input app sprite/window helpers (UnkStruct_020850F4). First pass by decomp-drafter (21/24). sub_02086490 matched by declaring locals sys,narc,bg,pltt,mgr (regalloc) and assigning sys,mgr,pltt,bg,narc (scheduler load order). sub_02086758 + sub_020869BC NONMATCHING asm: ManagedSpriteTemplate init constant-derivation (-1 from 1 vs 10) / store scheduling unreproduced after vram-position, -1-position and 80 random statement-order sweeps."
+    },
+    {
+      "file": "asm/unk_02085604.s",
+      "lines": 1910,
+      "functions": 17,
+      "attempts": 7,
+      "result": "matched"
     }
   ],
   "failed": [
@@ -1346,20 +1353,10 @@
       "note": "ANALYSIS-ONLY defer (no code) \u2014 LARGEST remaining file (1982 lines, 41 fns), all static. overlay_02 battle cluster (sibling of the 364-fn overlay_02_02248728). TaskManager-driven animated battle-effect/scene module: heavy TaskManager_Call/GetFieldSystem/GetEnvironment state machines, BG/graphics (SetBgPriority, GfGfx_EngineATogglePlanes), Heap_Alloc/Free, PlaySE, and SOFT-FLOAT math (_fflt/_fadd/_fsub/_ffix in ~6 fns -> those must stay C, can't NONMATCHING). 102B rodata (small byte tables ov02_0225321C..). 0 unknown callees (all headered). Needs a dedicated focused session (drafter can't handle 1900+ lines; the soft-float coloring fns are the hard core). Triage-easiest of the remaining queue, which is now ALL large files (47/68/34/39/44-fn)."
     }
   ],
-  "in_progress": [
-    {
-      "file": "asm/overlay_93_arm.s",
-      "lines": 995,
-      "functions": 17,
-      "matched_functions": 14,
-      "attempts": 8,
-      "result": "wip",
-      "note": "WIP 14/17, rodata byte-identical, C function order matches the asm. NOT linked - main.lsf:1155 still points at asm/overlay_93_arm.o. First ARM-mode decomp in the tree. SCAFFOLD: global.h, then project headers, then <nitro/code32.h> LAST inside a clang-format off/on guard. PlaySE/IsSEPlaying are in include/unk_02005D10.h, not sound.h. DONE (14): EE98, EF0C, EF5C, F268, F370, F44C, F8AC, F94C, F9AC, F9D8, FABC, FB00, FB6C, FBE4. ov93_0225F268 note: the fx divide is a raw ((s64)v << FX32_SHIFT) / 0x80000, NOT FX_Div - the SDK FX_Div uses the divide hardware, whereas retail calls _ll_sdiv, which is what the raw 64-bit expression emits. CLOSE: ov93_0225F8E4 at 4 diffs - retail schedules ldr lr,[sp,#8] before add r4,r2,r1 and we emit them swapped. An explicit sum local did not move it; looks like a plain scheduler tie. REMAINING 2 untouched: EFAC (~178 lines, asm/overlay_93_arm.s:91-269) and F548 (~230 lines, :485-715). ov93_0225F548(ctx, int, fx32) returns 0/1/2 and is called from F44C; ov93_0225EB38 is external (overlay_93_thumb_1)."
-    }
-  ],
+  "in_progress": null,
   "stats": {
     "total_attempts": 216,
-    "total_matched": 86,
+    "total_matched": 87,
     "total_failed": 31
   },
   "matched": [
