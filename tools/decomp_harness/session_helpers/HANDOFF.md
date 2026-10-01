@@ -37,6 +37,7 @@ session can resume from whatever was last pushed.
 | overlay_56 | 31/31 C (mail viewer, HG version of pokeplatinum mail_viewer.c) |
 | overlay_41_02249A40 | 43/43 C (fashion case node list, bg scroll, button bar) |
 | overlay_41_0224A5A4 | 38/38 C (button bar move/press, info panel: windows, msg text, 2x10 sprite grid) |
+| unk_02061284 | 84/84 C (NPC movement types, port of plat unk_0206450C.c; rodata via plat def order) |
 
 ## In progress / next
 

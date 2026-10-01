@@ -1114,6 +1114,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "ov41 button bar move/press handlers + info panel (scroll bg, windows, 2x10 sprite grid, sub sprites)"
+    },
+    {
+      "file": "asm/unk_02061284.s",
+      "lines": 2265,
+      "functions": 84,
+      "attempts": 1,
+      "result": "matched",
+      "note": "NPC movement types (look around, wander, spin, routes); port of pokeplatinum unk_0206450C.c"
     }
   ],
   "failed": [
@@ -1522,8 +1530,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 236,
-    "total_matched": 108,
+    "total_attempts": 237,
+    "total_matched": 109,
     "total_failed": 31
   },
   "matched": [
