@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-01T15:20:17Z",
+ "generated": "2026-10-01T15:33:47Z",
  "weights": {
   "insn_line": 1.0,
   "unknown_callee": 40.0,
@@ -10,28 +10,6 @@
   "special_section": 500.0
  },
  "queue": [
-  {
-   "file": "asm/overlay_56.s",
-   "score": 2019.6,
-   "special_sections": [],
-   "functions": 31,
-   "insn_lines": 1964,
-   "data_only": false,
-   "unknown_callees": [
-    "sub_0203A964"
-   ],
-   "jumptable_words": 0,
-   "rodata_bytes": 312,
-   "arm_functions": 0,
-   "gated_by": [],
-   "copyprop_funcs": [],
-   "cluster_partners": [
-    {
-     "file": "asm/unk_0203A3B0.s",
-     "shared_symbols": 1
-    }
-   ]
-  },
   {
    "file": "asm/overlay_41_02249A40.s",
    "score": 2023.2,

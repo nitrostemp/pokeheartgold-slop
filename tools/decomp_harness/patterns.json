@@ -2077,6 +2077,30 @@
         "wireless",
         "bss-struct"
       ]
+    },
+    {
+      "id": "rodata-size-sorted-tiebreak-definition-order",
+      "category": "data-sections",
+      "title": "MWCC sorts a TU's .rodata objects by size; equal-size objects keep definition order, so a file-scope table may need to be defined at the end of the file",
+      "body": "In overlay_56 the .rodata is ordered strictly by object size (16,16,20,24,24,32,40,140), mixing function-local initializer copies and the file-scope touch-hitbox table. The two 24-byte objects (a const local SpriteResourceCountsListUnion in ov56_021E6BB4 and the static TouchscreenHitbox[6]) came out in the wrong order whatever form the table took (file scope at top, function-local static, anonymous local, or u32 array). The fix was a forward declaration `static const TouchscreenHitbox X[6];` at the top and the definition after the last function, so the table is created after the local copy. If size-sorted rodata has a tie in the wrong order, move the named table's definition later in the file.",
+      "tags": [
+        "rodata",
+        "ordering",
+        "size-sort",
+        "forward-declaration"
+      ]
+    },
+    {
+      "id": "port-mail-viewer-hg",
+      "category": "file-patterns",
+      "title": "overlay_56 = HG mail viewer: pokeplatinum applications/mail_viewer.c plus a touch layer",
+      "body": "31 functions, 0xC4-byte app struct. Same skeleton as Platinum (Init/Main/Exit, HandleInput_Read/Write, ConfirmEmpty, Cancel, InitGraphics stages, glow SysTask). HG adds inputMode (u8 at 0xA, from MenuInputStateMgr), callbacks onSwitchToKeys/onSwitchToTouch at 0x34/0x38, a key/touch switch helper, a touch handler (TouchscreenHitbox_FindRectAtTouchNew plus a DoesPixelAtScreenXYMatchPtrVal check on BG2), and a YesNoPrompt instead of Menu_MakeYesNoChoice. HG specifics: GX_SetDispSelect(SUB_MAIN) in InitBackgrounds and MAIN_SUB in teardown; args is UnkStruct_ov55_021E5B08 (mailMessages at 0x1E, icon data u16[3] at 0x18 as a 12:4 bitfield, hidden-icon sprite index 7); the confirm/cancel windows sit at x=3/21; the author-name y is 1; FillBgTilemapRect uses mode 0x11 (TILEMAP_FILL_OVWT_PAL); keep the capacities table a `const` local (passed with a cast).",
+      "tags": [
+        "port",
+        "pokeplatinum",
+        "mail",
+        "touch"
+      ]
     }
   ]
 }

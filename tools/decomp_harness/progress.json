@@ -1090,6 +1090,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "56/56 C: comm server/client discovery (port of pokeplatinum unk_02033200.c)"
+    },
+    {
+      "file": "asm/overlay_56.s",
+      "lines": 2265,
+      "functions": 31,
+      "attempts": 1,
+      "result": "matched",
+      "note": "31/31 C: mail viewer (HG version of pokeplatinum mail_viewer.c, touch + YesNoPrompt)"
     }
   ],
   "failed": [
@@ -1498,8 +1506,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 233,
-    "total_matched": 105,
+    "total_attempts": 234,
+    "total_matched": 106,
     "total_failed": 31
   },
   "matched": [

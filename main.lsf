@@ -929,7 +929,7 @@ Overlay OVY_55
 Overlay OVY_56
 {
     After OVY_55
-    Object asm/overlay_56.o
+    Object src/overlay_56.o
 }
 Overlay OVY_57
 {

@@ -1231,6 +1231,10 @@ overlay_117 had five 8-byte trainer-banner templates (_0225FACC.._0225FAEC) foll
 
 In unk_020658D4, objdiff reported 50/50 + data MATCH but main.sbin failed. The .rodata bytes were identical because unrelocated words are zero, but the relocation targets were permuted. With static function-pointer tables defined in the order 1,2,3, MWCC emitted them as 3,1,2. Two tables of different types came out reversed, and so did two identical `static const VecFx32` values (the swap was only visible as two literal-pool bytes in the sbin). Fix: reorder the C definitions until `arm-none-eabi-readelf -r <o> | grep -A40 rela.rodata` maps the same offsets to the same symbols as the asm .o. To find any remaining diff, `git stash push main.lsf`, build, copy main.sbin, unstash, and `cmp -l`; offset+0x02000000 is the address.
 
+### MWCC sorts a TU's .rodata objects by size; equal-size objects keep definition order, so a file-scope table may need to be defined at the end of the file  <!-- id: rodata-size-sorted-tiebreak-definition-order -->
+
+In overlay_56 the .rodata is ordered strictly by object size (16,16,20,24,24,32,40,140), mixing function-local initializer copies and the file-scope touch-hitbox table. The two 24-byte objects (a const local SpriteResourceCountsListUnion in ov56_021E6BB4 and the static TouchscreenHitbox[6]) came out in the wrong order whatever form the table took (file scope at top, function-local static, anonymous local, or u32 array). The fix was a forward declaration `static const TouchscreenHitbox X[6];` at the top and the definition after the last function, so the table is created after the local copy. If size-sorted rodata has a tie in the wrong order, move the named table's definition later in the file.
+
 ## Recurring File/Module Patterns
 
 ### Task callback pattern (field system)  <!-- id: task-callback-pattern -->
@@ -1354,6 +1358,10 @@ The 62 functions line up with pokeplatinum's pokemon_anim.c in order. Port steps
 ### unk_02034B0C = pokeplatinum src/unk_02033200.c (CommServerClient); WMBssDesc is 0xC0 here, so offsets shift  <!-- id: port-comm-server-client-from-pokeplatinum -->
 
 56 functions. Platinum's CommServerClient maps onto an HG struct of 0xD98 bytes: unk_54 WMBssDesc, unk_114[16] bss list (Platinum's WMbssDesc is larger), unk_D14[8][6] bssids, timers u16[16] at 0xD44, wm heap at 0xD64, MailMessage at 0xD68 (Platinum: EasyChatSentence), PlayerProfile* at 0xD78, LinkBattleRuleset* at 0xD7C, ggid 0x333 at 0xD80, flag bitfield at 0xD95. The bss is one 12-byte struct {u16 tgid; volatile int driverStatus; client*} (base+offset loads). HG differences: the WirelessDriver functions sit after sub_02033380; the tgid comes from WM_GetNextTgid() (on init and when bit3 is set) instead of ++; sub_02033E68, sub_020338C8/EC/394C, sub_02033F6C and sub_02034014 do not exist; the beacon-period assert is < 41. In this TU, sub_0203993C must be declared returning int, because the asm truncates it to u16 before sub_02033FC4/sub_02035724, and use `GF_ASSERT(32 >= (int)LinkBattleRuleset_sizeof())` to get a signed ble. The .text/.rodata trailing-padding size differences are harmless (the ROM matches).
+
+### overlay_56 = HG mail viewer: pokeplatinum applications/mail_viewer.c plus a touch layer  <!-- id: port-mail-viewer-hg -->
+
+31 functions, 0xC4-byte app struct. Same skeleton as Platinum (Init/Main/Exit, HandleInput_Read/Write, ConfirmEmpty, Cancel, InitGraphics stages, glow SysTask). HG adds inputMode (u8 at 0xA, from MenuInputStateMgr), callbacks onSwitchToKeys/onSwitchToTouch at 0x34/0x38, a key/touch switch helper, a touch handler (TouchscreenHitbox_FindRectAtTouchNew plus a DoesPixelAtScreenXYMatchPtrVal check on BG2), and a YesNoPrompt instead of Menu_MakeYesNoChoice. HG specifics: GX_SetDispSelect(SUB_MAIN) in InitBackgrounds and MAIN_SUB in teardown; args is UnkStruct_ov55_021E5B08 (mailMessages at 0x1E, icon data u16[3] at 0x18 as a 12:4 bitfield, hidden-icon sprite index 7); the confirm/cancel windows sit at x=3/21; the author-name y is 1; FillBgTilemapRect uses mode 0x11 (TILEMAP_FILL_OVWT_PAL); keep the capacities table a `const` local (passed with a cast).
 
 ## NONMATCHING Fallback
 
