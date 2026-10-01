@@ -1170,6 +1170,13 @@
       "attempts": 1,
       "result": "matched",
       "note": "Fashion Case gfx/system layer: 3D/BG/OAM setup, software-sprite system wrappers, char/pltt tables, pixel hit test"
+    },
+    {
+      "file": "asm/overlay_41_0224B21C.s",
+      "lines": 1574,
+      "functions": 40,
+      "attempts": 4,
+      "result": "matched"
     }
   ],
   "failed": [
@@ -1579,7 +1586,7 @@
   "in_progress": null,
   "stats": {
     "total_attempts": 243,
-    "total_matched": 115,
+    "total_matched": 116,
     "total_failed": 31
   },
   "matched": [

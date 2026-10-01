@@ -2173,6 +2173,18 @@
       "category": "codegen",
       "title": "Two pointer IVs over one array (one for a field check, one for the address passed): check via a separate `entry` pointer stepped at the loop end, pass `&entries[i]`",
       "body": "overlay_41_02245EA0 ov41_0224683C/0224689C: the loop `if (entries[i].ptr != NULL) h[n] = f(&entries[i]);` compiled to ONE pointer IV (82 bytes), while retail keeps TWO (r4 for the ->ptr load, r6 for the argument) and spills i and count (96 bytes). The match was `UnkEntry *entry = entries;` declared after i, `if (entry->ptr != NULL) h[n] = f(&entries[i]); ... entry++;` at the end of the body. With the roles swapped (check entries[i], pass entry) everything matched except the r4/r6 assignment. Same file: (1) a 4-byte struct returned in r0 ({s16 x, y} from sub_02015FCC: `ldrh y; lsl 16; orr x`) gives the `strh lo; lsr 16; strh hi; ldrh/strh copy; ldrsh` pattern when written as `UnkPoint pos = f(); *x = pos.x; *y = pos.y;`. (2) A register left over from earlier code can be the argument: `GF_3DVramMan_InitFrameTexVramManager` took r0 = 2 left over from G3_SwapBuffers(AUTO, W), so the call is (2, TRUE), not the usual (1, TRUE). (3) FX_SinIdx/FX_CosIdx already shift the index right by 4, so pass the raw u16 angle; an int angle param schedules the spill differently, a u16/s16 one matches. (4) For the pixel hit test, `width *= 8;` as a separate statement and a `u32 pixels` local loaded before `0xF << shift` reproduced the load order."
+    },
+    {
+      "id": "tween-step-clamp-increment-in-condition",
+      "category": "codegen",
+      "title": "Tween step-then-clamp: write `if (t->frame + 1 <= t->duration) { t->frame++; return FALSE; }` with no temp, so frame+1 stays in the loaded register",
+      "body": "Retail `ldr r0,[r4,#0xc]; ldr r1,[r4,#0x10]; adds r0,#1; cmp r0,r1; bgt L; str r0,[r4,#0xc]; movs r0,#0; pop; L: str r1,[r4,#0xc]; movs r0,#1; pop` (frame+1 computed in place in the frame register, duration in r1, both stores reuse those registers). A named temp `int next = t->frame + 1; if (next <= t->duration) { t->frame = next; ... }` put next in r1 and duration in r0 (swapped load order and cmp operands, 6 diffs). Inverting the test (`if (next > duration) { clamp; return TRUE; }`) is worse. The matching source is the temp-free `if (t->frame + 1 <= t->duration) { t->frame++; return FALSE; } t->frame = t->duration; return TRUE;`: MWCC CSEs `t->frame++` with the already-computed frame+1. The same function also needed the div result in a temp (see commutative-add-operand-order-via-temp). Seen in ov41_0224B32C (overlay_41_0224B21C)."
+    },
+    {
+      "id": "caller-skips-arg-setup-declare-callee-void-locally",
+      "category": "ipa",
+      "title": "If a call site does not load r0 (or passes an extra arg) versus the callee definition, declare the callee locally with the call-site arity",
+      "body": "In AccessoryPortrait_Init the `bl ov41_02246130` has no `adds r0,...` before it (r0 still holds a stale value) even though the definition in overlay_41_02245EA0.c is `void ov41_02246130(UnkOv41Gfx *gfx)` (the body ignores gfx). Likewise `ov41_02246670` is defined with one param but this caller sets r1 = HEAP_ID_14. Retail called them through prototypes that differed from the definitions. Do NOT change the defining TU; in the calling TU forward-declare the function with the arity the call site shows (`void ov41_02246130(void);`, `void ov41_02246670(UnkOv41Gfx *gfx, enum HeapID heapID);`). No shared header is involved, so there is no IPA risk. Seen in overlay_41_0224B21C."
     }
   ]
 }
