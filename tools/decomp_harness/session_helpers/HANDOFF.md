@@ -43,6 +43,7 @@ session can resume from whatever was last pushed.
 | overlay_49_0225CB50 | 58/58 C (WiFi Plaza 3D scene: camera, object manager, model/anim resources) |
 | frontier_map | 40/40 C (Battle Frontier map graphics, port of plat frontier_graphics.c) |
 | overlay_41_02246B34 | 37/37 C (Fashion Case app init/main/exit + gfx setup) |
+| overlay_41_02245EA0 | 63/63 C (Fashion Case gfx/system layer) |
 
 ## In progress / next
 

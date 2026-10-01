@@ -1162,6 +1162,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "Fashion Case app: overlay init/main/exit, gfx tables, pokepic VRAM, board/canvas/button wiring"
+    },
+    {
+      "file": "asm/overlay_41_02245EA0.s",
+      "lines": 1753,
+      "functions": 63,
+      "attempts": 1,
+      "result": "matched",
+      "note": "Fashion Case gfx/system layer: 3D/BG/OAM setup, software-sprite system wrappers, char/pltt tables, pixel hit test"
     }
   ],
   "failed": [
@@ -1570,8 +1578,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 242,
-    "total_matched": 114,
+    "total_attempts": 243,
+    "total_matched": 115,
     "total_failed": 31
   },
   "matched": [
