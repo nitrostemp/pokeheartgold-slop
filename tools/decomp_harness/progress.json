@@ -986,6 +986,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "compare-verified HG+SS. Screen-fade effect library (FadeFunc_00..42 + brightness/window/scanline helpers + two HBlank callbacks), all C, no NONMATCHING. Started from the 175578f26^ draft (71/127, placeholder C behind asm for the HBlank callbacks). Key fixes: rodata/.data as one aggregate each (templates at section offsets copied by struct assignment); store-then-reload data->work; the draft had arg mappings shifted in the 8-arg setup functions; SDK G2_SetWnd*Position/InsidePlane/OutsidePlane inlines with HBLK guard for the callbacks; GXWndPlane returned by value; FX_Mul/FX_Whole/FX_Div for the _ll_mul blocks."
+    },
+    {
+      "file": "asm/render_window.s",
+      "lines": 2841,
+      "functions": 40,
+      "attempts": 1,
+      "result": "matched",
+      "note": "compare-verified HG+SS. Window frames, message box and scroll cursor, signposts, wait dial, Pokemon preview. Ported from pret/pokeplatinum render_window.c (the 175578f26^ draft was 29/40 asm with placeholder C and referenced renamed headers). 37 C + 3 NONMATCHING (sub_0200EA68 spill scheduling; DrawPokemonPicFromSpecies/FromMon heapID-vs-x register choice). The defining TU does not include the frozen render_window.h (it declares sub_0200F478 without its parameter) and declares its own prototypes."
     }
   ],
   "failed": [
@@ -1394,8 +1402,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 220,
-    "total_matched": 92,
+    "total_attempts": 221,
+    "total_matched": 93,
     "total_failed": 31
   },
   "matched": [

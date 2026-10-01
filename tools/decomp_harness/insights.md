@@ -693,6 +693,10 @@ For a static struct, direct member access folds to a pool entry for sObj (or sOb
 
 The two forms differ only in whether the str precedes the register copy. Retail unk_0201010C used `data->work = Heap_Alloc(...); work = data->work;` throughout. When the callee arg is `ldr r0,[r5,#0x14]` reloaded right before the call, pass `data->work` directly with no local at all. For `memset(data->work, 0, N)` straight after the alloc, MWCC reuses r0. Applying this file-wide fixed about 10 functions at once.
 
+### Param-spill store order differs (str r1 before str r0): a u16 parameter the body never narrows may really be u32  <!-- id: u16-param-spill-order-use-u32 -->
+
+In render_window WaitingIcon_New(Window *window, u16 tileNum), retail spills r0 (window) first and then r1. With the frozen header's `u16 tileNum`, MWCC spilled r1 first. Declaring the defining TU's own prototype as `u32 tileNum` (pokeplatinum also uses u32 baseTile) reproduced the retail order exactly. The ABI is unchanged, so callers compiled against the u16 header are unaffected. The same lever did NOT fix sub_0200EA68 or DrawPokemonPicFromSpecies in that file, so try it once and move on if it fails.
+
 ## Matching Tricks
 
 ### Small source changes that move codegen  <!-- id: decl-order-tricks -->
@@ -1274,6 +1278,10 @@ src/overlay_01_021F6830.c is the launcher for the bottom-screen sub-app family. 
 ### FontOAM TextOBJ creation helper (String -> window -> sub_020135D8) recurs across overlays: copy BattleInput_CreateTextObject  <!-- id: fontoam-textobj-helper-recipe -->
 
 The helper that measures a String (FontID_String_GetWidth + FX_ModS32(width,8) tile round-up), renders it into a temp Window (InitWindow / AddTextWindowTopLeftCorner(bg,&win,tiles,2,0,0) / AddTextPrinterParameterizedWithColorAndSpacing), reserves OBJ char VRAM (sub_02013688 + sub_02021AC8), fills a TextOBJTemplate {fontSystem, &window, SpriteManager_GetSpriteList, SpriteManager_FindPlttResourceProxy(palId), NULL, alloc.offset, x, y, 0, prio, vram, heap} and calls sub_020135D8 / sub_020138E0 / sub_020136B4, then RemoveWindow + stores {TextOBJ*, UnkStruct_02021AC8, u16 fontLength}, is the SAME function as src/battle/battle_input.c BattleInput_CreateTextObject. Its 11-arg signature (ctx, out, String*, fontId, color, palOffset, palId, x, y, centerText, displayObj{Window; u16 charLength; u16 fontLength}) matched verbatim in overlay_80_0223A00C (ov80_0223A62C) with only ctx field sources, the vram (2DMAIN) and y handling (y - 8, not +264) changed. Its companions: delete = FontOAM_Delete + sub_02021B5C(&alloc); measure = ov80_0223A75C-style. Grep a new file for sub_020135D8 and start from battle_input.c.
+
+### render_window and other shared engine files: pret/pokeplatinum and pokediamond have matching C. Fetch it from raw.githubusercontent.com and port it.  <!-- id: port-from-pokeplatinum-render-window -->
+
+HG render_window.s maps 1:1 onto pokeplatinum src/render_window.c: standard frame, message box, scroll cursor (HG generalises it to member/frames/srcX/srcY), transparent-tile replace, signpost, wait dial and Pokemon preview. Porting with HG API names (FillBgTilemapRect, GfGfxLoader_*, FieldSpriteManager_*, BG_LoadCharTilesData, sub_020143E0) matched 37/40 nearly as written. HG differences: FillBgTilemapRect mode 16 = keep palette; WaitingIcon/PokemonPreview use HG struct layouts; rodata templates (regions, res counts, ManagedSpriteTemplate with resIdList 89301) are file-scope static consts copied by struct assignment. github.com/.../raw is blocked by the egress proxy, but raw.githubusercontent.com works.
 
 ## NONMATCHING Fallback
 

@@ -1835,6 +1835,18 @@
       "category": "matching-tricks",
       "title": "`adds r0,r0,r1` vs `adds r0,r1,r0` after a division call: assign the quotient to a temp first (`v = a*b/c; x = v + y;`), or use `x = q; x += y;`",
       "body": "`p[0] = p[2]*a1/a2 + p[1]` (and the `p[1] + ...` spelling) both gave `adds r0, r1, r0` where retail had `adds r0, r0, r1`. Splitting the quotient into its own statement (`s32 v = p[2]*a1/a2; p[0] = v + p[1];` or `cur = ...; cur += start;`) flips the operand order. Seen in sub_020125D4, sub_02012884 and sub_02012ACC in unk_0201010C."
+    },
+    {
+      "id": "u16-param-spill-order-use-u32",
+      "category": "codegen",
+      "title": "Param-spill store order differs (str r1 before str r0): a u16 parameter the body never narrows may really be u32",
+      "body": "In render_window WaitingIcon_New(Window *window, u16 tileNum), retail spills r0 (window) first and then r1. With the frozen header's `u16 tileNum`, MWCC spilled r1 first. Declaring the defining TU's own prototype as `u32 tileNum` (pokeplatinum also uses u32 baseTile) reproduced the retail order exactly. The ABI is unchanged, so callers compiled against the u16 header are unaffected. The same lever did NOT fix sub_0200EA68 or DrawPokemonPicFromSpecies in that file, so try it once and move on if it fails."
+    },
+    {
+      "id": "port-from-pokeplatinum-render-window",
+      "category": "file-patterns",
+      "title": "render_window and other shared engine files: pret/pokeplatinum and pokediamond have matching C. Fetch it from raw.githubusercontent.com and port it.",
+      "body": "HG render_window.s maps 1:1 onto pokeplatinum src/render_window.c: standard frame, message box, scroll cursor (HG generalises it to member/frames/srcX/srcY), transparent-tile replace, signpost, wait dial and Pokemon preview. Porting with HG API names (FillBgTilemapRect, GfGfxLoader_*, FieldSpriteManager_*, BG_LoadCharTilesData, sub_020143E0) matched 37/40 nearly as written. HG differences: FillBgTilemapRect mode 16 = keep palette; WaitingIcon/PokemonPreview use HG struct layouts; rodata templates (regions, res counts, ManagedSpriteTemplate with resIdList 89301) are file-scope static consts copied by struct assignment. github.com/.../raw is blocked by the egress proxy, but raw.githubusercontent.com works."
     }
   ]
 }

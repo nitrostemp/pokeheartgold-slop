@@ -2,16 +2,16 @@
   "schema": 1,
   "generated": "2026-07-02",
   "generator": "tools/decomp_harness/permuter/gen_nonmatching_registry.py",
-  "total": 84,
-  "candidates": 81,
+  "total": 87,
+  "candidates": 84,
   "do_not_queue": 3,
   "by_failure_class": {
-    "regalloc-tiebreak": 47,
+    "regalloc-tiebreak": 49,
     "unknown": 17,
     "control-flow-divergence": 5,
     "instruction-schedule": 5,
+    "spill-slot-layout": 3,
     "header-locked-signature": 2,
-    "spill-slot-layout": 2,
     "size-mismatch": 1,
     "soft-float": 1,
     "param-copyprop-cmp": 1,
@@ -370,6 +370,33 @@
       "permuter_candidate": true,
       "reason": "instruction scheduling / load-delay-slot fill differs; primary permuter target (statement reorder / temp introduction)",
       "source": "attempts_log"
+    },
+    {
+      "file": "src/render_window.c",
+      "function": "sub_0200EA68",
+      "line": 241,
+      "failure_class": "regalloc-tiebreak",
+      "permuter_candidate": true,
+      "reason": "MWCC register-allocation / scheduling tie-break; primary permuter target (equivalent C shapes flip the allocator)",
+      "source": "attempts_log"
+    },
+    {
+      "file": "src/render_window.c",
+      "function": "DrawPokemonPicFromSpecies",
+      "line": 599,
+      "failure_class": "regalloc-tiebreak",
+      "permuter_candidate": true,
+      "reason": "MWCC register-allocation / scheduling tie-break; primary permuter target (equivalent C shapes flip the allocator)",
+      "source": "attempts_log"
+    },
+    {
+      "file": "src/render_window.c",
+      "function": "DrawPokemonPicFromMon",
+      "line": 655,
+      "failure_class": "spill-slot-layout",
+      "permuter_candidate": true,
+      "reason": "spill-slot / stack-frame layout differs; permuter may find it via temp-var and statement-order mutations",
+      "source": "block_comment"
     },
     {
       "file": "src/unk_0200B150.c",
