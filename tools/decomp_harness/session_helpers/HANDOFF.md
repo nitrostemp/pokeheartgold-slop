@@ -29,6 +29,7 @@ session can resume from whatever was last pushed.
 | unk_02096910 | 15/15 C |
 | frontier/overlay_80_0222FD08 | 20 C + 1 NONMATCHING (ov80_022308C4 stack slot) |
 | unk_02016EDC | 62/62 C (port of pokeplatinum pokemon_anim.c) |
+| unk_020658D4 | 50/50 C (follow/effect-object movement; rodata static order fix) |
 
 ## In progress / next
 

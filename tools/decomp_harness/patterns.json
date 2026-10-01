@@ -1991,6 +1991,19 @@
         "pokemon_anim",
         "pokepic"
       ]
+    },
+    {
+      "id": "rodata-reloc-order-invisible-to-objdiff",
+      "category": "data-sections",
+      "title": "objdiff misses rodata that matches bytewise but has relocations in the wrong order; check `readelf -r` on .rela.rodata and diff the sbin",
+      "body": "In unk_020658D4, objdiff reported 50/50 + data MATCH but main.sbin failed. The .rodata bytes were identical because unrelocated words are zero, but the relocation targets were permuted. With static function-pointer tables defined in the order 1,2,3, MWCC emitted them as 3,1,2. Two tables of different types came out reversed, and so did two identical `static const VecFx32` values (the swap was only visible as two literal-pool bytes in the sbin). Fix: reorder the C definitions until `arm-none-eabi-readelf -r <o> | grep -A40 rela.rodata` maps the same offsets to the same symbols as the asm .o. To find any remaining diff, `git stash push main.lsf`, build, copy main.sbin, unstash, and `cmp -l`; offset+0x02000000 is the address.",
+      "tags": [
+        "rodata",
+        "relocation",
+        "objdiff",
+        "static-order",
+        "sbin"
+      ]
     }
   ]
 }

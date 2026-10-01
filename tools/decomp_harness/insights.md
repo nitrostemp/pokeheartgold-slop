@@ -1215,6 +1215,10 @@ In unk_0201010C, FadeFunc_32..35 load from `=_020F5D58` + 0x18/0x20/0x30 and Fad
 
 overlay_117 had five 8-byte trainer-banner templates (_0225FACC.._0225FAEC) followed by a 6-entry table. Defining the templates in address order put them in .rodata reversed (FAEC first); the table, defined after them, stayed in place. Define separate same-type static consts in reverse address order (or merge them into one aggregate). Check with `objcopy -O binary -j .rodata` on the asm and C objects and `cmp -l`.
 
+### objdiff misses rodata that matches bytewise but has relocations in the wrong order; check `readelf -r` on .rela.rodata and diff the sbin  <!-- id: rodata-reloc-order-invisible-to-objdiff -->
+
+In unk_020658D4, objdiff reported 50/50 + data MATCH but main.sbin failed. The .rodata bytes were identical because unrelocated words are zero, but the relocation targets were permuted. With static function-pointer tables defined in the order 1,2,3, MWCC emitted them as 3,1,2. Two tables of different types came out reversed, and so did two identical `static const VecFx32` values (the swap was only visible as two literal-pool bytes in the sbin). Fix: reorder the C definitions until `arm-none-eabi-readelf -r <o> | grep -A40 rela.rodata` maps the same offsets to the same symbols as the asm .o. To find any remaining diff, `git stash push main.lsf`, build, copy main.sbin, unstash, and `cmp -l`; offset+0x02000000 is the address.
+
 ## Recurring File/Module Patterns
 
 ### Task callback pattern (field system)  <!-- id: task-callback-pattern -->

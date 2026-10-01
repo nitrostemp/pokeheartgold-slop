@@ -1050,6 +1050,14 @@
       "attempts": 1,
       "result": "matched",
       "note": "62/62 C: Pokemon sprite anim script interpreter, ported from pokeplatinum pokemon_anim.c"
+    },
+    {
+      "file": "asm/unk_020658D4.s",
+      "lines": 1724,
+      "functions": 50,
+      "attempts": 1,
+      "result": "matched",
+      "note": "50/50 C: follow-mon/follow-object/effect-object movement types"
     }
   ],
   "failed": [
@@ -1458,8 +1466,8 @@
   ],
   "in_progress": null,
   "stats": {
-    "total_attempts": 228,
-    "total_matched": 100,
+    "total_attempts": 229,
+    "total_matched": 101,
     "total_failed": 31
   },
   "matched": [
